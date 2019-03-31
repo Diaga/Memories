@@ -1,0 +1,243 @@
+-- Merging decision tree log ---
+manifest
+ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:2:1-23:12
+INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:2:1-23:12
+INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:2:1-23:12
+INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:2:1-23:12
+MERGED from [com.google.android.material:material:1.1.0-alpha05] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\material-1.1.0-alpha05.aar\7d52136fd665c52792cb4d3ff7a6249f\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.appcompat:appcompat:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\appcompat-1.1.0-alpha01.aar\5baa7210113b6a1b9b7f71a6b0dc8d10\AndroidManifest.xml:17:1-22:12
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-16.0.1.aar\d72a65cfed3bb4fa8a60ea8d5bef4a44\AndroidManifest.xml:17:1-39:12
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-api-phone-16.0.0.aar\d391665a0cf5ed872d86bc92df47175b\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-base-16.0.0.aar\77e08bfe9a9c4ed3ee970a8d68051063\AndroidManifest.xml:2:1-7:12
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\dd81ec834d2aa12c861d034b97d3724a\AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-tasks-16.0.1.aar\5bde90f31d134dbea0351766ed0d6a16\AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\f143cc8e4a7c88ac211dfd9b11ef699a\AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\legacy-support-v4-1.0.0.aar\3806b295de43f8de05e870c7c00b3748\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media:media:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\media-1.0.0.aar\f2d7ed7736570d0d1e6546a8ab212c6a\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\constraintlayout-1.1.2.aar\a8f366a3a8c48c4bcc3998b055e64b07\AndroidManifest.xml:2:1-11:12
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.0.0.aar\3d41fed59865dcec65ec4dc1a2c181ae\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\legacy-support-core-ui-1.0.0.aar\921fdd45417be566013bcb65f87ba64d\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\legacy-support-core-utils-1.0.0.aar\5faa596f5704a1c9482cae2a1d97b630\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-1.1.0-alpha01.aar\f373dfc060ed85f5f77e9e82c63d781b\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.recyclerview:recyclerview:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\recyclerview-1.1.0-alpha01.aar\77903ac3c6798640b76a67494f4e8868\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.transition:transition:1.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\transition-1.0.1.aar\a7f7132009e90003847b300aa6e69cdc\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.1.0-alpha01.aar\b2f39ecd70aba050e501d54d577d6a0f\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.1.0-alpha02] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0-alpha02.aar\46021f27d31aee5ca58cf32833bc19de\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\loader-1.0.0.aar\def8b9cb8c641ac705af7551f48973de\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\viewpager-1.0.0.aar\71fc1b13697c7642aff4f545d468dfaf\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\drawerlayout-1.0.0.aar\d3e4c42dd774a0c66af0f2ea23f969ee\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-1.0.0.aar\d32d535ab4ad44449b4d433cfa4e4d0c\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\customview-1.0.0.aar\5b6d7b835fdba7ae27d1a618cc098e30\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-1.0.0.aar\6ffcdf9d59a2d971994a8efbec2b4b05\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-1.0.0.aar\f1b68fb4dad52ca84f7143f1edbd92fc\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.activity:activity:1.0.0-alpha02] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\activity-1.0.0-alpha02.aar\fca4ab0abd4b49118e7908ee2608d660\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.1.0-alpha03] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\core-1.1.0-alpha03.aar\d9d343792fa0d7f4282e72569d8ecbc8\AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\cardview-1.0.0.aar\22290903b2e8e1c102a808ac80da13cc\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\documentfile-1.0.0.aar\42fe55ee6d34b33dc243f7a753a49d71\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-1.0.0.aar\861cc3197d5d38cb36631d1e1e2abb21\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\print-1.0.0.aar\799bac69830a8ad95612b55e6cc5ecc0\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\lifecycle-viewmodel-2.0.0.aar\5e12c03710004f0cae6250e80b010893\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\interpolator-1.0.0.aar\bf33e8d0816071082bc6cdbbd229a83f\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\cursoradapter-1.0.0.aar\125bfd48b29a45b9417f5fd850cd40c7\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0-alpha01.aar\1eb659f8036babb2ab5a1193f0a2b8bb\AndroidManifest.xml:17:1-25:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\lifecycle-runtime-2.0.0.aar\0957797af537105d1804a79ff68ded33\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-2.0.0.aar\50dd37239b1fbe0989ae4fbea1af3796\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-core-2.0.0.aar\c7316590850989721f7828004976bb9f\AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\core-runtime-2.0.0.aar\9fba0f7212e0a2180d5d7a111cf0c6cd\AndroidManifest.xml:17:1-22:12
+INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:2:1-23:12
+INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:2:1-23:12
+INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:2:1-23:12
+	package
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:4:5-30
+		INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+	android:versionName
+		INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:2:1-23:12
+		INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+	xmlns:tools
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:3:5-51
+	android:versionCode
+		INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:2:1-23:12
+		INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+	xmlns:android
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:2:11-69
+application
+ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:6:5-21:19
+MERGED from [com.google.android.material:material:1.1.0-alpha05] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\material-1.1.0-alpha05.aar\7d52136fd665c52792cb4d3ff7a6249f\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.material:material:1.1.0-alpha05] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\material-1.1.0-alpha05.aar\7d52136fd665c52792cb4d3ff7a6249f\AndroidManifest.xml:22:5-20
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-16.0.1.aar\d72a65cfed3bb4fa8a60ea8d5bef4a44\AndroidManifest.xml:22:5-37:19
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-16.0.1.aar\d72a65cfed3bb4fa8a60ea8d5bef4a44\AndroidManifest.xml:22:5-37:19
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\dd81ec834d2aa12c861d034b97d3724a\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\dd81ec834d2aa12c861d034b97d3724a\AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-tasks-16.0.1.aar\5bde90f31d134dbea0351766ed0d6a16\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-tasks-16.0.1.aar\5bde90f31d134dbea0351766ed0d6a16\AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\f143cc8e4a7c88ac211dfd9b11ef699a\AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\f143cc8e4a7c88ac211dfd9b11ef699a\AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\constraintlayout-1.1.2.aar\a8f366a3a8c48c4bcc3998b055e64b07\AndroidManifest.xml:9:5-20
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\constraintlayout-1.1.2.aar\a8f366a3a8c48c4bcc3998b055e64b07\AndroidManifest.xml:9:5-20
+MERGED from [androidx.core:core:1.1.0-alpha03] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\core-1.1.0-alpha03.aar\d9d343792fa0d7f4282e72569d8ecbc8\AndroidManifest.xml:22:5-89
+MERGED from [androidx.core:core:1.1.0-alpha03] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\core-1.1.0-alpha03.aar\d9d343792fa0d7f4282e72569d8ecbc8\AndroidManifest.xml:22:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0-alpha01.aar\1eb659f8036babb2ab5a1193f0a2b8bb\AndroidManifest.xml:22:5-23:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0-alpha01.aar\1eb659f8036babb2ab5a1193f0a2b8bb\AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.1.0-alpha03] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\core-1.1.0-alpha03.aar\d9d343792fa0d7f4282e72569d8ecbc8\AndroidManifest.xml:22:18-86
+	android:supportsRtl
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:11:9-35
+	android:label
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:9:9-41
+	android:roundIcon
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:10:9-54
+	android:icon
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:8:9-43
+	android:allowBackup
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:7:9-35
+	android:theme
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:12:9-40
+activity#com.kat.journal.HomeActivity
+ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:13:9-59
+	android:name
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:13:19-47
+activity#com.kat.journal.MainActivity
+ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:14:9-20:20
+	android:noHistory
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:14:48-72
+	android:name
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:14:19-47
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:15:13-19:29
+action#android.intent.action.MAIN
+ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:16:17-69
+	android:name
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:16:25-66
+category#android.intent.category.LAUNCHER
+ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:18:17-77
+	android:name
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml:18:27-74
+uses-sdk
+INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+MERGED from [com.google.android.material:material:1.1.0-alpha05] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\material-1.1.0-alpha05.aar\7d52136fd665c52792cb4d3ff7a6249f\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.material:material:1.1.0-alpha05] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\material-1.1.0-alpha05.aar\7d52136fd665c52792cb4d3ff7a6249f\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\appcompat-1.1.0-alpha01.aar\5baa7210113b6a1b9b7f71a6b0dc8d10\AndroidManifest.xml:20:5-44
+MERGED from [androidx.appcompat:appcompat:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\appcompat-1.1.0-alpha01.aar\5baa7210113b6a1b9b7f71a6b0dc8d10\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-16.0.1.aar\d72a65cfed3bb4fa8a60ea8d5bef4a44\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-16.0.1.aar\d72a65cfed3bb4fa8a60ea8d5bef4a44\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-api-phone-16.0.0.aar\d391665a0cf5ed872d86bc92df47175b\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-api-phone:16.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-api-phone-16.0.0.aar\d391665a0cf5ed872d86bc92df47175b\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-base-16.0.0.aar\77e08bfe9a9c4ed3ee970a8d68051063\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-auth-base:16.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-base-16.0.0.aar\77e08bfe9a9c4ed3ee970a8d68051063\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\dd81ec834d2aa12c861d034b97d3724a\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\dd81ec834d2aa12c861d034b97d3724a\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-tasks-16.0.1.aar\5bde90f31d134dbea0351766ed0d6a16\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-tasks-16.0.1.aar\5bde90f31d134dbea0351766ed0d6a16\AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\f143cc8e4a7c88ac211dfd9b11ef699a\AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\f143cc8e4a7c88ac211dfd9b11ef699a\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\legacy-support-v4-1.0.0.aar\3806b295de43f8de05e870c7c00b3748\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\legacy-support-v4-1.0.0.aar\3806b295de43f8de05e870c7c00b3748\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\media-1.0.0.aar\f2d7ed7736570d0d1e6546a8ab212c6a\AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\media-1.0.0.aar\f2d7ed7736570d0d1e6546a8ab212c6a\AndroidManifest.xml:20:5-44
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\constraintlayout-1.1.2.aar\a8f366a3a8c48c4bcc3998b055e64b07\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.constraintlayout:constraintlayout:1.1.2] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\constraintlayout-1.1.2.aar\a8f366a3a8c48c4bcc3998b055e64b07\AndroidManifest.xml:5:5-7:41
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.0.0.aar\3d41fed59865dcec65ec4dc1a2c181ae\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable-animated:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\vectordrawable-animated-1.0.0.aar\3d41fed59865dcec65ec4dc1a2c181ae\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\legacy-support-core-ui-1.0.0.aar\921fdd45417be566013bcb65f87ba64d\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\legacy-support-core-ui-1.0.0.aar\921fdd45417be566013bcb65f87ba64d\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\legacy-support-core-utils-1.0.0.aar\5faa596f5704a1c9482cae2a1d97b630\AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\legacy-support-core-utils-1.0.0.aar\5faa596f5704a1c9482cae2a1d97b630\AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-1.1.0-alpha01.aar\f373dfc060ed85f5f77e9e82c63d781b\AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\coordinatorlayout-1.1.0-alpha01.aar\f373dfc060ed85f5f77e9e82c63d781b\AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\recyclerview-1.1.0-alpha01.aar\77903ac3c6798640b76a67494f4e8868\AndroidManifest.xml:20:5-44
+MERGED from [androidx.recyclerview:recyclerview:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\recyclerview-1.1.0-alpha01.aar\77903ac3c6798640b76a67494f4e8868\AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\transition-1.0.1.aar\a7f7132009e90003847b300aa6e69cdc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.transition:transition:1.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\transition-1.0.1.aar\a7f7132009e90003847b300aa6e69cdc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.1.0-alpha01.aar\b2f39ecd70aba050e501d54d577d6a0f\AndroidManifest.xml:20:5-44
+MERGED from [androidx.vectordrawable:vectordrawable:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\vectordrawable-1.1.0-alpha01.aar\b2f39ecd70aba050e501d54d577d6a0f\AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.1.0-alpha02] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0-alpha02.aar\46021f27d31aee5ca58cf32833bc19de\AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.1.0-alpha02] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\fragment-1.1.0-alpha02.aar\46021f27d31aee5ca58cf32833bc19de\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\loader-1.0.0.aar\def8b9cb8c641ac705af7551f48973de\AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\loader-1.0.0.aar\def8b9cb8c641ac705af7551f48973de\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\viewpager-1.0.0.aar\71fc1b13697c7642aff4f545d468dfaf\AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\viewpager-1.0.0.aar\71fc1b13697c7642aff4f545d468dfaf\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\drawerlayout-1.0.0.aar\d3e4c42dd774a0c66af0f2ea23f969ee\AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\drawerlayout-1.0.0.aar\d3e4c42dd774a0c66af0f2ea23f969ee\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-1.0.0.aar\d32d535ab4ad44449b4d433cfa4e4d0c\AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\slidingpanelayout-1.0.0.aar\d32d535ab4ad44449b4d433cfa4e4d0c\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\customview-1.0.0.aar\5b6d7b835fdba7ae27d1a618cc098e30\AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\customview-1.0.0.aar\5b6d7b835fdba7ae27d1a618cc098e30\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-1.0.0.aar\6ffcdf9d59a2d971994a8efbec2b4b05\AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\swiperefreshlayout-1.0.0.aar\6ffcdf9d59a2d971994a8efbec2b4b05\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-1.0.0.aar\f1b68fb4dad52ca84f7143f1edbd92fc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\asynclayoutinflater-1.0.0.aar\f1b68fb4dad52ca84f7143f1edbd92fc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0-alpha02] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\activity-1.0.0-alpha02.aar\fca4ab0abd4b49118e7908ee2608d660\AndroidManifest.xml:20:5-44
+MERGED from [androidx.activity:activity:1.0.0-alpha02] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\activity-1.0.0-alpha02.aar\fca4ab0abd4b49118e7908ee2608d660\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.1.0-alpha03] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\core-1.1.0-alpha03.aar\d9d343792fa0d7f4282e72569d8ecbc8\AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.1.0-alpha03] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\core-1.1.0-alpha03.aar\d9d343792fa0d7f4282e72569d8ecbc8\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\cardview-1.0.0.aar\22290903b2e8e1c102a808ac80da13cc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cardview:cardview:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\cardview-1.0.0.aar\22290903b2e8e1c102a808ac80da13cc\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\documentfile-1.0.0.aar\42fe55ee6d34b33dc243f7a753a49d71\AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\documentfile-1.0.0.aar\42fe55ee6d34b33dc243f7a753a49d71\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-1.0.0.aar\861cc3197d5d38cb36631d1e1e2abb21\AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\localbroadcastmanager-1.0.0.aar\861cc3197d5d38cb36631d1e1e2abb21\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\print-1.0.0.aar\799bac69830a8ad95612b55e6cc5ecc0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\print-1.0.0.aar\799bac69830a8ad95612b55e6cc5ecc0\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\lifecycle-viewmodel-2.0.0.aar\5e12c03710004f0cae6250e80b010893\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\lifecycle-viewmodel-2.0.0.aar\5e12c03710004f0cae6250e80b010893\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\interpolator-1.0.0.aar\bf33e8d0816071082bc6cdbbd229a83f\AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\interpolator-1.0.0.aar\bf33e8d0816071082bc6cdbbd229a83f\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\cursoradapter-1.0.0.aar\125bfd48b29a45b9417f5fd850cd40c7\AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\cursoradapter-1.0.0.aar\125bfd48b29a45b9417f5fd850cd40c7\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0-alpha01.aar\1eb659f8036babb2ab5a1193f0a2b8bb\AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.1.0-alpha01] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\versionedparcelable-1.1.0-alpha01.aar\1eb659f8036babb2ab5a1193f0a2b8bb\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\lifecycle-runtime-2.0.0.aar\0957797af537105d1804a79ff68ded33\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\lifecycle-runtime-2.0.0.aar\0957797af537105d1804a79ff68ded33\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-2.0.0.aar\50dd37239b1fbe0989ae4fbea1af3796\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-2.0.0.aar\50dd37239b1fbe0989ae4fbea1af3796\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-core-2.0.0.aar\c7316590850989721f7828004976bb9f\AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\lifecycle-livedata-core-2.0.0.aar\c7316590850989721f7828004976bb9f\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\core-runtime-2.0.0.aar\9fba0f7212e0a2180d5d7a111cf0c6cd\AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\core-runtime-2.0.0.aar\9fba0f7212e0a2180d5d7a111cf0c6cd\AndroidManifest.xml:20:5-44
+INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+		ADDED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+		INJECTED from C:\Users\Diaga\AndroidStudio\Journal\app\src\main\AndroidManifest.xml
+activity#com.google.android.gms.auth.api.signin.internal.SignInHubActivity
+ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-16.0.1.aar\d72a65cfed3bb4fa8a60ea8d5bef4a44\AndroidManifest.xml:23:9-27:75
+	android:excludeFromRecents
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-16.0.1.aar\d72a65cfed3bb4fa8a60ea8d5bef4a44\AndroidManifest.xml:25:13-46
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-16.0.1.aar\d72a65cfed3bb4fa8a60ea8d5bef4a44\AndroidManifest.xml:26:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-16.0.1.aar\d72a65cfed3bb4fa8a60ea8d5bef4a44\AndroidManifest.xml:27:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-16.0.1.aar\d72a65cfed3bb4fa8a60ea8d5bef4a44\AndroidManifest.xml:24:13-93
+service#com.google.android.gms.auth.api.signin.RevocationBoundService
+ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-16.0.1.aar\d72a65cfed3bb4fa8a60ea8d5bef4a44\AndroidManifest.xml:33:9-36:110
+	android:exported
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-16.0.1.aar\d72a65cfed3bb4fa8a60ea8d5bef4a44\AndroidManifest.xml:35:13-36
+	android:permission
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-16.0.1.aar\d72a65cfed3bb4fa8a60ea8d5bef4a44\AndroidManifest.xml:36:13-107
+	android:name
+		ADDED from [com.google.android.gms:play-services-auth:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-auth-16.0.1.aar\d72a65cfed3bb4fa8a60ea8d5bef4a44\AndroidManifest.xml:34:13-89
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\dd81ec834d2aa12c861d034b97d3724a\AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\dd81ec834d2aa12c861d034b97d3724a\AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\dd81ec834d2aa12c861d034b97d3724a\AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-base-16.0.1.aar\dd81ec834d2aa12c861d034b97d3724a\AndroidManifest.xml:24:13-79
+meta-data#com.google.android.gms.version
+ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\f143cc8e4a7c88ac211dfd9b11ef699a\AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\f143cc8e4a7c88ac211dfd9b11ef699a\AndroidManifest.xml:25:13-66
+	android:name
+		ADDED from [com.google.android.gms:play-services-basement:16.0.1] C:\Users\Diaga\.gradle\caches\transforms-1\files-1.1\jetified-play-services-basement-16.0.1.aar\f143cc8e4a7c88ac211dfd9b11ef699a\AndroidManifest.xml:24:13-58

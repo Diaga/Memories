@@ -1,0 +1,58 @@
+{
+    "logs": [
+        {
+            "outputFile": "C:\\Users\\Diaga\\AndroidStudio\\Journal\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-v23\\values-v23.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\Diaga\\.gradle\\caches\\transforms-1\\files-1.1\\cardview-1.0.0.aar\\22290903b2e8e1c102a808ac80da13cc\\res\\values-v23\\values-v23.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "4",
+                        "endColumns": "12",
+                        "endOffsets": "200"
+                    },
+                    "to": {
+                        "startLines": "45",
+                        "startColumns": "4",
+                        "startOffsets": "3100",
+                        "endLines": "47",
+                        "endColumns": "12",
+                        "endOffsets": "3245"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Diaga\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-1.1.0-alpha01.aar\\5baa7210113b6a1b9b7f71a6b0dc8d10\\res\\values-v23\\values-v23.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6,19,32,33,34,38,39,40,41",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "55,190,325,400,487,1277,2079,2206,2311,2535,2650,2757,2870",
+                        "endLines": "2,3,4,5,18,31,32,33,37,38,39,40,44",
+                        "endColumns": "134,134,74,86,12,12,126,104,12,114,106,112,12",
+                        "endOffsets": "185,320,395,482,1272,2074,2201,2306,2530,2645,2752,2865,3095"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Diaga\\.gradle\\caches\\transforms-1\\files-1.1\\material-1.1.0-alpha05.aar\\7d52136fd665c52792cb4d3ff7a6249f\\res\\values-v23\\values-v23.xml",
+                    "from": {
+                        "startLines": "2,5",
+                        "startColumns": "4,4",
+                        "startOffsets": "55,215",
+                        "endLines": "4,7",
+                        "endColumns": "10,10",
+                        "endOffsets": "210,379"
+                    },
+                    "to": {
+                        "startLines": "48,51",
+                        "startColumns": "4,4",
+                        "startOffsets": "3250,3410",
+                        "endLines": "50,53",
+                        "endColumns": "10,10",
+                        "endOffsets": "3405,3574"
+                    }
+                }
+            ]
+        }
+    ]
+}
