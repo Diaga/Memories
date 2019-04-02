@@ -29,9 +29,15 @@ public class LoginActivity extends AppCompatActivity {
 
     private GoogleSignInClient gsClient;
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private User user = new User();
 >>>>>>> Back-end deployed at diaga.pythonanywhere.com
+=======
+    private User user = new User();
+=======
+>>>>>>> Merged v0.16 with v.017
+>>>>>>> Merged v0.16 with v.017
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,10 +52,13 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
     private void updateLoginUI(GoogleSignInAccount gsAccount) {
         if (gsAccount != null) {
             Log.i("GoogleSignInSuccessful", gsAccount.getEmail());
 =======
+=======
+>>>>>>> Merged v0.16 with v.017
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
@@ -59,7 +68,15 @@ public class LoginActivity extends AppCompatActivity {
         if (gsAccount != null) {
             Log.i("GoogleSignInSuccessful", gsAccount.getEmail());
             user.register(gsAccount);
+<<<<<<< HEAD
 >>>>>>> Back-end deployed at diaga.pythonanywhere.com
+=======
+=======
+    private void updateLoginUI(GoogleSignInAccount gsAccount) {
+        if (gsAccount != null) {
+            Log.i("GoogleSignInSuccessful", gsAccount.getEmail());
+>>>>>>> Merged v0.16 with v.017
+>>>>>>> Merged v0.16 with v.017
             Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
             setResult(RESULT_OK, mainIntent);
             startActivity(mainIntent);

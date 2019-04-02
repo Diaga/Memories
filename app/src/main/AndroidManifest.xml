@@ -2,9 +2,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kat.chatty">
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     <uses-permission android:name="android.permission.INTERNET" />
 >>>>>>> Back-end deployed at diaga.pythonanywhere.com
+=======
+    <uses-permission android:name="android.permission.INTERNET" />
+=======
+>>>>>>> Merged v0.16 with v.017
+>>>>>>> Merged v0.16 with v.017
 
     <application
         android:allowBackup="true"
@@ -24,9 +30,15 @@
             android:name=".MainActivity"
             android:label="Chatty"
 <<<<<<< HEAD
+<<<<<<< HEAD
             android:noHistory="true"
 =======
 >>>>>>> Back-end deployed at diaga.pythonanywhere.com
+=======
+=======
+            android:noHistory="true"
+>>>>>>> Merged v0.16 with v.017
+>>>>>>> Merged v0.16 with v.017
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
