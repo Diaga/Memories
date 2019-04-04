@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kat.chatty">
+<<<<<<< HEAD
+=======
+    <uses-permission android:name="android.permission.INTERNET" />
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
 
     <application
         android:allowBackup="true"
@@ -19,7 +23,10 @@
         <activity
             android:name=".MainActivity"
             android:label="Chatty"
+<<<<<<< HEAD
             android:noHistory="true"
+=======
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

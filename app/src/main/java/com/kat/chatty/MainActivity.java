@@ -74,6 +74,17 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
+<<<<<<< HEAD
+=======
+    protected void onResume() {
+        super.onResume();
+        if (!signedIn()) {
+            signIn();
+        }
+    }
+
+    @Override
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
