@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private GoogleSignInClient gsClient;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
     private User user = new User();
 >>>>>>> Back-end deployed at diaga.pythonanywhere.com
@@ -38,6 +39,16 @@ public class LoginActivity extends AppCompatActivity {
 =======
 >>>>>>> Merged v0.16 with v.017
 >>>>>>> Merged v0.16 with v.017
+=======
+    private User user = new User();
+=======
+>>>>>>> Merged v0.16 with v.017
+=======
+=======
+    private User user = new User();
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +64,15 @@ public class LoginActivity extends AppCompatActivity {
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     private void updateLoginUI(GoogleSignInAccount gsAccount) {
         if (gsAccount != null) {
             Log.i("GoogleSignInSuccessful", gsAccount.getEmail());
 =======
 =======
 >>>>>>> Merged v0.16 with v.017
+=======
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
@@ -76,7 +90,26 @@ public class LoginActivity extends AppCompatActivity {
         if (gsAccount != null) {
             Log.i("GoogleSignInSuccessful", gsAccount.getEmail());
 >>>>>>> Merged v0.16 with v.017
+<<<<<<< HEAD
 >>>>>>> Merged v0.16 with v.017
+=======
+=======
+    private void updateLoginUI(GoogleSignInAccount gsAccount) {
+        if (gsAccount != null) {
+            Log.i("GoogleSignInSuccessful", gsAccount.getEmail());
+=======
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    private void updateLoginUI(GoogleSignInAccount gsAccount) {
+        if (gsAccount != null) {
+            Log.i("GoogleSignInSuccessful", gsAccount.getEmail());
+            user.register(gsAccount);
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
             Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
             setResult(RESULT_OK, mainIntent);
             startActivity(mainIntent);

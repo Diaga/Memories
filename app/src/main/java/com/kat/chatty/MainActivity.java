@@ -78,7 +78,11 @@ public class MainActivity extends AppCompatActivity
 <<<<<<< HEAD
 =======
 =======
+<<<<<<< HEAD
 >>>>>>> Merged v0.16 with v.017
+=======
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
     protected void onResume() {
         super.onResume();
         if (!signedIn()) {
@@ -88,11 +92,19 @@ public class MainActivity extends AppCompatActivity
 
     @Override
 <<<<<<< HEAD
+<<<<<<< HEAD
 >>>>>>> Back-end deployed at diaga.pythonanywhere.com
 =======
 =======
 >>>>>>> Merged v0.16 with v.017
 >>>>>>> Merged v0.16 with v.017
+=======
+=======
+>>>>>>> Merged v0.16 with v.017
+=======
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }

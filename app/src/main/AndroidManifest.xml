@@ -3,7 +3,10 @@
     package="com.kat.chatty">
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
     <uses-permission android:name="android.permission.INTERNET" />
 >>>>>>> Back-end deployed at diaga.pythonanywhere.com
 =======
@@ -11,6 +14,11 @@
 =======
 >>>>>>> Merged v0.16 with v.017
 >>>>>>> Merged v0.16 with v.017
+=======
+=======
+    <uses-permission android:name="android.permission.INTERNET" />
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
 
     <application
         android:allowBackup="true"
@@ -31,6 +39,7 @@
             android:label="Chatty"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             android:noHistory="true"
 =======
 >>>>>>> Back-end deployed at diaga.pythonanywhere.com
@@ -39,6 +48,16 @@
             android:noHistory="true"
 >>>>>>> Merged v0.16 with v.017
 >>>>>>> Merged v0.16 with v.017
+=======
+=======
+            android:noHistory="true"
+>>>>>>> Merged v0.16 with v.017
+=======
+            android:noHistory="true"
+=======
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
+>>>>>>> Back-end deployed at diaga.pythonanywhere.com
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
