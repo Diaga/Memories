@@ -25,7 +25,7 @@
         android:layout_marginEnd="23dp"
         android:background="@drawable/button_bg"
         android:elevation="100dp"
-        android:onClick="startchat"
+        android:onClick="startChat"
         android:text="GO"
         android:textColor="#fff"
         android:textSize="18sp" />

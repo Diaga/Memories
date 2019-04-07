@@ -1,69 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.kat.chatty">
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> Back-end deployed at diaga.pythonanywhere.com
+    package="com.pika.memories">
+
     <uses-permission android:name="android.permission.INTERNET" />
->>>>>>> Back-end deployed at diaga.pythonanywhere.com
-=======
-    <uses-permission android:name="android.permission.INTERNET" />
-=======
->>>>>>> Merged v0.16 with v.017
->>>>>>> Merged v0.16 with v.017
-=======
-=======
-    <uses-permission android:name="android.permission.INTERNET" />
->>>>>>> Back-end deployed at diaga.pythonanywhere.com
->>>>>>> Back-end deployed at diaga.pythonanywhere.com
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label="Chatty"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@mipmap/ic_pika_launcher"
+        android:label="Memories"
+        android:roundIcon="@mipmap/ic_pika_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
-        <activity
-            android:name=".Chat"
-            android:label="@string/title_activity_chat"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-        <activity
-            android:name=".LoginActivity"
-            android:noHistory="true" />
-        <activity
-            android:name=".MainActivity"
-            android:label="Chatty"
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-            android:noHistory="true"
-=======
->>>>>>> Back-end deployed at diaga.pythonanywhere.com
-=======
-=======
-            android:noHistory="true"
->>>>>>> Merged v0.16 with v.017
->>>>>>> Merged v0.16 with v.017
-=======
-=======
-            android:noHistory="true"
->>>>>>> Merged v0.16 with v.017
-=======
-            android:noHistory="true"
-=======
->>>>>>> Back-end deployed at diaga.pythonanywhere.com
->>>>>>> Back-end deployed at diaga.pythonanywhere.com
->>>>>>> Back-end deployed at diaga.pythonanywhere.com
-            android:theme="@style/AppTheme.NoActionBar">
+        android:theme="@style/AppThemeDark">
+        <activity android:name="com.pika.memories.SplashActivity"
+            android:theme="@style/splashScreenTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="com.pika.memories.EditorActivity" />
+        <activity
+            android:name="com.pika.memories.Chat"
+            android:label="@string/title_activity_chat"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name="com.pika.memories.LoginActivity"
+            android:noHistory="true" />
+        <activity
+            android:name="com.pika.memories.MainActivity"
+            android:label="Memories"
+            android:theme="@style/AppThemeDark">
         </activity>
     </application>
 

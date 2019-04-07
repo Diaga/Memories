@@ -3,20 +3,20 @@
 
     <item
         android:id="@+id/home"
-        android:icon="@drawable/ic_home_black_24dp"
+        android:icon="@drawable/ic_home_white_24dp"
         android:title="@string/title_home" />
     <item
-        android:id="@+id/bar_chat"
-        android:icon="@drawable/ic_menu_send"
+        android:id="@+id/bar_test"
+        android:icon="@drawable/ic_send_white_24dp"
         android:title="Template" />
 
     <item
         android:id="@+id/calendar"
-        android:icon="@drawable/ic_baseline_calendar_today_24px"
+        android:icon="@drawable/ic_today_white_24dp"
         android:title="Calendar" />
     <item
         android:id="@+id/statistics"
-        android:icon="@drawable/ic_show_chart_black_24dp"
+        android:icon="@drawable/ic_show_chart_white_24dp"
         android:title="Statistics"/>
 
 </menu>
