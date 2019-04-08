@@ -19,7 +19,7 @@ public class UserViewModel extends AndroidViewModel {
         signedInUser = userRepository.getSignedInUser();
     }
 
-    public LiveData<List<User>> getUser() {
+    public LiveData<List<User>> getUsers() {
         return userLiveData;
     }
 

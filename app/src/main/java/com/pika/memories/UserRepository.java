@@ -24,15 +24,16 @@ public class UserRepository {
         new insertUserTask(userDao).execute(user);
     }
 
-    LiveData<List<User>> getUsers() {
+    public LiveData<List<User>> getUsers() {
         return userLiveData;
     }
 
-    User getSignedInUser() { return signedInUser;}
+    // Does not run asynchronously!
+    public User getSignedInUser() { return signedInUser;}
 
-    void signOutAllUsers() {new signOutTask(userDao).execute();}
+    public void signOutAllUsers() {new signOutTask(userDao).execute();}
 
-    void setAccessKey(String accessKey) {new accessKeyTask(userDao).execute(accessKey);}
+    public void setAccessKey(String accessKey) {new accessKeyTask(userDao).execute(accessKey);}
 
 }
 

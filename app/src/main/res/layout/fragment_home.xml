@@ -30,4 +30,18 @@
         android:textColor="#fff"
         android:textSize="18sp" />
 
+    <Button
+        android:id="@+id/change_theme_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textView2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="151dp"
+        android:background="@drawable/button_bg"
+        android:elevation="100dp"
+        android:text="Change Theme" />
 </RelativeLayout>

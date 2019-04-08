@@ -42,26 +42,32 @@ public class User {
         return accessKey;
     }
 
+    @NonNull
     public String getId() {
         return id;
     }
 
+    @NonNull
     public String getDisplayName() {
         return displayName;
     }
 
+    @NonNull
     public String getEmail() {
         return email;
     }
 
+    @Nullable
     public String getPhotoURI() {
         return photoURI;
     }
 
+    @Nullable
     public String getRegisteredOn() {
         return registeredOn;
     }
 
+    @NonNull
     public String getSignedIn() {
         return signedIn;
     }
@@ -70,27 +76,27 @@ public class User {
         this.accessKey = accessKey;
     }
 
-    public void setId(String id) {
+    public void setId(@NonNull String id) {
         this.id = id;
     }
 
-    public void setDisplayName(String displayName) {
+    public void setDisplayName(@NonNull String displayName) {
         this.displayName = displayName;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(@NonNull String email) {
         this.email = email;
     }
 
-    public void setPhotoURI(String photoURI) {
+    public void setPhotoURI(@Nullable String photoURI) {
         this.photoURI = photoURI;
     }
 
-    public void setRegisteredOn(String registeredOn) {
+    public void setRegisteredOn(@Nullable String registeredOn) {
         this.registeredOn = registeredOn;
     }
 
-    public void setSignedIn(String signedIn) {
+    public void setSignedIn(@NonNull String signedIn) {
         this.signedIn = signedIn;
     }
 }

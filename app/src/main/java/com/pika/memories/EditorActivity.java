@@ -6,42 +6,50 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
+
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class EditorActivity extends AppCompatActivity {
 
     public static final int PICK_IMAGE = 1;
+    private MemoryViewModel memoryViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editor);
+
+        // Connect with database
+        memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel.class);
+
+        memoryViewModel.getMemories().observe(this, new Observer<List<Memory>>() {
+            @Override
+            public void onChanged(List<Memory> memories) {
+                if (memories.size() > 0)
+                Toast.makeText(getApplicationContext(), memories.get(memories.size()-1).getMemory(),
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
         Intent getIntent = getIntent();
-        Toolbar toolbar = findViewById(R.id.editorOptions);
-        toolbar.inflateMenu(R.menu.activity_editor_toolbar);
-        toolbar.setOnMenuItemClickListener(toolbarListener);
     }
 
-    private Toolbar.OnMenuItemClickListener toolbarListener = new Toolbar.OnMenuItemClickListener() {
-        @Override
-        public boolean onMenuItemClick(MenuItem menuItem) {
-            switch (menuItem.getItemId()) {
-                case R.id.attach_media:
-                    selectImage();
-                    break;
-            }
-            return true;
-        }
-    };
+    public void selectImage(View view) {
 
-    private void selectImage() {
         Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
         getIntent.setType("image/*");
 
@@ -106,5 +114,18 @@ public class EditorActivity extends AppCompatActivity {
                     }
                 }
         }
+    }
+
+    public void backToMain(View view) {
+        onBackPressed();
+    }
+
+    public void saveMemory(View view) {
+        EditText editorText = findViewById(R.id.editorText);
+        String memoryText = editorText.getText().toString();
+        Memory memory = new Memory();
+        memory.setMemory(memoryText);
+        memory.setSavedOn(String.valueOf(System.currentTimeMillis()));
+        memoryViewModel.insert(memory);
     }
 }

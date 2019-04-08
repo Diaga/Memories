@@ -8,4 +8,5 @@
         android:textSize="26sp"
         android:text="Settings"
         android:layout_centerInParent="true" />
+
 </RelativeLayout>

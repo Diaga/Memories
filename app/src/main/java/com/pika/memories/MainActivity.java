@@ -31,13 +31,9 @@ public class MainActivity extends AppCompatActivity
     private final int LOGIN_REQUEST = 0;
     private final int LOGOUT_REQUEST = 1;
 
-    public void startChat(View view) {
-        Intent intent = new Intent(getApplicationContext(), Chat.class);
-        startActivity(intent);
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Utils.onActivityCreateSetTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Intent loginIntent = getIntent();
@@ -191,5 +187,10 @@ public class MainActivity extends AppCompatActivity
             ImageView navBarImageView = navHeader.findViewById(R.id.navBarImageView);
             navBarImageView.setImageURI(Uri.parse(userViewModel.getSignedInUser().getPhotoURI()));
         }
+    }
+
+    public void startChat(View view) {
+        Intent intent = new Intent(getApplicationContext(), Chat.class);
+        startActivity(intent);
     }
 }

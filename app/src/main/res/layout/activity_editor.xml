@@ -6,31 +6,124 @@
     android:layout_height="match_parent"
     tools:context=".EditorActivity">
 
+    <EditText
+        android:id="@+id/editorText"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:background="@null"
+        android:ems="10"
+        android:gravity="top"
+        android:hint="Write here"
+        android:inputType="textShortMessage|textLongMessage|textImeMultiLine"
+        app:layout_constraintBottom_toTopOf="@id/editorOptions"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/editorTopBar" />
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/editorTopBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:elevation="12dp"
+        android:gravity="top"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:backgroundTint="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:contentDescription="Save"
+                android:src="@drawable/ic_arrow_back_white_24dp"
+                android:onClick="backToMain"
+                android:tint="@drawable/editor_selector_change_color" />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:contentDescription="Save"
+                android:onClick="saveMemory"
+                android:src="@drawable/ic_check_white_24dp"
+                android:tint="@drawable/editor_selector_change_color" />
+
+
+
+
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/editorOptions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@android:color/white"
-        android:elevation="10dp"
+        android:background="@color/colorPrimary"
+        android:elevation="24dp"
         android:gravity="top"
-        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <EditText
-        android:id="@+id/editText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Name"
-        app:layout_constraintBottom_toTopOf="@+id/editorOptions"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/editorText">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="horizontal"
+            android:weightSum="3">
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:contentDescription="Add location"
+                android:src="@drawable/ic_location_on_white_24dp"
+                android:tint="@drawable/editor_selector_change_color" />
+
+            <ImageButton
+                android:id="@+id/menuGalleryButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:contentDescription="Attach media"
+                android:onClick="selectImage"
+                android:src="@drawable/ic_menu_gallery"
+                android:tint="@drawable/editor_selector_change_color" />
+
+            <ImageButton
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorPrimary"
+                android:contentDescription="Set mood"
+                android:src="@drawable/ic_mood_white_24dp"
+                android:tint="@drawable/editor_selector_change_color" />
+
+        </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,10 +7,12 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@androidx.room.Database(entities = {User.class}, version = 4)
+@androidx.room.Database(entities = {User.class, Memory.class}, version = 5)
 public abstract class Database extends RoomDatabase {
 
     public abstract UserDao userDao();
+
+    public abstract MemoryDao memoryDao();
 
     private static volatile Database INSTANCE;
 
@@ -30,7 +32,7 @@ public abstract class Database extends RoomDatabase {
         @Override
         public void onOpen(@NonNull SupportSQLiteDatabase db) {
             super.onOpen(db);
-            // Add ASync Task To Update!
+            // Add Async Task To Update!
         }
     };
 }

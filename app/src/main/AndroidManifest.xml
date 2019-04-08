@@ -12,25 +12,31 @@
         android:supportsRtl="true"
         android:theme="@style/AppThemeDark">
         <activity android:name="com.pika.memories.SplashActivity"
-            android:theme="@style/splashScreenTheme">
+            android:theme="@style/splashScreenTheme"
+            android:screenOrientation="nosensor">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.pika.memories.EditorActivity" />
+        <activity android:name="com.pika.memories.EditorActivity"
+            android:theme="@style/AppThemeDark"
+            android:screenOrientation="nosensor"/>
         <activity
             android:name="com.pika.memories.Chat"
             android:label="@string/title_activity_chat"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="nosensor"/>
         <activity
             android:name="com.pika.memories.LoginActivity"
-            android:noHistory="true" />
+            android:noHistory="true"
+            android:screenOrientation="nosensor"/>
         <activity
             android:name="com.pika.memories.MainActivity"
             android:label="Memories"
-            android:theme="@style/AppThemeDark">
+            android:theme="@style/AppThemeDark"
+            android:screenOrientation="nosensor">
         </activity>
     </application>
 
