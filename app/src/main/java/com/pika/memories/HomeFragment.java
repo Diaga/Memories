@@ -1,19 +1,20 @@
 package com.pika.memories;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 
 public class HomeFragment extends Fragment {
-
-    private int currentTheme = 1;
 
     @Nullable
     @Override
@@ -30,14 +31,10 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
-    void changeTheme() {
-        Log.i("CHANGETHEME_INFO", String.valueOf(currentTheme));
-        if (currentTheme == 1) {
-            currentTheme = 2;
-            Utils.changeToTheme(getActivity(), currentTheme);
-        } else {
-            currentTheme = 1;
-            Utils.changeToTheme(getActivity(), currentTheme);
-        }
+    private void changeTheme() {
+        Log.i("CHANGETHEME_INFO", String.valueOf("changetheme"));
+        Utils.changeTheme();
+        Intent changeThemeIntent = new Intent(getContext(), MainActivity.class);
+        startActivity(changeThemeIntent);
     }
 }

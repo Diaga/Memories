@@ -12,7 +12,6 @@
         android:background="@drawable/user_msg_bubble"
         android:layout_alignParentEnd="true"
         android:padding="16dp"
-        android:textColor="#fff"
         android:textSize="20sp" />
 
 </RelativeLayout>

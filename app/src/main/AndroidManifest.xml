@@ -10,7 +10,7 @@
         android:label="Memories"
         android:roundIcon="@mipmap/ic_pika_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppThemeDark">
+        android:theme="@style/AppThemeLight">
         <activity android:name="com.pika.memories.SplashActivity"
             android:theme="@style/splashScreenTheme"
             android:screenOrientation="nosensor">
@@ -21,12 +21,10 @@
             </intent-filter>
         </activity>
         <activity android:name="com.pika.memories.EditorActivity"
-            android:theme="@style/AppThemeDark"
             android:screenOrientation="nosensor"/>
         <activity
             android:name="com.pika.memories.Chat"
             android:label="@string/title_activity_chat"
-            android:theme="@style/AppTheme.NoActionBar"
             android:screenOrientation="nosensor"/>
         <activity
             android:name="com.pika.memories.LoginActivity"
@@ -35,9 +33,9 @@
         <activity
             android:name="com.pika.memories.MainActivity"
             android:label="Memories"
-            android:theme="@style/AppThemeDark"
             android:screenOrientation="nosensor">
         </activity>
+        <activity android:name=".BaseActivity" android:noHistory="true"/>
     </application>
 
 </manifest>

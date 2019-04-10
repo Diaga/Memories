@@ -23,6 +23,7 @@ public class Chat extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.chat_layout);
         input_message = findViewById(R.id.input_message);
         recyclerView = findViewById(R.id.conversation);

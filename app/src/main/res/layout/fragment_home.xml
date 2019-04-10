@@ -27,7 +27,6 @@
         android:elevation="100dp"
         android:onClick="startChat"
         android:text="GO"
-        android:textColor="#fff"
         android:textSize="18sp" />
 
     <Button

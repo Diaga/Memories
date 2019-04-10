@@ -28,12 +28,12 @@
         android:id="@+id/editorTopBar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="?colorPrimary"
         android:elevation="12dp"
         android:gravity="top"
         android:minHeight="?attr/actionBarSize"
         android:theme="?attr/actionBarTheme"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="?colorPrimary"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,7 +50,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
+                android:background="?colorPrimary"
                 android:contentDescription="Save"
                 android:src="@drawable/ic_arrow_back_white_24dp"
                 android:onClick="backToMain"
@@ -60,14 +60,11 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
+                android:background="?colorPrimary"
                 android:contentDescription="Save"
                 android:onClick="saveMemory"
                 android:src="@drawable/ic_check_white_24dp"
                 android:tint="@drawable/editor_selector_change_color" />
-
-
-
 
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -77,11 +74,11 @@
         android:id="@+id/editorOptions"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/colorPrimary"
+        android:background="?colorPrimary"
         android:elevation="24dp"
         android:gravity="top"
         android:theme="?attr/actionBarTheme"
-        app:backgroundTint="@color/colorPrimary"
+        app:backgroundTint="?colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +95,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
+                android:background="?colorPrimary"
                 android:contentDescription="Add location"
                 android:src="@drawable/ic_location_on_white_24dp"
                 android:tint="@drawable/editor_selector_change_color" />
@@ -108,7 +105,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
+                android:background="?colorPrimary"
                 android:contentDescription="Attach media"
                 android:onClick="selectImage"
                 android:src="@drawable/ic_menu_gallery"
@@ -118,7 +115,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="@color/colorPrimary"
+                android:background="?colorPrimary"
                 android:contentDescription="Set mood"
                 android:src="@drawable/ic_mood_white_24dp"
                 android:tint="@drawable/editor_selector_change_color" />

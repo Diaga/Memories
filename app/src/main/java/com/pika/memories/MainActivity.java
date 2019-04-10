@@ -14,7 +14,6 @@ import androidx.fragment.app.Fragment;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
@@ -25,7 +24,7 @@ import android.widget.TextView;
 
 import androidx.lifecycle.ViewModelProviders;
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     private UserViewModel userViewModel;
     private final int LOGIN_REQUEST = 0;
@@ -33,15 +32,15 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        Utils.onActivityCreateSetTheme(this);
         super.onCreate(savedInstanceState);
+        Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_main);
         Intent loginIntent = getIntent();
 
         // Connect with Database
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.actionBarTop);
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -50,8 +49,9 @@ public class MainActivity extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+        NavigationView drawerView = findViewById(R.id.drawerView);
+        drawerView.setNavigationItemSelectedListener(this);
+
         fragmentLoader(new HomeFragment());
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
@@ -93,7 +93,6 @@ public class MainActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         Fragment fragment = null;
@@ -179,13 +178,13 @@ public class MainActivity extends AppCompatActivity
 
     private void updateUI(boolean signedIn) {
         if (signedIn) {
-            NavigationView navigationView = findViewById(R.id.nav_view);
-            View navHeader = navigationView.getHeaderView(0);
-            TextView navBarNameView = navHeader.findViewById(R.id.navBarNameView);
-            navBarNameView.setText(userViewModel.getSignedInUser().getDisplayName());
+            NavigationView drawerView = findViewById(R.id.drawerView);
+            View drawerHeader = drawerView.getHeaderView(0);
+            TextView drawerNameView = drawerHeader.findViewById(R.id.drawerNameView);
+            drawerNameView.setText(userViewModel.getSignedInUser().getDisplayName());
 
-            ImageView navBarImageView = navHeader.findViewById(R.id.navBarImageView);
-            navBarImageView.setImageURI(Uri.parse(userViewModel.getSignedInUser().getPhotoURI()));
+            ImageView drawerImageView = drawerHeader.findViewById(R.id.drawerImageView);
+            drawerImageView.setImageURI(Uri.parse(userViewModel.getSignedInUser().getPhotoURI()));
         }
     }
 

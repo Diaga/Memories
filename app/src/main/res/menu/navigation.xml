@@ -3,7 +3,6 @@
 
     <item
         android:id="@+id/home"
-        android:tint="@drawable/editor_selector_change_color"
         android:icon="@drawable/ic_home_white_24dp"
         android:title="@string/title_home" />
     <item

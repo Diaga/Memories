@@ -7,16 +7,15 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import javax.net.ssl.HttpsURLConnection;
-
 class Server {
-    private static final String server = "https://diaga.pythonanywhere.com/";
+    private static final String server = "http://memories.pika.cf/";
 
     static String queryBuilder(String[] query, String[] data) {
         if (query.length == data.length) {
@@ -45,12 +44,12 @@ class Server {
     }
     
     static String getResponse(String urlString) {
-        HttpsURLConnection connection;
+        HttpURLConnection connection;
         try {
             URL url = new URL(urlString);
             URLConnection urlConnection = url.openConnection();
-            if (urlConnection instanceof HttpsURLConnection) {
-                connection = (HttpsURLConnection) urlConnection;
+            if (urlConnection instanceof HttpURLConnection) {
+                connection = (HttpURLConnection) urlConnection;
                 return bufferRead(connection);
             }
         } catch (Exception e) {
@@ -60,12 +59,12 @@ class Server {
     }
 
     static String saveMemory(String urlString, byte[] bytes) {
-        HttpsURLConnection connection;
+        HttpURLConnection connection;
         try {
             URL url = new URL(urlString);
             URLConnection urlConnection = url.openConnection();
-            if (urlConnection instanceof HttpsURLConnection) {
-                connection = (HttpsURLConnection) urlConnection;
+            if (urlConnection instanceof HttpURLConnection) {
+                connection = (HttpURLConnection) urlConnection;
                 if (bytes != null) {
                     connection.setDoOutput(true);
                     connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=*****");
@@ -89,7 +88,7 @@ class Server {
 
     }
 
-    private static String bufferRead(HttpsURLConnection conn) {
+    private static String bufferRead(HttpURLConnection conn) {
         try {
             BufferedReader in =
                     new BufferedReader(new InputStreamReader(conn.getInputStream()));
