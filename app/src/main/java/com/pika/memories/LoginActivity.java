@@ -64,6 +64,7 @@ public class LoginActivity extends BaseActivity {
 
             Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
             setResult(RESULT_OK, mainIntent);
+            mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(mainIntent);
             finish();
         } else {

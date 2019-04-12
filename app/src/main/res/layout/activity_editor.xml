@@ -17,6 +17,7 @@
         android:ems="10"
         android:gravity="top"
         android:hint="Write here"
+        android:textColor="?android:textColor"
         android:inputType="textShortMessage|textLongMessage|textImeMultiLine"
         app:layout_constraintBottom_toTopOf="@id/editorOptions"
         app:layout_constraintEnd_toEndOf="parent"

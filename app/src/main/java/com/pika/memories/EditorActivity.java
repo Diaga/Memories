@@ -58,6 +58,12 @@ public class EditorActivity extends BaseActivity {
         startActivityForResult(chooserIntent, PICK_IMAGE);
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        finish();
+    }
+
     static void saveMemory(String memory) {
         saveMemory(memory, "");
     }

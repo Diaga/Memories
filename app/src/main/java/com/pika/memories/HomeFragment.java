@@ -32,9 +32,10 @@ public class HomeFragment extends Fragment {
     }
 
     private void changeTheme() {
-        Log.i("CHANGETHEME_INFO", String.valueOf("changetheme"));
+        Log.i("CHANGETHEME_INFO", "Done!");
         Utils.changeTheme();
         Intent changeThemeIntent = new Intent(getContext(), MainActivity.class);
+        changeThemeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(changeThemeIntent);
     }
 }

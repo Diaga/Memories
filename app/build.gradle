@@ -2,6 +2,10 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
     defaultConfig {
         applicationId "com.pika.memories"
         minSdkVersion 21
@@ -46,5 +50,6 @@ dependencies {
     def lifecycle_version = "2.1.0-alpha04"
     implementation "androidx.lifecycle:lifecycle-extensions:$lifecycle_version"
 
+    implementation "com.github.prolificinteractive:material-calendarview:2.0.1"
 }
 

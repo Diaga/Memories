@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class Chat extends AppCompatActivity {
+public class ChatActivity extends AppCompatActivity {
 
     EditText input_message;
     RecyclerView recyclerView;

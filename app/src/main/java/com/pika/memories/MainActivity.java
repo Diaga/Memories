@@ -16,6 +16,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
+import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -98,10 +99,12 @@ public class MainActivity extends BaseActivity
         Fragment fragment = null;
         switch (item.getItemId()) {
             case R.id.profile:
-                fragment = new ProfileFragment();
+                Intent profileIntent = new Intent(this, ProfileActivity.class);
+                startActivity(profileIntent);
                 break;
             case R.id.settings:
-                fragment = new SettingsFragment();
+                Intent settingsIntent = new Intent(this, SettingsActivity.class);
+                startActivity(settingsIntent);
                 break;
             case R.id.help:
                 fragment = new HelpFragment();
@@ -189,7 +192,7 @@ public class MainActivity extends BaseActivity
     }
 
     public void startChat(View view) {
-        Intent intent = new Intent(getApplicationContext(), Chat.class);
+        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
         startActivity(intent);
     }
 }

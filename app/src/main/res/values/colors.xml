@@ -2,8 +2,10 @@
 <resources>
     <color name="colorNotQuiteBlack">#2C2F33</color>
     <color name="colorAlmostBlack">#23272A</color>
-    <color name="colorAccent">#7289DA</color>
+    <color name="colorDiscordBlue">#7289DA</color>
     <color name="colorWhite">#FFFFFF</color>
     <color name="colorBlack">#000000</color>
     <color name="colorGreyple">#99AAB5</color>
+    <color name="colorChromeBlue">#4285F4</color>
+    <color name="colorChromeYellow">#F4B400</color>
 </resources>

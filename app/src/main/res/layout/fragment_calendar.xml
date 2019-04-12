@@ -4,8 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <CalendarView
-        android:id="@+id/calendarView"
+    <FrameLayout
         android:layout_width="341dp"
         android:layout_height="299dp"
         android:layout_alignParentStart="true"
@@ -14,16 +13,22 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="84dp"
         android:layout_marginEnd="8dp"
-        android:weekNumberColor="?android:textColor"
-        android:dateTextAppearance="?android:textColor"
-        android:unfocusedMonthDateColor="?android:textColor"
-        android:selectedWeekBackgroundColor="?android:textColor"
-        android:weekSeparatorLineColor="?android:textColor"
-        android:focusedMonthDateColor="?android:textColor"
-        android:weekDayTextAppearance="?android:textColor"
-        android:foregroundTint="@color/bottom_nav_selector_change_color"
+        android:elevation="10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/calendarView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:mcv_leftArrow="@drawable/ic_keyboard_arrow_left_24dp"
+            app:mcv_rightArrow="@drawable/ic_keyboard_arrow_right_24dp"
+            app:mcv_selectionColor="?colorAccent"
+            app:mcv_headerTextAppearance="@style/calendarViewHeader"
+            app:mcv_weekDayTextAppearance="?android:textColor"
+            app:mcv_dateTextAppearance="?android:textColor"
+            />
+    </FrameLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

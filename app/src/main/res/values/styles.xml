@@ -4,7 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">@color/colorNotQuiteBlack</item>
         <item name="colorPrimaryDark">@color/colorAlmostBlack</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorDiscordBlue</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
     </style>
 
@@ -12,7 +12,7 @@
     <style name="AppThemeDark" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/colorNotQuiteBlack</item>
         <item name="colorPrimaryDark">@color/colorAlmostBlack</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorDiscordBlue</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:windowBackground">@color/colorNotQuiteBlack</item>
         <item name="android:textColor">@color/colorWhite</item>
@@ -27,13 +27,13 @@
     <style name="AppThemeLight" parent="Theme.AppCompat.NoActionBar">
         <item name="colorPrimary">@color/colorWhite</item>
         <item name="colorPrimaryDark">@color/colorAlmostBlack</item>
-        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorAccent">@color/colorChromeBlue</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
         <item name="android:windowBackground">@color/colorWhite</item>
         <item name="android:textColor">@color/colorBlack</item>
         <item name="android:fontFamily">@font/product_sans_regular</item>
-        <item name="android:ambientShadowAlpha">0.5</item>
-        <item name="android:spotShadowAlpha">0.5</item>
+        <item name="android:ambientShadowAlpha">0.1</item>
+        <item name="android:spotShadowAlpha">0.1</item>
         <item name="android:itemTextAppearance">@color/colorBlack</item>
         <item name="android:calendarTextColor">@color/colorGreyple</item>
     </style>
@@ -55,6 +55,10 @@
     <style name="splashScreenTheme" parent="@style/AppTheme.NoActionBar">
         <item name="android:windowBackground">@drawable/splash_screen</item>
         <item name="android:windowFullscreen">true</item>
+    </style>
+
+    <style name="calendarViewHeader" parent="TextAppearance.MaterialCalendarWidget.Header">
+        <item name="android:textColor">?colorAccent</item>
     </style>
 
 </resources>
