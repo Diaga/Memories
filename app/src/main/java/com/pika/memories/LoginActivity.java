@@ -130,8 +130,6 @@ public class LoginActivity extends BaseActivity {
         user.setEmail(gsAccount.getEmail());
         if (gsAccount.getPhotoUrl() != null) {
             user.setPhotoURI(gsAccount.getPhotoUrl().toString());
-        } else {
-            user.setPhotoURI("null");
         }
         user.setSignedIn("1");
         userViewModel.insertUser(user);

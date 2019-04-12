@@ -1,6 +1,7 @@
 package com.pika.memories;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -9,6 +10,7 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
+import com.squareup.picasso.Picasso;
 
 import androidx.fragment.app.Fragment;
 import androidx.core.view.GravityCompat;
@@ -16,12 +18,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
-import android.provider.Settings;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.io.File;
+import java.io.FilenameFilter;
 
 import androidx.lifecycle.ViewModelProviders;
 
@@ -121,25 +125,23 @@ public class MainActivity extends BaseActivity
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            Fragment fragment = null;
-            switch (menuItem.getItemId()) {
-                case R.id.home:
-                    fragment = new HomeFragment();
-                    break;
-                case R.id.calendar:
-                    fragment = new CalendarFragment();
-                    break;
-                case R.id.statistics:
-                    fragment = new StatisticsFragment();
-                    break;
-                case R.id.bar_test:
-                    Intent test_intent = new Intent(getApplicationContext(), EditorActivity.class);
-                    startActivity(test_intent);
-            }
-            return fragmentLoader(fragment);
+            = menuItem -> {
+        Fragment fragment = null;
+        switch (menuItem.getItemId()) {
+            case R.id.home:
+                fragment = new HomeFragment();
+                break;
+            case R.id.calendar:
+                fragment = new CalendarFragment();
+                break;
+            case R.id.statistics:
+                fragment = new StatisticsFragment();
+                break;
+            case R.id.bar_test:
+                Intent test_intent = new Intent(getApplicationContext(), EditorActivity.class);
+                startActivity(test_intent);
         }
+        return fragmentLoader(fragment);
     };
 
 
@@ -187,7 +189,19 @@ public class MainActivity extends BaseActivity
             drawerNameView.setText(userViewModel.getSignedInUser().getDisplayName());
 
             ImageView drawerImageView = drawerHeader.findViewById(R.id.drawerImageView);
-            drawerImageView.setImageURI(Uri.parse(userViewModel.getSignedInUser().getPhotoURI()));
+            String imageURI = userViewModel.getSignedInUser().getPhotoURI();
+            if (imageURI == null) {
+                Picasso.with(getApplicationContext()).load(R.drawable.default_avatar).into(drawerImageView);
+            } else {
+                File[] fileCheck = getCacheDir().listFiles((dir, name) -> name.equals("avatar.jpg"));
+                if (fileCheck.length > 0) {
+                    byte[] bytes = Utils.readCacheToBytes(fileCheck[0]);
+                    Bitmap bitmap = Utils.bytesToImage(bytes);
+                    drawerImageView.setImageBitmap(bitmap);
+                } else {
+                    Picasso.with(getApplicationContext()).load(imageURI).into(drawerImageView);
+                }
+            }
         }
     }
 

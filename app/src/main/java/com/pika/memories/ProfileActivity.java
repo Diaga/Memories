@@ -3,10 +3,15 @@ package com.pika.memories;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
+
+import java.io.File;
 
 public class ProfileActivity extends AppCompatActivity {
 
@@ -24,15 +29,22 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     private void updateUI() {
-        String defaultImageURI = "https://lh3.googleusercontent.com/-XdUIqdMkCWA/AAAAAAAAAAI/AAAAAAAAAAA/4252rscbv5M/photo.jpg";
         TextView nameTextView = findViewById(R.id.displayName);
         nameTextView.setText(userViewModel.getSignedInUser().getDisplayName());
 
         ImageView avatar = findViewById(R.id.avatar);
-        if (userViewModel.getSignedInUser().getPhotoURI().equals("")) {
-            avatar.setImageURI(Uri.parse(defaultImageURI));
+        String imageURI = userViewModel.getSignedInUser().getPhotoURI();
+        if (imageURI == null) {
+            Picasso.with(getApplicationContext()).load(R.drawable.default_avatar).into(avatar);
         } else {
-            avatar.setImageURI(Uri.parse(userViewModel.getSignedInUser().getPhotoURI()));
+            File[] fileCheck = getCacheDir().listFiles((dir, name) -> name.equals("avatar.jpg"));
+            if (fileCheck.length > 0) {
+                byte[] bytes = Utils.readCacheToBytes(fileCheck[0]);
+                Bitmap bitmap = Utils.bytesToImage(bytes);
+                avatar.setImageBitmap(bitmap);
+            } else {
+                Picasso.with(getApplicationContext()).load(imageURI).into(avatar);
+            }
         }
     }
 }

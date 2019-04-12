@@ -80,22 +80,7 @@ public class EditorActivity extends BaseActivity {
         String query = Server.queryBuilder(args, params);
         String url = Server.urlBuilder("save", query);
         array.add(url);
-        if (imageUri != null) {
-            byte[] bytes;
-            byte[] buffer = new byte[8192];
-            int bytesRead;
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-            try {
-                InputStream inputStream = new FileInputStream(imageUri.toString());
-                while ((bytesRead = inputStream.read(buffer)) != -1) {
-                    outputStream.write(buffer, 0, bytesRead);
-                }
-            } catch (Exception e) {
-                Log.d("IMG_TO_BYTE_ERROR: ", e.toString());
-            }
-            bytes = outputStream.toByteArray();
-            array.add(bytes);
-        }
+
         new saveMemoryTask().execute(array);
     }
 
@@ -111,7 +96,7 @@ public class EditorActivity extends BaseActivity {
                         try {
                             saveMemory("s", "a", image);
                         } catch (Exception e) {
-                            Log.d("IMAGE_SELECTION_ERROR: ", e.toString());
+                            Log.d("ImageSelectionERROR: ", e.toString());
                         }
                     }
                 }

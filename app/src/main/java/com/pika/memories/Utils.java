@@ -1,26 +1,40 @@
 package com.pika.memories;
 
 import android.app.Activity;
+import android.content.Context;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.util.Log;
 
-public class Utils
-{
-    public final static int THEME_BLACK = 1;
-    public final static int THEME_WHITE = 2;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+
+class Utils {
+    final static int THEME_BLACK = 1;
+    final static int THEME_WHITE = 2;
     private static int sTheme = THEME_WHITE;
+
     /**
      * Set the theme of the Activity, and restart it by creating a new Activity of the same type.
      */
-    public static void changeTheme()
-    {
-        if (sTheme == THEME_BLACK) {sTheme = THEME_WHITE;} else {sTheme = THEME_BLACK;}
+    static void changeTheme() {
+        if (sTheme == THEME_BLACK) {
+            sTheme = THEME_WHITE;
+        } else {
+            sTheme = THEME_BLACK;
+        }
     }
-    /** Set the theme of the activity, according to the configuration. */
-    public static void onActivityCreateSetTheme(Activity activity)
-    {
+
+    /**
+     * Set the theme of the activity, according to the configuration.
+     */
+    static void onActivityCreateSetTheme(Activity activity) {
         Log.i("Theme", String.valueOf(sTheme));
-        switch (sTheme)
-        {
+        switch (sTheme) {
             default:
             case THEME_BLACK:
                 activity.setTheme(R.style.AppThemeDark);
@@ -29,5 +43,48 @@ public class Utils
                 activity.setTheme(R.style.AppThemeLight);
                 break;
         }
+    }
+
+    static byte[] imageResourceToByteArray(Bitmap bitmap) {
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    static File getCacheFile(Context context, String filename) {
+        File file = null;
+        try {
+            file = File.createTempFile(filename, null, context.getCacheDir());
+        } catch (IOException e) {
+            Log.e("FileCacheCreateERROR: ", filename);
+        }
+        return file;
+    }
+
+    static void writeCacheBytes(byte[] bytes, File file) {
+        FileOutputStream fileOutPutStream;
+        try {
+            fileOutPutStream = new FileOutputStream(file);
+            fileOutPutStream.write(bytes);
+            fileOutPutStream.close();
+        } catch (Exception e) {
+            Log.e("FileCacheWriteERROR: ", file.getName());
+        }
+    }
+
+    static byte[] readCacheToBytes(File file) {
+        BufferedInputStream bufferedInputStream;
+        byte[] bytes = new byte[(int)file.length()];
+        try {
+            bufferedInputStream = new BufferedInputStream(new FileInputStream(file));
+            int bytesRead = bufferedInputStream.read(bytes);
+        } catch (Exception e) {
+            Log.e("FileCacheReadError: ", file.getName());
+        }
+        return bytes;
+    }
+
+    static Bitmap bytesToImage(byte[] bytes) {
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
     }
 }
