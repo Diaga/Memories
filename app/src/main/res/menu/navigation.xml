@@ -6,8 +6,8 @@
         android:icon="@drawable/ic_home_white_24dp"
         android:title="@string/title_home" />
     <item
-        android:id="@+id/bar_test"
-        android:icon="@drawable/ic_send_white_24dp"
+        android:id="@+id/chat"
+        android:icon="@drawable/ic_chat_black_24dp"
         android:title="Template" />
 
     <item

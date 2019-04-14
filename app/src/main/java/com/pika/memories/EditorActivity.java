@@ -4,25 +4,23 @@ import android.content.Intent;
 import android.net.Uri;
 import androidx.annotation.Nullable;
 import android.os.Bundle;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
+import android.widget.PopupMenu;
+import android.widget.PopupWindow;
+import android.widget.TextView;
 
-import java.io.ByteArrayOutputStream;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Date;
 
 public class EditorActivity extends BaseActivity {
 
     public static final int PICK_IMAGE = 1;
     private MemoryViewModel memoryViewModel;
+    private Uri imageURI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,17 +28,19 @@ public class EditorActivity extends BaseActivity {
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_editor);
 
+        // Connect with time
+        setTime(findViewById(R.id.dateEditorActivity));
+
         // Connect with database
         memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel.class);
 
-        memoryViewModel.getMemories().observe(this, new Observer<List<Memory>>() {
-            @Override
-            public void onChanged(List<Memory> memories) {
-                if (memories.size() > 0)
-                Toast.makeText(getApplicationContext(), memories.get(memories.size()-1).getMemory(),
-                        Toast.LENGTH_SHORT).show();
-            }
+        /* Debug Toast
+        memoryViewModel.getMemories().observe(this, memories -> {
+            if (memories.size() > 0)
+            Toast.makeText(getApplicationContext(), memories.get(memories.size()-1).getSavedOn(),
+                    Toast.LENGTH_SHORT).show();
         });
+        */
         Intent getIntent = getIntent();
     }
 
@@ -64,6 +64,22 @@ public class EditorActivity extends BaseActivity {
         finish();
     }
 
+    public void saveMemory(View view) {
+        EditText editorText = findViewById(R.id.editorText);
+        String memoryText = editorText.getText().toString();
+        if (memoryText.equals("")) {
+            return;
+        }
+        Memory memory = new Memory();
+        memory.setMemory(memoryText);
+        memory.setSavedOn(String.valueOf(System.currentTimeMillis()));
+        if (imageURI != null) {
+            memory.setImagePath(imageURI.toString());
+        }
+        memoryViewModel.insert(memory);
+        onBackPressed();
+    }
+
     static void saveMemory(String memory) {
         saveMemory(memory, "");
     }
@@ -76,7 +92,7 @@ public class EditorActivity extends BaseActivity {
         ArrayList<Serializable> array = new ArrayList<>();
 
         String[] args = {"accessKey", "savedOn", "memory", "geoTag"};
-        String[] params = {"s", String.valueOf(System.currentTimeMillis()), memory, geoTag};
+        String[] params = {"s", String.valueOf(new Date(System.currentTimeMillis())), memory, geoTag};
         String query = Server.queryBuilder(args, params);
         String url = Server.urlBuilder("save", query);
         array.add(url);
@@ -92,12 +108,9 @@ public class EditorActivity extends BaseActivity {
             case PICK_IMAGE:
                 if (resultCode == RESULT_OK) {
                     if (data.getData() != null) {
-                        Uri image = data.getData();
-                        try {
-                            saveMemory("s", "a", image);
-                        } catch (Exception e) {
-                            Log.d("ImageSelectionERROR: ", e.toString());
-                        }
+                        imageURI = data.getData();
+                    } else {
+                        imageURI = null;
                     }
                 }
         }
@@ -107,12 +120,8 @@ public class EditorActivity extends BaseActivity {
         onBackPressed();
     }
 
-    public void saveMemory(View view) {
-        EditText editorText = findViewById(R.id.editorText);
-        String memoryText = editorText.getText().toString();
-        Memory memory = new Memory();
-        memory.setMemory(memoryText);
-        memory.setSavedOn(String.valueOf(System.currentTimeMillis()));
-        memoryViewModel.insert(memory);
+    private void setTime(TextView textView) {
+        textView.setText(Utils.timestampToDateTime(String.valueOf(System.currentTimeMillis()),
+                "EEEE dd, yyyy"));
     }
 }

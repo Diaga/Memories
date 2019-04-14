@@ -20,6 +20,9 @@ public interface MemoryDao {
     @Query("SELECT * FROM Memory WHERE savedOn = :savedOn LIMIT 1")
     Memory getMemory(String savedOn);
 
-    @Query("SELECT * FROM Memory")
+    @Query("SELECT * FROM Memory ORDER BY savedOn DESC")
     LiveData<List<Memory>> getMemories();
+
+    @Query("DELETE FROM Memory")
+    void clearTable();
 }

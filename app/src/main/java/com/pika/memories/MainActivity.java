@@ -2,7 +2,6 @@ package com.pika.memories;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -25,8 +24,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
-import java.io.FilenameFilter;
-
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
 
 public class MainActivity extends BaseActivity
@@ -34,6 +33,9 @@ public class MainActivity extends BaseActivity
     private UserViewModel userViewModel;
     private final int LOGIN_REQUEST = 0;
     private final int LOGOUT_REQUEST = 1;
+
+    Fragment[] fragments = {new HomeFragment(), new CalendarFragment(), new StatisticsFragment()};
+    String[] fragmentTags = {"Home", "Calendar", "Statistics"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +46,10 @@ public class MainActivity extends BaseActivity
 
         // Connect with Database
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+
+        // Load And Hide All Fragments
+        loadAllFragments();
+        hideAllFragments();
 
         Toolbar toolbar = findViewById(R.id.actionBarTop);
         setSupportActionBar(toolbar);
@@ -129,17 +135,18 @@ public class MainActivity extends BaseActivity
         Fragment fragment = null;
         switch (menuItem.getItemId()) {
             case R.id.home:
-                fragment = new HomeFragment();
+                fragment = getSupportFragmentManager().findFragmentByTag(fragmentTags[0]);
                 break;
             case R.id.calendar:
-                fragment = new CalendarFragment();
+                fragment = getSupportFragmentManager().findFragmentByTag(fragmentTags[1]);
                 break;
             case R.id.statistics:
-                fragment = new StatisticsFragment();
+                fragment = getSupportFragmentManager().findFragmentByTag(fragmentTags[2]);
                 break;
-            case R.id.bar_test:
-                Intent test_intent = new Intent(getApplicationContext(), EditorActivity.class);
-                startActivity(test_intent);
+            case R.id.chat:
+                Intent chatIntent = new Intent(getApplicationContext(), ChatActivity.class);
+                startActivity(chatIntent);
+                break;
         }
         return fragmentLoader(fragment);
     };
@@ -147,7 +154,8 @@ public class MainActivity extends BaseActivity
 
     public boolean fragmentLoader(Fragment fragment) {
         if (fragment != null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fg_container, fragment).commit();
+            hideAllFragments();
+            getSupportFragmentManager().beginTransaction().show(fragment).commit();
             return true;
         }
         return false;
@@ -205,8 +213,32 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    public void startChat(View view) {
-        Intent intent = new Intent(getApplicationContext(), ChatActivity.class);
-        startActivity(intent);
+    private void hideAllFragments() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        for (int counter = 0; counter < 3; counter++) {
+            fragmentTransaction.hide(fragmentManager.findFragmentByTag(fragmentTags[counter]));
+        }
+        fragmentTransaction.commit();
+        fragmentManager.executePendingTransactions();
     }
+
+
+    private void loadAllFragments() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        for (int counter = 0; counter < 3; counter++) {
+            fragmentTransaction.add(R.id.fg_container, fragments[counter], fragmentTags[counter]);
+        }
+        fragmentTransaction.commit();
+        fragmentManager.executePendingTransactions();
+    }
+
+
+
+    public void startEditor(View view) {
+        Intent editorIntent = new Intent(getApplicationContext(), EditorActivity.class);
+        startActivity(editorIntent);
+    }
+
 }

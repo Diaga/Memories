@@ -8,8 +8,8 @@
 
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="0dp"
+        android:id="@+id/linearLayoutSettings"
+        android:layout_width="match_parent"
         android:layout_height="250dp"
         android:background="@drawable/activity_settings_background"
         android:orientation="vertical"
@@ -18,15 +18,33 @@
         app:layout_constraintTop_toTopOf="parent"></LinearLayout>
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/settingsTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="104dp"
+        android:layout_marginStart="88dp"
+        android:layout_marginTop="108dp"
         android:text="Settings"
         android:textColor="@color/colorWhite"
         android:textSize="30sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="?colorAccent"
+        android:text="Change Theme"
+        android:padding="5dp"
+        android:onClick="changeTheme"
+        android:textColor="@color/colorWhite"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/linearLayoutSettings" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

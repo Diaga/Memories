@@ -25,6 +25,10 @@ public class MemoryViewModel extends AndroidViewModel {
         memoryRepository.insert(memory);
     }
 
+    public void clearTable() {
+        memoryRepository.clearTable();
+    }
+
     public void getMemoryAndDelete(String savedOn) {
         memoryRepository.getMemoryAndDelete(savedOn);
     }

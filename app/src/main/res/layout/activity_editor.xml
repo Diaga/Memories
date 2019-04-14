@@ -50,17 +50,30 @@
             <ImageButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
+                android:layout_gravity="start"
                 android:background="?colorPrimary"
                 android:contentDescription="Save"
                 android:src="@drawable/ic_arrow_back_white_24dp"
                 android:onClick="backToMain"
                 android:tint="@drawable/editor_selector_change_color" />
 
+            <TextView
+                android:id="@+id/dateEditorActivity"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:background="?colorPrimary"
+                android:textColor="?colorAccent"
+                android:gravity="center_horizontal"
+                android:paddingTop="2dp"
+                android:textStyle="bold"/>
+
             <ImageButton
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0.5"
+                android:layout_gravity="end"
                 android:background="?colorPrimary"
                 android:contentDescription="Save"
                 android:onClick="saveMemory"

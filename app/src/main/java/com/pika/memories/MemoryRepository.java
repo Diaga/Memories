@@ -33,6 +33,8 @@ public class MemoryRepository {
     public void deleteMemory(Memory memory) {
         new deleteMemoryTask(memoryDao).execute(memory);
     }
+
+    public void clearTable() {new clearTableTask(memoryDao).execute();}
 }
 
 class insertMemoryTask extends AsyncTask<Memory, Void, Void> {
@@ -78,5 +80,19 @@ class getMemoryAndDeleteTask extends AsyncTask<String, Void, Memory> {
     @Override
     protected void onPostExecute(Memory memory) {
         new deleteMemoryTask(memoryDaoWeakReference.get()).execute(memory);
+    }
+}
+
+class clearTableTask extends AsyncTask<Void, Void, Void> {
+    private WeakReference<MemoryDao> memoryDaoWeakReference;
+
+    clearTableTask(MemoryDao memoryDao) {
+        this.memoryDaoWeakReference = new WeakReference<>(memoryDao);
+    }
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+        memoryDaoWeakReference.get().clearTable();
+        return null;
     }
 }

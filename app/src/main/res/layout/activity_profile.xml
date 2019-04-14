@@ -10,7 +10,7 @@
         android:id="@+id/activity_profile_relative_layout"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:background="@drawable/bg_edit_text"
+        android:background="@drawable/gradient_blurple"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,12 +21,12 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <ImageView
+            <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/avatar"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:layout_gravity="center_horizontal"
-                android:src="@mipmap/ic_launcher_round"
+                android:src="@drawable/default_avatar"
                 android:layout_marginTop="50dp"/>
 
 

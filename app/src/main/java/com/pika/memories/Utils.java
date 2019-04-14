@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.text.format.DateFormat;
 import android.util.Log;
 
 import java.io.BufferedInputStream;
@@ -12,6 +13,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Calendar;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 
 class Utils {
     final static int THEME_BLACK = 1;
@@ -45,10 +51,20 @@ class Utils {
         }
     }
 
-    static byte[] imageResourceToByteArray(Bitmap bitmap) {
+    static byte[] imageToByteArray(Bitmap bitmap) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
         return byteArrayOutputStream.toByteArray();
+    }
+
+    static FileOutputStream getFileOutStream(Context context, String filename) {
+        FileOutputStream fileOutputStream = null;
+        try {
+            fileOutputStream = context.openFileOutput(filename, 0);
+        } catch (Exception e) {
+            Log.e("FileCreateERROR: ", filename);
+        }
+        return fileOutputStream;
     }
 
     static File getCacheFile(Context context, String filename) {
@@ -86,5 +102,11 @@ class Utils {
 
     static Bitmap bytesToImage(byte[] bytes) {
         return BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+    }
+
+    static String timestampToDateTime(String timestamp, String format) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTimeInMillis(Long.valueOf(timestamp));
+        return DateFormat.format(format, cal).toString();
     }
 }

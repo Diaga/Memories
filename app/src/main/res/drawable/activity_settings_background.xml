@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android" android:shape="rectangle">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <solid android:color="?colorAccent"/>
-    <corners android:bottomLeftRadius="100dp" android:bottomRightRadius="9000dp"/>
+<item>
+    <shape android:shape="rectangle" >
+        <solid android:color="?colorPrimary" />
+    </shape>
+</item>
+<item>
+    <shape xmlns:android="http://schemas.android.com/apk/res/android"
+        android:shape="rectangle">
 
-</shape>
+        <solid android:color="?colorAccent"/>
+        <corners
+            android:bottomLeftRadius="100dp"
+            android:bottomRightRadius="9000dp" />
+    </shape>
+</item>
+
+</layer-list>

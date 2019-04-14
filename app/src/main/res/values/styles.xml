@@ -21,6 +21,7 @@
         <item name="android:spotShadowAlpha">0.5</item>
         <item name="android:itemTextAppearance">@color/colorWhite</item>
         <item name="android:calendarTextColor">@color/colorGreyple</item>
+        <item name="android:windowAnimationStyle">@style/modeChangeAnimation</item>
     </style>
 
     <!-- Light Theme settings below -->
@@ -36,6 +37,7 @@
         <item name="android:spotShadowAlpha">0.1</item>
         <item name="android:itemTextAppearance">@color/colorBlack</item>
         <item name="android:calendarTextColor">@color/colorGreyple</item>
+        <item name="android:windowAnimationStyle">@style/modeChangeAnimation</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -59,6 +61,11 @@
 
     <style name="calendarViewHeader" parent="TextAppearance.MaterialCalendarWidget.Header">
         <item name="android:textColor">?colorAccent</item>
+    </style>
+
+    <style name="modeChangeAnimation">
+        <item name="android:windowEnterAnimation">@android:anim/fade_in</item>
+        <item name="android:windowExitAnimation">@android:anim/fade_out</item>
     </style>
 
 </resources>
