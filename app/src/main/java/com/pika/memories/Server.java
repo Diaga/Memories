@@ -84,10 +84,6 @@ class Server {
         return "NotTestedYet";
     }
 
-    void sendMessage(String message) {
-
-    }
-
     private static String bufferRead(HttpURLConnection conn) {
         try {
             BufferedReader in =
@@ -145,5 +141,33 @@ class saveMemoryTask extends AsyncTask<ArrayList, Void, String> {
     protected void onPostExecute(String status) {
         // Do something with status
         // OK if success, FAIL if failed
+    }
+}
+
+class sendMessageTask extends AsyncTask<String, Void, String> {
+
+    private WeakReference<MessageViewModel> messageViewModelWeakReference;
+    private WeakReference<UserViewModel> userViewModelWeakReference;
+
+    sendMessageTask(MessageViewModel messageViewModel, UserViewModel userViewModel) {
+        this.messageViewModelWeakReference = new WeakReference<>(messageViewModel);
+        this.userViewModelWeakReference = new WeakReference<>(userViewModel);
+    }
+
+    @Override
+    protected String doInBackground(String... strings) {
+        return Server.getResponse(strings[0]);
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        super.onPostExecute(s);
+        // Send to Recycler View
+        Message message = new Message();
+        message.setMessage(s);
+        message.setUser(false);
+        message.setSavedOn(String.valueOf(System.currentTimeMillis()));
+        message.setUserId(userViewModelWeakReference.get().getSignedInUser().getId());
+        messageViewModelWeakReference.get().insert(message);
     }
 }

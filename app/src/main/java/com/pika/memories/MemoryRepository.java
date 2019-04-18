@@ -10,20 +10,18 @@ import androidx.lifecycle.LiveData;
 
 public class MemoryRepository {
     private MemoryDao memoryDao;
-    private LiveData<List<Memory>> memoryLiveData;
 
     MemoryRepository(Application application) {
         Database db = Database.getDatabase(application);
         memoryDao = db.memoryDao();
-        memoryLiveData = memoryDao.getMemories();
     }
 
     public void insert(Memory memory) {
         new insertMemoryTask(memoryDao).execute(memory);
     }
 
-    public LiveData<List<Memory>> getMemories() {
-        return memoryLiveData;
+    public LiveData<List<Memory>> getMemories(String userId) {
+        return memoryDao.getMemories(userId);
     }
 
     public void getMemoryAndDelete(String savedOn) {

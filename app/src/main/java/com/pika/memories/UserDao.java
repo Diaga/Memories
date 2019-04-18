@@ -17,12 +17,12 @@ public interface UserDao {
     @Query("SELECT * FROM User")
     LiveData<List<User>> getUsers();
 
-    @Query("SELECT * FROM User WHERE signedIn = 1 LIMIT 1")
+    @Query("SELECT * FROM User WHERE signedIn = \"1\" LIMIT 1")
     User getSignedInUser();
 
-    @Query("UPDATE User SET signedIn = 0 WHERE signedIn = 1")
+    @Query("UPDATE User SET signedIn = \"0\" WHERE signedIn = \"1\"")
     void signOutAllUsers();
 
-    @Query("UPDATE User SET accessKey = :accessKey WHERE signedIn = 1")
+    @Query("UPDATE User SET accessKey = :accessKey WHERE signedIn = \"1\"")
     void setAccessKey(String accessKey);
 }

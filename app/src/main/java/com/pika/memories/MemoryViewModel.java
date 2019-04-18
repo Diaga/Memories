@@ -9,16 +9,14 @@ import androidx.lifecycle.LiveData;
 
 public class MemoryViewModel extends AndroidViewModel {
     private MemoryRepository memoryRepository;
-    private LiveData<List<Memory>> memoryLiveData;
 
     public MemoryViewModel(Application application) {
         super(application);
         memoryRepository = new MemoryRepository(application);
-        memoryLiveData = memoryRepository.getMemories();
     }
 
-    public LiveData<List<Memory>> getMemories() {
-        return memoryLiveData;
+    public LiveData<List<Memory>> getMemories(String userId) {
+        return memoryRepository.getMemories(userId);
     }
 
     public void insert(Memory memory) {

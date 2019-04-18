@@ -14,5 +14,5 @@
         android:background="@drawable/chatty_msg_bubble"
         android:padding="16dp"
         android:textColor="?android:textColor"
-        android:textSize="12sp" />
+        android:textSize="14sp" />
 </RelativeLayout>

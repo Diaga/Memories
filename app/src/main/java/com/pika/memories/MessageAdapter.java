@@ -12,8 +12,9 @@ import java.util.List;
 
 public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.CustomViewHolder> {
 
-    List<ResponseMessage> responseMessages;
+    List<MessageStorage> messages;
     Context context;
+
     class CustomViewHolder extends RecyclerView.ViewHolder{
         TextView textView;
         public CustomViewHolder(View itemView) {
@@ -22,14 +23,14 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.CustomVi
         }
     }
 
-    public MessageAdapter(List<ResponseMessage> responseMessages, Context context) {
-        this.responseMessages = responseMessages;
+    public MessageAdapter(List<MessageStorage> messages, Context context) {
+        this.messages = messages;
         this.context = context;
     }
 
     @Override
     public int getItemViewType(int position) {
-        if(responseMessages.get(position).isMe()){
+        if(messages.get(position).isMe()){
             return R.layout.user_msg;
         }
         return R.layout.chatty_msg;
@@ -37,7 +38,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.CustomVi
 
     @Override
     public int getItemCount() {
-        return  responseMessages.size();
+        return  messages.size();
     }
 
     @Override
@@ -48,6 +49,36 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.CustomVi
 
     @Override
     public void onBindViewHolder(CustomViewHolder holder, int position) {
-        holder.textView.setText(responseMessages.get(position).getText());
+        holder.textView.setText(messages.get(position).getText());
+    }
+
+    void updateUI() { notifyDataSetChanged(); }
+}
+
+class MessageStorage {
+
+    private String text;
+    private boolean isMe;
+
+    MessageStorage(String text, boolean isMe) {
+        this.text = text;
+        this.isMe = isMe;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
+    public boolean isMe() {
+        return isMe;
+    }
+
+    public void setMe(boolean me) {
+        isMe = me;
     }
 }
+

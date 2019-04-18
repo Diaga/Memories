@@ -15,6 +15,10 @@ public class Memory {
     private String savedOn;
 
     @ColumnInfo
+    @NonNull
+    private String userId;
+
+    @ColumnInfo
     private String memory;
 
     @ColumnInfo
@@ -71,5 +75,14 @@ public class Memory {
 
     public void setGeoTag(@Nullable String geoTag) {
         this.geoTag = geoTag;
+    }
+
+    @NonNull
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(@NonNull String userId) {
+        this.userId = userId;
     }
 }

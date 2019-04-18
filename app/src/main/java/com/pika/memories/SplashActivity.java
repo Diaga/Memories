@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProviders;
 public class SplashActivity extends BaseActivity {
 
     private MemoryViewModel memoryViewModel;
+    private MessageViewModel messageViewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -19,7 +21,9 @@ public class SplashActivity extends BaseActivity {
 
         // Connect with Database
         memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel.class);
+        messageViewModel = ViewModelProviders.of(this).get(MessageViewModel.class);
         memoryViewModel.clearTable();
+        messageViewModel.clearTable();
 
         Intent mainIntent = new Intent(this, MainActivity.class);
         startActivity(mainIntent);

@@ -20,6 +20,7 @@ public class EditorActivity extends BaseActivity {
 
     public static final int PICK_IMAGE = 1;
     private MemoryViewModel memoryViewModel;
+    private UserViewModel userViewModel;
     private Uri imageURI;
 
     @Override
@@ -33,6 +34,7 @@ public class EditorActivity extends BaseActivity {
 
         // Connect with database
         memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel.class);
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
 
         /* Debug Toast
         memoryViewModel.getMemories().observe(this, memories -> {
@@ -76,6 +78,7 @@ public class EditorActivity extends BaseActivity {
         if (imageURI != null) {
             memory.setImagePath(imageURI.toString());
         }
+        memory.setUserId(userViewModel.getSignedInUser().getId());
         memoryViewModel.insert(memory);
         onBackPressed();
     }

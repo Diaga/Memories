@@ -1,6 +1,5 @@
 package com.pika.memories;
 
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
@@ -27,6 +26,7 @@ public class HomeFragment extends Fragment {
     private List<MemoryStorage> memoriesList;
     private MemoryViewModel memoryViewModel;
     private MemoryAdapter memoryAdapter;
+    private UserViewModel userViewModel;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -34,14 +34,19 @@ public class HomeFragment extends Fragment {
 
         // Connect with database
         memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel.class);
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+
+        // Get SignedIn User
+        User signedInUser = userViewModel.getSignedInUser();
+        String userId = signedInUser.getId();
 
         // Initialize MemoryAdapter
         memoriesList = new ArrayList<>();
 
-        if (memoryViewModel.getMemories().getValue() != null) {
-            addMemoriesToAdapter(memoryViewModel.getMemories().getValue());
+        if (memoryViewModel.getMemories(userId).getValue() != null) {
+            addMemoriesToAdapter(memoryViewModel.getMemories(userId).getValue());
         }
-        memoryViewModel.getMemories().observe(this, memories -> {
+        memoryViewModel.getMemories(userId).observe(this, memories -> {
             removeMemoriesFromAdapter();
             addMemoriesToAdapter(memories);
         });

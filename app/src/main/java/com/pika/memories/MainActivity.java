@@ -17,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -30,7 +31,7 @@ import androidx.lifecycle.ViewModelProviders;
 
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
-    private UserViewModel userViewModel;
+    UserViewModel userViewModel;
     private final int LOGIN_REQUEST = 0;
     private final int LOGOUT_REQUEST = 1;
 
@@ -44,13 +45,6 @@ public class MainActivity extends BaseActivity
         setContentView(R.layout.activity_main);
         Intent loginIntent = getIntent();
 
-        // Connect with Database
-        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
-
-        // Load And Hide All Fragments
-        loadAllFragments();
-        hideAllFragments();
-
         Toolbar toolbar = findViewById(R.id.actionBarTop);
         setSupportActionBar(toolbar);
 
@@ -63,13 +57,22 @@ public class MainActivity extends BaseActivity
         NavigationView drawerView = findViewById(R.id.drawerView);
         drawerView.setNavigationItemSelectedListener(this);
 
-        fragmentLoader(new HomeFragment());
-
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+
+        // Connect with Database
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+
+        // Check if signed In
         if (!signedIn()) {
             signIn();
+        } else {
+            // Load And Hide All Fragments
+            loadAllFragments();
+            hideAllFragments();
+
+            fragmentLoader(getSupportFragmentManager().findFragmentByTag(fragmentTags[0]));
         }
     }
 
@@ -162,7 +165,7 @@ public class MainActivity extends BaseActivity
     }
 
     private boolean signedIn() {
-        boolean checkSignedIn = userViewModel.getSignedInUser() != null;
+        boolean checkSignedIn = !(userViewModel.getSignedInUser() == null);
         updateUI(checkSignedIn);
         return checkSignedIn;
     }
