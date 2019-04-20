@@ -34,4 +34,6 @@ public class UserViewModel extends AndroidViewModel {
     public void insertUser(User user) {
         userRepository.insert(user);
     }
+
+    public void clearTable() { userRepository.clearTable(); }
 }

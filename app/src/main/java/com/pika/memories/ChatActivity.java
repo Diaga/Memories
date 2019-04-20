@@ -41,15 +41,13 @@ public class ChatActivity extends AppCompatActivity {
         // Set Recycler View
         queryEditText = findViewById(R.id.input_message);
         recyclerView = findViewById(R.id.conversation);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL,false));
         recyclerView.setAdapter(messageAdapter);
 
 
         // Send message To Server
         queryEditText.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_SEND) {
-
-                queryEditText.getText().clear();
 
                 Message message = new Message();
                 message.setMessage(queryEditText.getText().toString());
@@ -64,6 +62,9 @@ public class ChatActivity extends AppCompatActivity {
                 String query = Server.queryBuilder(args, params);
                 String url = Server.urlBuilder("reply", query);
                 new sendMessageTask(messageViewModel, userViewModel).execute(url);
+
+                // Clear edit text
+                queryEditText.getText().clear();
             }
             return false;
         });

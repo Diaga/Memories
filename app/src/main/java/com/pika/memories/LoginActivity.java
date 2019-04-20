@@ -2,24 +2,24 @@ package com.pika.memories;
 
 import android.content.Intent;
 import android.os.Bundle;
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
-import android.view.View;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 
 
 public class LoginActivity extends BaseActivity {
+
     private UserViewModel userViewModel;
+    private SettingsViewModel settingsViewModel;
+
     private final int RC_SIGN_IN = 0;
     private final int RC_SIGN_OUT = 1;
     private GoogleSignInOptions gsOptions = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -38,8 +38,10 @@ public class LoginActivity extends BaseActivity {
         setContentView(R.layout.activity_login);
         Intent loginIntent = getIntent();
         gsClient = GoogleSignIn.getClient(this, gsOptions);
+
         // Connect with database
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        settingsViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
 
         if (loginIntent.getIntExtra("requestCode", 0) == RC_SIGN_OUT) {
             signOut();
@@ -63,19 +65,16 @@ public class LoginActivity extends BaseActivity {
             register(gsAccount);
 
             Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
-            setResult(RESULT_OK, mainIntent);
+            mainIntent.putExtra("fromCode", "LoginActivity");
             mainIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(mainIntent);
             finish();
         } else {
-            findViewById(R.id.sign_in_button).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    switch (v.getId()) {
-                        case R.id.sign_in_button:
-                            signIn();
-                            break;
-                    }
+            findViewById(R.id.sign_in_button).setOnClickListener(v -> {
+                switch (v.getId()) {
+                    case R.id.sign_in_button:
+                        signIn();
+                        break;
                 }
             });
         }
@@ -106,12 +105,9 @@ public class LoginActivity extends BaseActivity {
     }
 
     private void signOut() {
-        gsClient.signOut().addOnCompleteListener(this, new OnCompleteListener<Void>() {
-            @Override
-            public void onComplete(@NonNull Task<Void> task) {
-                userViewModel.signOutAllUsers();
-                Log.i("GoogleSignOutSuccessful", "OK!");
-            }
+        gsClient.signOut().addOnCompleteListener(this, task -> {
+            userViewModel.signOutAllUsers();
+            Log.i("GoogleSignOutSuccessful", "OK!");
         });
     }
 
@@ -124,6 +120,7 @@ public class LoginActivity extends BaseActivity {
         }
 
     void insertDatabase () {
+        // Insert User
         User user = new User();
         user.setDisplayName(gsAccount.getDisplayName());
         user.setId(gsAccount.getId());
@@ -133,6 +130,12 @@ public class LoginActivity extends BaseActivity {
         }
         user.setSignedIn("1");
         userViewModel.insertUser(user);
+
+        // Insert Settings
+        Settings settings = new Settings();
+        settings.setUserId(gsAccount.getId());
+        settings.setTheme(String.valueOf(Utils.currentTheme));
+        settingsViewModel.insert(settings);
     }
 
 
@@ -148,6 +151,8 @@ public class LoginActivity extends BaseActivity {
         String[] params = {id, displayName, email, photoURL};
         String query = Server.queryBuilder(args, params);
         String url = Server.urlBuilder("register", query);
+
+        // Update on server
         new registerTask(userViewModel).execute(url);
     }
 

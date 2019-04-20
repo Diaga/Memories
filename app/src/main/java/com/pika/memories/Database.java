@@ -7,7 +7,7 @@ import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-@androidx.room.Database(entities = {User.class, Memory.class, Message.class}, version = 6)
+@androidx.room.Database(entities = {User.class, Memory.class, Message.class, Settings.class}, version = 7)
 public abstract class Database extends RoomDatabase {
 
     public abstract UserDao userDao();
@@ -15,6 +15,8 @@ public abstract class Database extends RoomDatabase {
     public abstract MemoryDao memoryDao();
 
     public abstract MessageDao messageDao();
+
+    public abstract SettingsDao settingsDao();
 
     private static volatile Database INSTANCE;
 

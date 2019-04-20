@@ -25,6 +25,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.io.File;
+
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.ViewModelProviders;
@@ -32,7 +33,7 @@ import androidx.lifecycle.ViewModelProviders;
 public class MainActivity extends BaseActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     UserViewModel userViewModel;
-    private final int LOGIN_REQUEST = 0;
+    SettingsViewModel settingsViewModel;
     private final int LOGOUT_REQUEST = 1;
 
     Fragment[] fragments = {new HomeFragment(), new CalendarFragment(), new StatisticsFragment()};
@@ -43,7 +44,17 @@ public class MainActivity extends BaseActivity
         super.onCreate(savedInstanceState);
         Utils.onActivityCreateSetTheme(this);
         setContentView(R.layout.activity_main);
-        Intent loginIntent = getIntent();
+        Intent mainIntent = getIntent();
+
+        // Connect with Database
+        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        settingsViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
+
+        // Check from where MainActivity was invoked and perform corresponding actions
+        String fromCode = mainIntent.getExtras().getString("fromCode");
+        if (fromCode != null && fromCode.equals("LoginActivity")) {
+            Utils.updateThemeOnSettings(settingsViewModel.getCurrentSettings(userViewModel.getSignedInUser().getId()));
+        }
 
         Toolbar toolbar = findViewById(R.id.actionBarTop);
         setSupportActionBar(toolbar);
@@ -60,21 +71,16 @@ public class MainActivity extends BaseActivity
         BottomNavigationView navigation = findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
+        // Update UI
+        updateUI();
 
-        // Connect with Database
-        userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        // Load And Hide All Fragments
+        loadAllFragments();
+        hideAllFragments();
 
-        // Check if signed In
-        if (!signedIn()) {
-            signIn();
-        } else {
-            // Load And Hide All Fragments
-            loadAllFragments();
-            hideAllFragments();
-
-            fragmentLoader(getSupportFragmentManager().findFragmentByTag(fragmentTags[0]));
-        }
+        fragmentLoader(getSupportFragmentManager().findFragmentByTag(fragmentTags[0]));
     }
+
 
     @Override
     public void onBackPressed() {
@@ -87,14 +93,6 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (!signedIn()) {
-            signIn();
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return true;
     }
@@ -102,8 +100,6 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
-
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -164,54 +160,30 @@ public class MainActivity extends BaseActivity
         return false;
     }
 
-    private boolean signedIn() {
-        boolean checkSignedIn = !(userViewModel.getSignedInUser() == null);
-        updateUI(checkSignedIn);
-        return checkSignedIn;
-    }
-
-    private void signIn() {
-        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-        loginIntent.putExtra("requestCode", LOGIN_REQUEST);
-        startActivityForResult(loginIntent, LOGIN_REQUEST);
-    }
-
     private void signOut() {
         Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
         loginIntent.putExtra("requestCode", LOGOUT_REQUEST);
         startActivityForResult(loginIntent, LOGOUT_REQUEST);
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == LOGIN_REQUEST) {
-            if (resultCode == RESULT_OK) {
-                signedIn();
-            }
-        }
-    }
+    private void updateUI() {
+        NavigationView drawerView = findViewById(R.id.drawerView);
+        View drawerHeader = drawerView.getHeaderView(0);
+        TextView drawerNameView = drawerHeader.findViewById(R.id.drawerNameView);
+        drawerNameView.setText(userViewModel.getSignedInUser().getDisplayName());
 
-    private void updateUI(boolean signedIn) {
-        if (signedIn) {
-            NavigationView drawerView = findViewById(R.id.drawerView);
-            View drawerHeader = drawerView.getHeaderView(0);
-            TextView drawerNameView = drawerHeader.findViewById(R.id.drawerNameView);
-            drawerNameView.setText(userViewModel.getSignedInUser().getDisplayName());
-
-            ImageView drawerImageView = drawerHeader.findViewById(R.id.drawerImageView);
-            String imageURI = userViewModel.getSignedInUser().getPhotoURI();
-            if (imageURI == null) {
-                Picasso.with(getApplicationContext()).load(R.drawable.default_avatar).into(drawerImageView);
+        ImageView drawerImageView = drawerHeader.findViewById(R.id.drawerImageView);
+        String imageURI = userViewModel.getSignedInUser().getPhotoURI();
+        if (imageURI == null) {
+            Picasso.with(getApplicationContext()).load(R.drawable.default_avatar).into(drawerImageView);
+        } else {
+            File[] fileCheck = getCacheDir().listFiles((dir, name) -> name.equals("avatar.jpg"));
+            if (fileCheck.length > 0) {
+                byte[] bytes = Utils.readCacheToBytes(fileCheck[0]);
+                Bitmap bitmap = Utils.bytesToImage(bytes);
+                drawerImageView.setImageBitmap(bitmap);
             } else {
-                File[] fileCheck = getCacheDir().listFiles((dir, name) -> name.equals("avatar.jpg"));
-                if (fileCheck.length > 0) {
-                    byte[] bytes = Utils.readCacheToBytes(fileCheck[0]);
-                    Bitmap bitmap = Utils.bytesToImage(bytes);
-                    drawerImageView.setImageBitmap(bitmap);
-                } else {
-                    Picasso.with(getApplicationContext()).load(imageURI).into(drawerImageView);
-                }
+                Picasso.with(getApplicationContext()).load(imageURI).into(drawerImageView);
             }
         }
     }
@@ -236,7 +208,6 @@ public class MainActivity extends BaseActivity
         fragmentTransaction.commit();
         fragmentManager.executePendingTransactions();
     }
-
 
 
     public void startEditor(View view) {

@@ -35,6 +35,7 @@ public class UserRepository {
 
     public void setAccessKey(String accessKey) {new accessKeyTask(userDao).execute(accessKey);}
 
+    public void clearTable() { new clearUserTableTask(userDao).execute(); }
 }
 
 class insertUserTask extends AsyncTask<User, Void, Void> {
@@ -71,6 +72,20 @@ class signOutTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         userDaoWeakReference.get().signOutAllUsers();
+        return null;
+    }
+}
+
+class clearUserTableTask extends AsyncTask<Void, Void, Void> {
+    private WeakReference<UserDao> userDaoWeakReference;
+
+    clearUserTableTask(UserDao userDao) {
+        this.userDaoWeakReference = new WeakReference<>(userDao);
+    }
+
+    @Override
+    protected Void doInBackground(Void... voids) {
+        userDaoWeakReference.get().clearTable();
         return null;
     }
 }

@@ -1,9 +1,13 @@
 package com.pika.memories;
 
+import android.Manifest;
 import android.content.Intent;
+import android.location.Location;
 import android.net.Uri;
 import androidx.annotation.Nullable;
 import android.os.Bundle;
+
+import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProviders;
 
 import android.view.View;
@@ -11,6 +15,7 @@ import android.widget.EditText;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -22,6 +27,7 @@ public class EditorActivity extends BaseActivity {
     private MemoryViewModel memoryViewModel;
     private UserViewModel userViewModel;
     private Uri imageURI;
+    private GpsTracker gpsTracker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +39,11 @@ public class EditorActivity extends BaseActivity {
         setTime(findViewById(R.id.dateEditorActivity));
 
         // Connect with database
-        memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel.class);
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
+        memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel.class);
+
+        // GeoTag
+        gpsTracker = new GpsTracker(getApplicationContext());
 
         /* Debug Toast
         memoryViewModel.getMemories().observe(this, memories -> {
@@ -58,6 +67,17 @@ public class EditorActivity extends BaseActivity {
         chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
 
         startActivityForResult(chooserIntent, PICK_IMAGE);
+    }
+
+    public void selectLocation(View view) {
+        ActivityCompat.requestPermissions(EditorActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},123);
+        Location location = gpsTracker.getLocation();
+        if (location!=null){
+            double latitude = location.getLatitude();
+            double longitude = location.getLongitude();
+            Toast.makeText(EditorActivity.this, "Longitude: "+latitude+" Longitude: "+longitude, Toast.LENGTH_SHORT).show();
+            //Log.i("Info", "Longitude: "+latitude+" Longitude: "+longitude);
+        }
     }
 
     @Override

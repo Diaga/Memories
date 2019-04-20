@@ -15,32 +15,29 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Calendar;
 
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
-
 class Utils {
     final static int THEME_BLACK = 1;
     final static int THEME_WHITE = 2;
-    private static int sTheme = THEME_WHITE;
+    static int currentTheme = THEME_WHITE;
 
-    /**
-     * Set the theme of the Activity, and restart it by creating a new Activity of the same type.
-     */
-    static void changeTheme() {
-        if (sTheme == THEME_BLACK) {
-            sTheme = THEME_WHITE;
-        } else {
-            sTheme = THEME_BLACK;
+    // Setter function for currentTheme
+    static void changeTheme(int theme) {
+        currentTheme = theme;
+    }
+
+    // Update currentTheme based on user settings
+    static void updateThemeOnSettings(Settings settings) {
+        if (settings.getTheme().equals(String.valueOf(Utils.THEME_WHITE))) {
+            Utils.changeTheme(Utils.THEME_WHITE);
+        } else if (settings.getTheme().equals(String.valueOf(Utils.THEME_BLACK))) {
+            Utils.changeTheme(Utils.THEME_BLACK);
         }
     }
 
-    /**
-     * Set the theme of the activity, according to the configuration.
-     */
+    // Set the theme of the activity according to the configurations
     static void onActivityCreateSetTheme(Activity activity) {
-        Log.i("Theme", String.valueOf(sTheme));
-        switch (sTheme) {
+        Log.i("Theme", String.valueOf(currentTheme));
+        switch (currentTheme) {
             default:
             case THEME_BLACK:
                 activity.setTheme(R.style.AppThemeDark);

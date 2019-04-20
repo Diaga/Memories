@@ -25,4 +25,7 @@ public interface UserDao {
 
     @Query("UPDATE User SET accessKey = :accessKey WHERE signedIn = \"1\"")
     void setAccessKey(String accessKey);
+
+    @Query("DELETE FROM User")
+    void clearTable();
 }

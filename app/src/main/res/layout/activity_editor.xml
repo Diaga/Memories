@@ -106,11 +106,13 @@
             android:weightSum="3">
 
             <ImageButton
+                android:id="@+id/menuLocationButton"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="?colorPrimary"
                 android:contentDescription="Add location"
+                android:onClick="selectLocation"
                 android:src="@drawable/ic_location_on_white_24dp"
                 android:tint="@drawable/editor_selector_change_color" />
 
