@@ -1,0 +1,114 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 4,
+    "identityHash": "79c530f41bbb394e4f450b3b40b80a51",
+    "entities": [
+      {
+        "tableName": "User",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`accessKey` TEXT, `id` TEXT NOT NULL, `displayName` TEXT NOT NULL, `email` TEXT NOT NULL, `photoURI` TEXT, `registeredOn` TEXT, `signedIn` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "accessKey",
+            "columnName": "accessKey",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "displayName",
+            "columnName": "displayName",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "email",
+            "columnName": "email",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "photoURI",
+            "columnName": "photoURI",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "registeredOn",
+            "columnName": "registeredOn",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "signedIn",
+            "columnName": "signedIn",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Memory",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`savedOn` TEXT NOT NULL, `memory` TEXT, `mood` TEXT, `imagePath` TEXT, `geoTag` TEXT, PRIMARY KEY(`savedOn`))",
+        "fields": [
+          {
+            "fieldPath": "savedOn",
+            "columnName": "savedOn",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "memory",
+            "columnName": "memory",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "mood",
+            "columnName": "mood",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "imagePath",
+            "columnName": "imagePath",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "geoTag",
+            "columnName": "geoTag",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "savedOn"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "views": [],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"79c530f41bbb394e4f450b3b40b80a51\")"
+    ]
+  }
+}
