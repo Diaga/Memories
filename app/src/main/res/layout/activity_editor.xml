@@ -18,7 +18,7 @@
         android:gravity="top"
         android:hint="Your memmory"
         android:textColor="?android:textColor"
-        android:inputType="textShortMessage|textLongMessage|textImeMultiLine"
+        android:inputType="textShortMessage|textLongMessage|textMultiLine"
         app:layout_constraintBottom_toTopOf="@id/editorOptions"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

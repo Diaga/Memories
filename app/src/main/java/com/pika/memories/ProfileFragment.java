@@ -38,22 +38,23 @@ public class ProfileFragment extends Fragment {
         startActivity(intent);
     }
 
-
-
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         // Connect with database
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
-        //updateUI();
+
+        updateUI(view);
     }
-    private void updateUI() {
-        TextView nameTextView = getView().findViewById(R.id.displayName);
+
+    private void updateUI(View view) {
+        TextView nameTextView = view.findViewById(R.id.displayName);
         nameTextView.setText(userViewModel.getSignedInUser().getDisplayName());
 
-        ImageView avatar = getView().findViewById(R.id.avatar);
+        ImageView avatar = view.findViewById(R.id.avatar);
         String imageURI = userViewModel.getSignedInUser().getPhotoURI();
-        if (imageURI == null) {
+        if (imageURI.equals("null")) {
             Picasso.with(getContext()).load(R.drawable.default_avatar).into(avatar);
         } else {
             File[] fileCheck = getActivity().getCacheDir().listFiles((dir, name) -> name.equals("avatar.jpg"));

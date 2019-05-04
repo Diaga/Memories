@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?colorPrimary"
-    tools:context=".ProfileFragment">
+    tools:context=".MainActivity">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView4"
@@ -34,12 +34,13 @@
                 app:layout_constraintVertical_bias="0.567" />
 
             <ImageButton
-                android:id="@+id/editProfileButton"
+                android:id="@+id/signoutButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/ic_mode_edit_black_24dp"
+                android:onClick="signOut"
+                android:background="@drawable/ic_logout"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
 
@@ -48,7 +49,7 @@
                 android:id="@+id/settingsButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="72dp"
+                android:layout_marginEnd="80dp"
                 android:layout_marginBottom="16dp"
                 android:background="@drawable/ic_settings_black_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -64,7 +65,6 @@
         android:id="@+id/usercard"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:layout_marginTop="20dp"
         app:cardElevation="5dp"
         android:backgroundTint="?android:windowBackground"
         app:layout_constraintEnd_toEndOf="parent"
@@ -97,7 +97,7 @@
                 android:layout_marginBottom="24dp"
                 android:gravity="center_horizontal"
                 android:text="User Name"
-                android:textSize="30dp"
+                android:textSize="30sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

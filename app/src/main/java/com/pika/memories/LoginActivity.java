@@ -56,6 +56,7 @@ public class LoginActivity extends BaseActivity {
         if (gsAccount != null) {
             Log.i("GoogleSignInSuccessful", gsAccount.getEmail());
 
+            userViewModel.signIn(gsAccount.getId(), "1");
             if (userViewModel.getUserFromId(gsAccount.getId()) == null) {
                 // Local Database
                 updateDatabase();
@@ -148,7 +149,10 @@ public class LoginActivity extends BaseActivity {
         String name = gsAccount.getDisplayName();
         String id = gsAccount.getId();
         String email = gsAccount.getEmail();
-        String photoURI = gsAccount.getPhotoUrl().toString();
+        String photoURI = "null";
+        if (gsAccount.getPhotoUrl() != null) {
+            photoURI = gsAccount.getPhotoUrl().toString();
+        }
         String timestamp = String.valueOf(System.currentTimeMillis());
         String accessKey = "201";
         String theme = "white";

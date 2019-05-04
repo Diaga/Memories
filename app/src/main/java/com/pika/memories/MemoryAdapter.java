@@ -1,6 +1,7 @@
 package com.pika.memories;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.net.Uri;
@@ -12,12 +13,14 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.io.File;
 import java.util.List;
 
 import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -38,7 +41,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         private TextView savedOnTime;
         private TextView memory;
         private ImageView imageView;
-        private RelativeLayout memory_container;
+        private ConstraintLayout memory_container;
 
 
         ViewHolder(View itemView) {
@@ -55,7 +58,15 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.fragment_home_recycle_view, parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.memory_card, parent,false);
+        ViewHolder viewHolder = new ViewHolder(view);
+        viewHolder.memory_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(),fullMemory.class);
+                v.getContext().startActivity(intent);
+            }
+        });
         return new ViewHolder(view);
     }
 
@@ -105,6 +116,7 @@ class MemoryStorage {
     private String imagePath;
     private String savedOn;
     private String savedOnTime;
+
 
     MemoryStorage(String memory, String imagePath, String savedOn) {
         this.memory = memory;

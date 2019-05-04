@@ -35,6 +35,9 @@ public interface UserDao {
     @Query("UPDATE User SET sync = :sync WHERE signedIn = \"1\"")
     void setSync(String sync);
 
+    @Query("UPDATE User SET signedIn = :signedIn WHERE id = :id")
+    void signIn(String id, String signedIn);
+
     @Query("DELETE FROM User")
     void clearTable();
 }

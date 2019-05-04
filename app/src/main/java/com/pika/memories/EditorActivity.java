@@ -61,15 +61,6 @@ public class EditorActivity extends BaseActivity {
     }
 
     public void selectImage(View view) {
-        counterImage += 1;
-
-        if (counterImage%2!=0) {
-            counterImage = 0;
-
-            // Change background resource
-            galleyButton.setBackgroundResource(R.drawable.ic_menu_galley_blue);
-
-            // Handle image selector
             Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
             getIntent.setType("image/*");
             Intent pickIntent = new Intent(Intent.ACTION_PICK);
@@ -77,13 +68,8 @@ public class EditorActivity extends BaseActivity {
             Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
             chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
             startActivityForResult(chooserIntent, PICK_IMAGE);
-        } else {
-            // Change background resource
-            galleyButton.setBackgroundResource(R.drawable.ic_menu_gallery);
-            imageURI = null;
 
         }
-    }
 
     public void selectLocation() {
         ActivityCompat.requestPermissions(EditorActivity.this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},123);
@@ -155,6 +141,7 @@ public class EditorActivity extends BaseActivity {
                 if (resultCode == RESULT_OK) {
                     if (data.getData() != null) {
                         imageURI = data.getData();
+                        galleyButton.setBackgroundResource(R.drawable.ic_menu_galley_blue);
                     } else {
                         imageURI = null;
                     }

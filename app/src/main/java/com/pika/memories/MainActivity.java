@@ -51,7 +51,9 @@ public class MainActivity extends BaseActivity {
         // Check from where MainActivity was invoked and perform corresponding actions
         String fromCode = mainIntent.getExtras().getString("fromCode");
         if (fromCode != null && fromCode.equals("LoginActivity")) {
-            Utils.changeTheme(userViewModel.getSignedInUser().getTheme());
+            if (userViewModel.getSignedInUser() != null) {
+                Utils.changeTheme(userViewModel.getSignedInUser().getTheme());
+            }
         }
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
@@ -110,11 +112,6 @@ public class MainActivity extends BaseActivity {
         return false;
     }
 
-    private void signOut() {
-        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-        loginIntent.putExtra("requestCode", LOGOUT_REQUEST);
-        startActivityForResult(loginIntent, LOGOUT_REQUEST);
-    }
 
     private void hideAllFragments() {
         FragmentManager fragmentManager = getSupportFragmentManager();
@@ -138,5 +135,10 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
+    public void signOut(View view) {
+        Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+        loginIntent.putExtra("requestCode", LOGOUT_REQUEST);
+        startActivityForResult(loginIntent, LOGOUT_REQUEST);
+        finish();
+    }
 }

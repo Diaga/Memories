@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_pika_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeLight">
-        <activity android:name=".SettingsActivity"></activity>
+        <activity android:name=".fullMemory"></activity>
+        <activity android:name=".SettingsActivity" />
         <activity
             android:name=".SplashActivity"
             android:screenOrientation="nosensor"
@@ -39,7 +40,7 @@
         <activity
             android:name=".MainActivity"
             android:label="Memories"
-            android:screenOrientation="nosensor"></activity>
+            android:screenOrientation="nosensor" />
         <activity
             android:name=".BaseActivity"
             android:noHistory="true" />

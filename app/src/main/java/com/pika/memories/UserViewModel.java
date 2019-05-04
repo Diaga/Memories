@@ -41,5 +41,7 @@ public class UserViewModel extends AndroidViewModel {
 
     public void setSync(String sync) {userRepository.setSync(sync);}
 
+    public void signIn(String id, String signedIn) {userRepository.signIn(id, signedIn);}
+
     public void clearTable() { userRepository.clearTable(); }
 }
