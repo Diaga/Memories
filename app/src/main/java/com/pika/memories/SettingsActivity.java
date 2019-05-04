@@ -14,7 +14,6 @@ import android.widget.Switch;
 public class SettingsActivity extends AppCompatActivity {
     private Switch themeSwitch;
     private UserViewModel userViewModel;
-    private SettingsViewModel settingsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,20 +23,19 @@ public class SettingsActivity extends AppCompatActivity {
 
         // Connect with database
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
-        settingsViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
 
         themeSwitch = findViewById(R.id.mode_switch);
 
         // Change themeSwitch state based on theme
-        if (Utils.currentTheme == Utils.THEME_BLACK) {
+        if (Utils.currentTheme.equals(Utils.THEME_BLACK)) {
             themeSwitch.setChecked(true);
-        } else if (Utils.currentTheme == Utils.THEME_WHITE) {
+        } else if (Utils.currentTheme.equals(Utils.THEME_WHITE)) {
             themeSwitch.setChecked(false);
         }
 
         // Change theme here!
         themeSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            int theme;
+            String theme;
             if (isChecked) {
                 theme = Utils.THEME_BLACK;
                 Utils.changeTheme(theme);
@@ -45,7 +43,7 @@ public class SettingsActivity extends AppCompatActivity {
                 theme = Utils.THEME_WHITE;
                 Utils.changeTheme(theme);
             }
-            settingsViewModel.changeTheme(String.valueOf(theme), userViewModel.getSignedInUser().getId());
+            userViewModel.getSignedInUser().setTheme("theme");
             restartApp();
         });
     }

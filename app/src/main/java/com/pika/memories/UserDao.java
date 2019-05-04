@@ -17,6 +17,9 @@ public interface UserDao {
     @Query("SELECT * FROM User")
     LiveData<List<User>> getUsers();
 
+    @Query("SELECT * FROM User WHERE id = :id LIMIT 1")
+    User getUserFromId(String id);
+
     @Query("SELECT * FROM User WHERE signedIn = \"1\" LIMIT 1")
     User getSignedInUser();
 
@@ -25,6 +28,12 @@ public interface UserDao {
 
     @Query("UPDATE User SET accessKey = :accessKey WHERE signedIn = \"1\"")
     void setAccessKey(String accessKey);
+
+    @Query("UPDATE User SET theme = :theme WHERE signedIn = \"1\"")
+    void setTheme(String theme);
+
+    @Query("UPDATE User SET sync = :sync WHERE signedIn = \"1\"")
+    void setSync(String sync);
 
     @Query("DELETE FROM User")
     void clearTable();

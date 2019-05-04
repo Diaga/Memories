@@ -31,9 +31,16 @@ public class UserRepository {
     // Does not run asynchronously!
     public User getSignedInUser() { return signedInUser;}
 
+    // Does not run asynchronously!
+    public User getUserFromId(String id) { return userDao.getUserFromId(id); }
+
     public void signOutAllUsers() {new signOutTask(userDao).execute();}
 
     public void setAccessKey(String accessKey) {new accessKeyTask(userDao).execute(accessKey);}
+
+    public void setTheme(String theme) {new themeTask(userDao).execute(theme);}
+
+    public void setSync(String sync) {new syncTask(userDao).execute(sync);}
 
     public void clearTable() { new clearUserTableTask(userDao).execute(); }
 }
@@ -60,6 +67,34 @@ class accessKeyTask extends AsyncTask<String, Void, Void> {
     @Override
     protected Void doInBackground(String... strings) {
         userDaoWeakReference.get().setAccessKey(strings[0]);
+        return null;
+    }
+}
+
+class themeTask extends AsyncTask<String, Void, Void> {
+    private WeakReference<UserDao> userDaoWeakReference;
+
+    themeTask(UserDao userDao) {
+        this.userDaoWeakReference = new WeakReference<>(userDao);
+    }
+
+    @Override
+    protected Void doInBackground(String... strings) {
+        userDaoWeakReference.get().setTheme(strings[0]);
+        return null;
+    }
+}
+
+class syncTask extends AsyncTask<String, Void, Void> {
+    private WeakReference<UserDao> userDaoWeakReference;
+
+    syncTask(UserDao userDao) {
+        this.userDaoWeakReference = new WeakReference<>(userDao);
+    }
+
+    @Override
+    protected Void doInBackground(String... strings) {
+        userDaoWeakReference.get().setSync(strings[0]);
         return null;
     }
 }

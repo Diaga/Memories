@@ -23,11 +23,25 @@ public class MemoryViewModel extends AndroidViewModel {
         memoryRepository.insert(memory);
     }
 
-    public void clearTable() {
-        memoryRepository.clearTable();
-    }
+    public void setMemory(String id, String memory) { memoryRepository.setMemory(id, memory); }
+
+    public void setMood(String id, String mood) { memoryRepository.setMood(id, mood); }
+
+    public void setImage(String id, String image) { memoryRepository.setImage(id, image); }
+
+    public void setLongitude(String id, String longitude) { memoryRepository.setLongitude(id, longitude); }
+
+    public void setLatitude(String id, String latitude) { memoryRepository.setLatitude(id, latitude); }
+
+    public void setSynced(String id, String synced) { memoryRepository.setSynced(id, synced); }
+
+    public void setImageInLocal(String id, String imageInLocal) { memoryRepository.setImageInLocal(id, imageInLocal); }
 
     public void getMemoryAndDelete(String savedOn) {
         memoryRepository.getMemoryAndDelete(savedOn);
+    }
+
+    public void clearTable() {
+        memoryRepository.clearTable();
     }
 }

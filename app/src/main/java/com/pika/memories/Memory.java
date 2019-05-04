@@ -10,7 +10,11 @@ import androidx.room.PrimaryKey;
 public class Memory {
 
     @ColumnInfo
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    private int id;
+
+    @ColumnInfo
     @NonNull
     private String savedOn;
 
@@ -31,7 +35,19 @@ public class Memory {
 
     @ColumnInfo
     @Nullable
-    private String geoTag;
+    private String longitude;
+
+    @ColumnInfo
+    @Nullable
+    private String latitude;
+
+    @ColumnInfo
+    @NonNull
+    private String synced;
+
+    @ColumnInfo
+    @NonNull
+    private String imageInLocal;
 
     @NonNull
     public String getSavedOn() {
@@ -68,15 +84,6 @@ public class Memory {
         this.imagePath = imagePath;
     }
 
-    @Nullable
-    public String getGeoTag() {
-        return geoTag;
-    }
-
-    public void setGeoTag(@Nullable String geoTag) {
-        this.geoTag = geoTag;
-    }
-
     @NonNull
     public String getUserId() {
         return userId;
@@ -84,5 +91,49 @@ public class Memory {
 
     public void setUserId(@NonNull String userId) {
         this.userId = userId;
+    }
+
+    @Nullable
+    public String getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(@Nullable String longitude) {
+        this.longitude = longitude;
+    }
+
+    @Nullable
+    public String getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(@Nullable String latitude) {
+        this.latitude = latitude;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @NonNull
+    public String getSynced() {
+        return synced;
+    }
+
+    public void setSynced(@NonNull String synced) {
+        this.synced = synced;
+    }
+
+    @NonNull
+    public String getImageInLocal() {
+        return imageInLocal;
+    }
+
+    public void setImageInLocal(@NonNull String imageInLocal) {
+        this.imageInLocal = imageInLocal;
     }
 }

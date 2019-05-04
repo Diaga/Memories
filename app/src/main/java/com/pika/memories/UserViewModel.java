@@ -27,13 +27,19 @@ public class UserViewModel extends AndroidViewModel {
         return signedInUser;
     }
 
-    public void signOutAllUsers() {userRepository.signOutAllUsers();}
-
-    public void setAccessKey(String accessKey) {userRepository.setAccessKey(accessKey);}
+    public User getUserFromId(String id) { return userRepository.getUserFromId(id); }
 
     public void insertUser(User user) {
         userRepository.insert(user);
     }
+
+    public void signOutAllUsers() {userRepository.signOutAllUsers();}
+
+    public void setAccessKey(String accessKey) {userRepository.setAccessKey(accessKey);}
+
+    public void setTheme(String theme) {userRepository.setTheme(theme);}
+
+    public void setSync(String sync) {userRepository.setSync(sync);}
 
     public void clearTable() { userRepository.clearTable(); }
 }

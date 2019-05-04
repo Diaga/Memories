@@ -29,12 +29,7 @@ public class ProfileFragment extends Fragment {
         public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
             view = inflater.inflate(R.layout.fragment_profile, container, false);
             settings = view.findViewById(R.id.settingsButton);
-            settings.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                   startSettings();
-                }
-            });
+            settings.setOnClickListener(v -> startSettings());
             return view;
     }
 
@@ -63,7 +58,7 @@ public class ProfileFragment extends Fragment {
         } else {
             File[] fileCheck = getActivity().getCacheDir().listFiles((dir, name) -> name.equals("avatar.jpg"));
             if (fileCheck.length > 0) {
-                byte[] bytes = Utils.readCacheToBytes(fileCheck[0]);
+                byte[] bytes = Utils.readBytes(fileCheck[0]);
                 Bitmap bitmap = Utils.bytesToImage(bytes);
                 avatar.setImageBitmap(bitmap);
             } else {

@@ -3,6 +3,8 @@ package com.pika.memories;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Rect;
+import android.net.Uri;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +13,14 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import java.io.File;
 import java.util.List;
 
 import androidx.annotation.DimenRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.squareup.picasso.Picasso;
 
 public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder> {
 
@@ -60,7 +65,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         holder.memory.setText(memories.get(position).getMemory());
         holder.savedOn.setText(memories.get(position).getSavedOn());
         holder.savedOnTime.setText(memories.get(position).getSavedOnTime());
-        holder.imageView.setImageBitmap(memories.get(position).getBitmap());
+        Picasso.with(context).load(new File(memories.get(position).getImagePath())).into(holder.imageView);
     }
 
     @Override
@@ -97,13 +102,13 @@ class ItemOffsetDecoration extends RecyclerView.ItemDecoration {
 class MemoryStorage {
 
     private String memory;
-    private Bitmap bitmap;
+    private String imagePath;
     private String savedOn;
     private String savedOnTime;
 
-    MemoryStorage(String memory, Bitmap bitmap, String savedOn) {
+    MemoryStorage(String memory, String imagePath, String savedOn) {
         this.memory = memory;
-        this.bitmap = bitmap;
+        this.imagePath = imagePath;
         this.savedOn = savedOn;
         this.savedOnTime = savedOn;
     }
@@ -116,12 +121,12 @@ class MemoryStorage {
         this.memory = memory;
     }
 
-    public Bitmap getBitmap() {
-        return bitmap;
+    public String getImagePath() {
+        return imagePath;
     }
 
-    public void setBitmap(Bitmap bitmap) {
-        this.bitmap = bitmap;
+    public void setImagePath(String imagePath) {
+        this.imagePath = imagePath;
     }
 
     public String getSavedOn() {

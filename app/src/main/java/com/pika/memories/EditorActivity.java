@@ -10,17 +10,12 @@ import android.os.Bundle;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.PopupMenu;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Date;
 
 public class EditorActivity extends BaseActivity {
 
@@ -28,11 +23,13 @@ public class EditorActivity extends BaseActivity {
     private MemoryViewModel memoryViewModel;
     private UserViewModel userViewModel;
     private Uri imageURI;
+    private double longitude;
+    private double latitude;
     private GpsTracker gpsTracker;
     private ImageButton locationButton;
     private ImageButton galleyButton;
-    int counter=0;
-
+    private int counterLocation=0;
+    private int counterImage=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,14 +61,28 @@ public class EditorActivity extends BaseActivity {
     }
 
     public void selectImage(View view) {
+        counterImage += 1;
 
-        Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        getIntent.setType("image/*");
-        Intent pickIntent = new Intent(Intent.ACTION_PICK);
-        pickIntent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
-        Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
-        chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
-        startActivityForResult(chooserIntent, PICK_IMAGE);
+        if (counterImage%2!=0) {
+            counterImage = 0;
+
+            // Change background resource
+            galleyButton.setBackgroundResource(R.drawable.ic_menu_galley_blue);
+
+            // Handle image selector
+            Intent getIntent = new Intent(Intent.ACTION_GET_CONTENT);
+            getIntent.setType("image/*");
+            Intent pickIntent = new Intent(Intent.ACTION_PICK);
+            pickIntent.setDataAndType(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*");
+            Intent chooserIntent = Intent.createChooser(getIntent, "Select Image");
+            chooserIntent.putExtra(Intent.EXTRA_INITIAL_INTENTS, new Intent[]{pickIntent});
+            startActivityForResult(chooserIntent, PICK_IMAGE);
+        } else {
+            // Change background resource
+            galleyButton.setBackgroundResource(R.drawable.ic_menu_gallery);
+            imageURI = null;
+
+        }
     }
 
     public void selectLocation() {
@@ -79,19 +90,20 @@ public class EditorActivity extends BaseActivity {
         Location location = gpsTracker.getLocation();
         locationButton.setOnClickListener(v -> {
                 if (location!=null){
-                    double latitude = location.getLatitude();
-                    double longitude = location.getLongitude();
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
                     locationButton.setBackgroundResource(R.drawable.ic_location_on_select_24dp);
-                    counter+=1;
-                    Toast.makeText(EditorActivity.this, "Latitude: "+latitude+" Longitude: "+longitude, Toast.LENGTH_SHORT).show();
-                    if (counter%2==0){
+                    counterLocation+=1;
+                    if (counterLocation%2==0){
+                        counterLocation = 0;
+
                         locationButton.setBackgroundResource(R.drawable.ic_location_on_white_24dp);
+                        longitude = 0;
+                        latitude = 0;
                     }
-                    //Log.i("Info", "Longitude: "+latitude+" Longitude: "+longitude);
+                    Log.i("Info", "Longitude: "+latitude+" Longitude: "+longitude);
                 }
             });
-
-            //Log.i("Info", "Longitude: "+latitude+" Longitude: "+longitude);
     }
 
     @Override
@@ -106,35 +118,32 @@ public class EditorActivity extends BaseActivity {
         if (memoryText.equals("")) {
             return;
         }
+
+        // Create memory
         Memory memory = new Memory();
+        memory.setUserId(userViewModel.getSignedInUser().getId());
         memory.setMemory(memoryText);
         memory.setSavedOn(String.valueOf(System.currentTimeMillis()));
+        memory.setSynced("0");
+        memory.setImagePath("null");
+        memory.setLongitude("null");
+        memory.setLatitude("null");
+        memory.setImageInLocal("1");
+        memory.setMood("201");
+
         if (imageURI != null) {
             memory.setImagePath(imageURI.toString());
+            memory.setImageInLocal("0");
         }
-        memory.setUserId(userViewModel.getSignedInUser().getId());
+
+        if (latitude != 0 && longitude != 0) {
+            memory.setLongitude(String.valueOf(longitude));
+            memory.setLatitude(String.valueOf(latitude));
+        }
+
         memoryViewModel.insert(memory);
+
         onBackPressed();
-    }
-
-    static void saveMemory(String memory) {
-        saveMemory(memory, "");
-    }
-
-    static void saveMemory(String memory, String geoTag) {
-        saveMemory(memory, geoTag, null);
-    }
-
-    static void saveMemory(String memory, String geoTag, Uri imageUri) {
-        ArrayList<Serializable> array = new ArrayList<>();
-
-        String[] args = {"accessKey", "savedOn", "memory", "geoTag"};
-        String[] params = {"s", String.valueOf(new Date(System.currentTimeMillis())), memory, geoTag};
-        String query = Server.queryBuilder(args, params);
-        String url = Server.urlBuilder("save", query);
-        array.add(url);
-
-        new saveMemoryTask().execute(array);
     }
 
     @Override
@@ -146,7 +155,6 @@ public class EditorActivity extends BaseActivity {
                 if (resultCode == RESULT_OK) {
                     if (data.getData() != null) {
                         imageURI = data.getData();
-                        galleyButton.setBackgroundResource(R.drawable.ic_menu_galley_blue);
                     } else {
                         imageURI = null;
                     }

@@ -44,7 +44,6 @@ public class ChatActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.VERTICAL,false));
         recyclerView.setAdapter(messageAdapter);
 
-
         // Send message To Server
         queryEditText.setOnEditorActionListener((textView, i, keyEvent) -> {
             if (i == EditorInfo.IME_ACTION_SEND) {
@@ -52,17 +51,12 @@ public class ChatActivity extends AppCompatActivity {
                 Message message = new Message();
                 message.setMessage(queryEditText.getText().toString());
                 message.setSavedOn(String.valueOf(System.currentTimeMillis()));
-                message.setUser(true);
                 message.setUserId(userViewModel.getSignedInUser().getId());
+                message.setSynced("0");
+                message.setReply("null");
+                message.setMood("-0");
 
                 messageViewModel.insert(message);
-
-                String[] args = {"message"};
-                String[] params = {queryEditText.getText().toString()};
-                String query = Server.queryBuilder(args, params);
-                String url = Server.urlBuilder("reply", query);
-                new sendMessageTask(messageViewModel, userViewModel).execute(url);
-
                 // Clear edit text
                 queryEditText.getText().clear();
             }
@@ -72,6 +66,7 @@ public class ChatActivity extends AppCompatActivity {
         // Listen for LiveData Message
         messageViewModel.getMessages(user.getId()).observe(this, messages -> {
                 removeMessagesFromAdapter();
+                sendMessagesToServer(messages);
                 addMessagesToAdapter(messages);
             if (messages.size() > 0) {
                 scrollToLastMessage();
@@ -102,9 +97,27 @@ public class ChatActivity extends AppCompatActivity {
 
             for (int counter = 0; counter < messages.size(); counter++) {
                 message = messages.get(counter);
-                messagesList.add(new MessageStorage(message.getMessage(), message.isUser()));
+                messagesList.add(new MessageStorage(message.getMessage(), true));
+                if (!message.getReply().equals("null")) {
+                    messagesList.add(new MessageStorage(message.getReply(), false));
+                }
             }
             messageAdapter.updateUI();
+        }
+    }
+
+    private void sendMessagesToServer(List<Message> messages) {
+        for (Message message: messages) {
+            if (message.getSynced().equals("0")) {
+
+                String[] args = {"id", "accessKey", "message", "timestamp"};
+                String[] params = {String.valueOf(message.getId()),
+                        userViewModel.getSignedInUser().getAccessKey(), message.getMessage(),
+                message.getSavedOn()};
+                String query = Server.queryBuilder(args, params);
+                String urlString = Server.urlBuilder("reply", query);
+                new sendMessageTask(messageViewModel, message).execute(urlString);
+            }
         }
     }
 }

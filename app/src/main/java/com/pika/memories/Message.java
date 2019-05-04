@@ -9,7 +9,11 @@ import androidx.room.PrimaryKey;
 public class Message {
 
     @ColumnInfo
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
+    @NonNull
+    private int id;
+
+    @ColumnInfo
     @NonNull
     private String savedOn;
 
@@ -23,7 +27,15 @@ public class Message {
 
     @ColumnInfo
     @NonNull
-    private boolean isUser;
+    private String mood;
+
+    @ColumnInfo
+    @NonNull
+    private String reply;
+
+    @ColumnInfo
+    @NonNull
+    private String synced;
 
     @NonNull
     public String getSavedOn() {
@@ -52,11 +64,38 @@ public class Message {
         this.message = message;
     }
 
-    public boolean isUser() {
-        return isUser;
+    public int getId() {
+        return id;
     }
 
-    public void setUser(boolean user) {
-        isUser = user;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @NonNull
+    public String getMood() {
+        return mood;
+    }
+
+    public void setMood(@NonNull String mood) {
+        this.mood = mood;
+    }
+
+    @NonNull
+    public String getReply() {
+        return reply;
+    }
+
+    public void setReply(@NonNull String reply) {
+        this.reply = reply;
+    }
+
+    @NonNull
+    public String getSynced() {
+        return synced;
+    }
+
+    public void setSynced(@NonNull String synced) {
+        this.synced = synced;
     }
 }

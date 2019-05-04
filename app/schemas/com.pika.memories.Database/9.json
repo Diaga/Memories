@@ -1,8 +1,8 @@
 {
   "formatVersion": 1,
   "database": {
-    "version": 7,
-    "identityHash": "ab645e26d40cdfbd85e5484665a40a16",
+    "version": 9,
+    "identityHash": "c3375a8bd784b3f77e6b3f5d167f972a",
     "entities": [
       {
         "tableName": "User",
@@ -148,7 +148,7 @@
       },
       {
         "tableName": "Message",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `savedOn` TEXT NOT NULL, `userId` TEXT NOT NULL, `message` TEXT NOT NULL, `mood` TEXT NOT NULL, `reply` TEXT NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `savedOn` TEXT NOT NULL, `userId` TEXT NOT NULL, `message` TEXT NOT NULL, `mood` TEXT NOT NULL, `reply` TEXT NOT NULL, `synced` TEXT NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -185,6 +185,12 @@
             "columnName": "reply",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "synced",
+            "columnName": "synced",
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -200,7 +206,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"ab645e26d40cdfbd85e5484665a40a16\")"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"c3375a8bd784b3f77e6b3f5d167f972a\")"
     ]
   }
 }

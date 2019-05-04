@@ -18,7 +18,6 @@ import com.google.android.gms.tasks.Task;
 public class LoginActivity extends BaseActivity {
 
     private UserViewModel userViewModel;
-    private SettingsViewModel settingsViewModel;
 
     private final int RC_SIGN_IN = 0;
     private final int RC_SIGN_OUT = 1;
@@ -41,7 +40,6 @@ public class LoginActivity extends BaseActivity {
 
         // Connect with database
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
-        settingsViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
 
         if (loginIntent.getIntExtra("requestCode", 0) == RC_SIGN_OUT) {
             signOut();
@@ -58,11 +56,13 @@ public class LoginActivity extends BaseActivity {
         if (gsAccount != null) {
             Log.i("GoogleSignInSuccessful", gsAccount.getEmail());
 
-            // Local Database
-            updateDatabase();
+            if (userViewModel.getUserFromId(gsAccount.getId()) == null) {
+                // Local Database
+                updateDatabase();
 
-            // Server
-            register(gsAccount);
+                // Server
+                register();
+            }
 
             Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
             mainIntent.putExtra("fromCode", "LoginActivity");
@@ -120,35 +120,43 @@ public class LoginActivity extends BaseActivity {
         }
 
     void insertDatabase () {
+
         // Insert User
         User user = new User();
         user.setDisplayName(gsAccount.getDisplayName());
         user.setId(gsAccount.getId());
         user.setEmail(gsAccount.getEmail());
+        user.setPhotoURI("null");
         if (gsAccount.getPhotoUrl() != null) {
             user.setPhotoURI(gsAccount.getPhotoUrl().toString());
         }
+        if (userViewModel.getSignedInUser() != null) {
+            user.setAccessKey(userViewModel.getSignedInUser().getAccessKey());
+        } else {
+            user.setAccessKey("201");
+        }
         user.setSignedIn("1");
-        userViewModel.insertUser(user);
 
-        // Insert Settings
-        Settings settings = new Settings();
-        settings.setUserId(gsAccount.getId());
-        settings.setTheme(String.valueOf(Utils.currentTheme));
-        settingsViewModel.insert(settings);
+        // Update User Settings
+        user.setTheme(Utils.THEME_WHITE);
+        user.setSync("1");
+
+        userViewModel.insertUser(user);
     }
 
-
-    void register(GoogleSignInAccount gsAccount) {
-        String displayName = gsAccount.getDisplayName();
+    void register() {
+        String name = gsAccount.getDisplayName();
         String id = gsAccount.getId();
         String email = gsAccount.getEmail();
-        String photoURL = "null";
-        if (gsAccount.getPhotoUrl() != null) {
-            photoURL = gsAccount.getPhotoUrl().toString();
-        }
-        String[] args = {"id", "displayName", "email", "photoURI"};
-        String[] params = {id, displayName, email, photoURL};
+        String photoURI = gsAccount.getPhotoUrl().toString();
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        String accessKey = "201";
+        String theme = "white";
+        String sync = "1";
+
+        String[] args = {"id", "name", "email", "imageURI", "timestamp", "accessKey",
+                "theme", "sync"};
+        String[] params = {id, name, email, photoURI, timestamp, accessKey, theme, sync};
         String query = Server.queryBuilder(args, params);
         String url = Server.urlBuilder("register", query);
 

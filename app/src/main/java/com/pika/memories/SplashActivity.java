@@ -15,7 +15,6 @@ public class SplashActivity extends BaseActivity {
     private UserViewModel userViewModel;
     private MemoryViewModel memoryViewModel;
     private MessageViewModel messageViewModel;
-    private SettingsViewModel settingsViewModel;
 
     private final int LOGIN_REQUEST = 0;
 
@@ -28,10 +27,9 @@ public class SplashActivity extends BaseActivity {
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel.class);
         messageViewModel = ViewModelProviders.of(this).get(MessageViewModel.class);
-        settingsViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
 
         // Clear Tables
-        memoryViewModel.clearTable();
+        // memoryViewModel.clearTable();
         messageViewModel.clearTable();
 
         // SignIn user
@@ -39,8 +37,7 @@ public class SplashActivity extends BaseActivity {
             signIn();
         } else {
             // Get current settings and update app
-            Settings settings = settingsViewModel.getCurrentSettings(userViewModel.getSignedInUser().getId());
-            Utils.updateThemeOnSettings(settings);
+            Utils.changeTheme(userViewModel.getSignedInUser().getTheme());
 
             // Start main activity
             Intent mainIntent = new Intent(this, MainActivity.class);

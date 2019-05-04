@@ -1,5 +1,6 @@
 package com.pika.memories;
 
+import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
 
@@ -58,32 +59,6 @@ class Server {
         return "";
     }
 
-    static String saveMemory(String urlString, byte[] bytes) {
-        HttpURLConnection connection;
-        try {
-            URL url = new URL(urlString);
-            URLConnection urlConnection = url.openConnection();
-            if (urlConnection instanceof HttpURLConnection) {
-                connection = (HttpURLConnection) urlConnection;
-                if (bytes != null) {
-                    connection.setDoOutput(true);
-                    connection.setRequestProperty("Content-Type", "multipart/form-data;boundary=*****");
-
-                    DataOutputStream request = new DataOutputStream(connection.getOutputStream());
-                    request.writeBytes("--*****\r\n");
-                    request.writeBytes("Content-Disposition: form-data; name=\"image\";filename=\"" +
-                            "image\"\r\n");
-                    request.writeBytes("\r\n");
-                    request.write(bytes, 0, bytes.length);
-                }
-                return bufferRead(connection);
-            }
-        } catch (Exception e) {
-            Log.d("sendPost_ERROR", e.toString());
-        }
-        return "NotTestedYet";
-    }
-
     private static String bufferRead(HttpURLConnection conn) {
         try {
             BufferedReader in =
@@ -102,8 +77,6 @@ class Server {
         }
         return null;
     }
-
-
 }
 
 class registerTask extends AsyncTask<String, Void, String> {
@@ -126,32 +99,50 @@ class registerTask extends AsyncTask<String, Void, String> {
     }
 }
 
-class saveMemoryTask extends AsyncTask<ArrayList, Void, String> {
+class saveMemoryTask extends AsyncTask<Memory, Void, String[]> {
+    private WeakReference<MemoryViewModel> memoryViewModelWeakReference;
+    private WeakReference<String> stringWeakReference;
+    private WeakReference<Bitmap> bitmapWeakReference;
 
-    @Override
-    protected String doInBackground(ArrayList... array) {
-        if (array.length == 2) {
-            return Server.saveMemory(array[0].toString(), (byte[]) Objects.requireNonNull(array[1].toArray())[0]);
-        } else {
-            return Server.saveMemory(array[0].toString(), null);
-        }
+    saveMemoryTask(MemoryViewModel memoryViewModel, String accessKey, Bitmap bitmap) {
+        memoryViewModelWeakReference = new WeakReference<>(memoryViewModel);
+        stringWeakReference = new WeakReference<>(accessKey);
+        bitmapWeakReference = new WeakReference<>(bitmap);
     }
 
     @Override
-    protected void onPostExecute(String status) {
-        // Do something with status
-        // OK if success, FAIL if failed
+    protected String[] doInBackground(Memory... memories) {
+        String[] args = {"id", "accessKey", "memory", "image", "longitude", "latitude", "score",
+                "timestamp"};
+        String[] params = {String.valueOf(memories[0].getId()), stringWeakReference.get(),
+                memories[0].getMemory(), Utils.bitmapToBase64(bitmapWeakReference.get()),
+                memories[0].getLongitude(), memories[0].getLatitude(), memories[0].getMood(),
+                memories[0].getSavedOn() };
+        String query = Server.queryBuilder(args, params);
+        String urlString = Server.urlBuilder("save-memory", query);
+        Log.i("Server", urlString);
+        return new String[] {String.valueOf(memories[0].getId()), Server.getResponse(urlString)};
+    }
+
+    @Override
+    protected void onPostExecute(String[] s) {
+        // Update database
+
+        memoryViewModelWeakReference.get().setMood(s[0], s[1]);
+
+        memoryViewModelWeakReference.get().setSynced(s[0], "1");
+
     }
 }
 
 class sendMessageTask extends AsyncTask<String, Void, String> {
 
     private WeakReference<MessageViewModel> messageViewModelWeakReference;
-    private WeakReference<UserViewModel> userViewModelWeakReference;
+    private WeakReference<Message> messageWeakReference;
 
-    sendMessageTask(MessageViewModel messageViewModel, UserViewModel userViewModel) {
+    sendMessageTask(MessageViewModel messageViewModel, Message message) {
         this.messageViewModelWeakReference = new WeakReference<>(messageViewModel);
-        this.userViewModelWeakReference = new WeakReference<>(userViewModel);
+        this.messageWeakReference = new WeakReference<>(message);
     }
 
     @Override
@@ -162,12 +153,13 @@ class sendMessageTask extends AsyncTask<String, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         super.onPostExecute(s);
-        // Send to Recycler View
-        Message message = new Message();
-        message.setMessage(s);
-        message.setUser(false);
-        message.setSavedOn(String.valueOf(System.currentTimeMillis()));
-        message.setUserId(userViewModelWeakReference.get().getSignedInUser().getId());
-        messageViewModelWeakReference.get().insert(message);
+        // Get useful data
+        String[] data = s.split("#");
+
+        // Update and send to Recycler View
+        messageWeakReference.get().setReply(data[0]);
+        messageWeakReference.get().setMood(data[1]);
+        messageWeakReference.get().setSynced("1");
+        messageViewModelWeakReference.get().insert(messageWeakReference.get());
     }
 }

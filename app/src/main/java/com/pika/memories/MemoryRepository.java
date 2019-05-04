@@ -24,8 +24,22 @@ public class MemoryRepository {
         return memoryDao.getMemories(userId);
     }
 
-    public void getMemoryAndDelete(String savedOn) {
-        new getMemoryAndDeleteTask(memoryDao).execute(savedOn);
+    public void setMemory(String id, String memory) {new memoryTask(memoryDao).execute(id, memory); }
+
+    public void setMood(String id, String mood) {new moodTask(memoryDao).execute(id, mood); }
+
+    public void setImage(String id, String image) {new imageTask(memoryDao).execute(id, image); }
+
+    public void setLongitude(String id, String longitude) {new longitudeTask(memoryDao).execute(id, longitude); }
+
+    public void setLatitude(String id, String latitude) {new latitudeTask(memoryDao).execute(id, latitude); }
+
+    public void setSynced(String id, String synced) {new syncedMemoryTask(memoryDao).execute(id, synced); }
+
+    public void setImageInLocal(String id, String imageInLocal) {new imageInLocalTask(memoryDao).execute(id, imageInLocal); }
+
+    public void getMemoryAndDelete(String id) {
+        new getMemoryAndDeleteTask(memoryDao).execute(id);
     }
 
     public void deleteMemory(Memory memory) {
@@ -63,6 +77,76 @@ class deleteMemoryTask extends AsyncTask<Memory, Void, Void> {
     }
 }
 
+class memoryTask extends AsyncTask<String, Void, Void> {
+    private WeakReference<MemoryDao> memoryDaoWeakReference;
+
+    memoryTask(MemoryDao memoryDao) {
+        memoryDaoWeakReference = new WeakReference<>(memoryDao);
+    }
+
+    @Override
+    protected Void doInBackground(String... strings) {
+        memoryDaoWeakReference.get().setMemory(Integer.parseInt(strings[0]), strings[1]);
+        return null;
+    }
+}
+
+class moodTask extends AsyncTask<String, Void, Void> {
+    private WeakReference<MemoryDao> memoryDaoWeakReference;
+
+    moodTask(MemoryDao memoryDao) {
+        memoryDaoWeakReference = new WeakReference<>(memoryDao);
+    }
+
+    @Override
+    protected Void doInBackground(String... strings) {
+        memoryDaoWeakReference.get().setMood(Integer.parseInt(strings[0]), strings[1]);
+        return null;
+    }
+}
+
+class imageTask extends AsyncTask<String, Void, Void> {
+    private WeakReference<MemoryDao> memoryDaoWeakReference;
+
+    imageTask(MemoryDao memoryDao) {
+        memoryDaoWeakReference = new WeakReference<>(memoryDao);
+    }
+
+    @Override
+    protected Void doInBackground(String... strings) {
+        memoryDaoWeakReference.get().setImage(Integer.parseInt(strings[0]), strings[1]);
+        return null;
+    }
+}
+
+class longitudeTask extends AsyncTask<String, Void, Void> {
+    private WeakReference<MemoryDao> memoryDaoWeakReference;
+
+    longitudeTask(MemoryDao memoryDao) {
+        memoryDaoWeakReference = new WeakReference<>(memoryDao);
+    }
+
+    @Override
+    protected Void doInBackground(String... strings) {
+        memoryDaoWeakReference.get().setLongitude(Integer.parseInt(strings[0]), strings[1]);
+        return null;
+    }
+}
+
+class latitudeTask extends AsyncTask<String, Void, Void> {
+    private WeakReference<MemoryDao> memoryDaoWeakReference;
+
+    latitudeTask(MemoryDao memoryDao) {
+        memoryDaoWeakReference = new WeakReference<>(memoryDao);
+    }
+
+    @Override
+    protected Void doInBackground(String... strings) {
+        memoryDaoWeakReference.get().setLatitude(Integer.parseInt(strings[0]), strings[1]);
+        return null;
+    }
+}
+
 class getMemoryAndDeleteTask extends AsyncTask<String, Void, Memory> {
     private WeakReference<MemoryDao> memoryDaoWeakReference;
 
@@ -91,6 +175,34 @@ class clearMemoryTableTask extends AsyncTask<Void, Void, Void> {
     @Override
     protected Void doInBackground(Void... voids) {
         memoryDaoWeakReference.get().clearTable();
+        return null;
+    }
+}
+
+class syncedMemoryTask extends AsyncTask<String, Void, Void> {
+    private WeakReference<MemoryDao> memoryDaoWeakReference;
+
+    syncedMemoryTask(MemoryDao memoryDao) {
+        memoryDaoWeakReference = new WeakReference<>(memoryDao);
+    }
+
+    @Override
+    protected Void doInBackground(String... strings) {
+        memoryDaoWeakReference.get().setSynced(Integer.parseInt(strings[0]), strings[1]);
+        return null;
+    }
+}
+
+class imageInLocalTask extends AsyncTask<String, Void, Void> {
+    private WeakReference<MemoryDao> memoryDaoWeakReference;
+
+    imageInLocalTask(MemoryDao memoryDao) {
+        memoryDaoWeakReference = new WeakReference<>(memoryDao);
+    }
+
+    @Override
+    protected Void doInBackground(String... strings) {
+        memoryDaoWeakReference.get().setImageInLocal(Integer.parseInt(strings[0]), strings[1]);
         return null;
     }
 }

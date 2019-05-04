@@ -2,7 +2,7 @@ package com.pika.memories;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,13 +11,17 @@ import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.provider.MediaStore;
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 
+import com.squareup.picasso.Picasso;
+import com.squareup.picasso.Target;
+
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +34,53 @@ public class HomeFragment extends Fragment {
     private MemoryAdapter memoryAdapter;
     private UserViewModel userViewModel;
     private ImageButton chatButton;
+
+    // Background
+    private final int interval = 5000;
+    private Handler handler;
+    private Runnable runnable;
+
+    // Variable Holders
+    private File fileAsync;
+    private Memory memoryAsync;
+    private List<Memory> memoriesAsync;
+
+    // Picasso targets below
+    private Target imageToLocalTarget = new Target() {
+        @Override
+        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            new imageToLocalTask(fileAsync, bitmap).execute(memoryAsync);
+        }
+
+        @Override
+        public void onBitmapFailed(Drawable errorDrawable) {
+
+        }
+
+        @Override
+        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+        }
+    };
+
+    private Target sendMemoryToServerTarget = new Target() {
+        @Override
+        public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
+            Log.i("IamBeingExecuted", "true");
+            new saveMemoryTask(memoryViewModel, userViewModel.getSignedInUser().getAccessKey(),
+                    bitmap).execute(memoryAsync);
+        }
+
+        @Override
+        public void onBitmapFailed(Drawable errorDrawable) {
+
+        }
+
+        @Override
+        public void onPrepareLoad(Drawable placeHolderDrawable) {
+
+        }
+    };
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -52,8 +103,21 @@ public class HomeFragment extends Fragment {
         memoryViewModel.getMemories(userId).observe(this, memories -> {
             removeMemoriesFromAdapter();
             addMemoriesToAdapter(memories);
+            sendMemoriesToServer(memories);
         });
 
+        // Run background tasks
+        handler = new Handler();
+        runnable = () -> {
+            Log.i("Runnable", "Running!");
+            if (memoriesAsync != null) {
+                sendMemoriesToServer(memoriesAsync);
+            }
+            handler.postAtTime(this.runnable, System.currentTimeMillis()+interval);
+            handler.postDelayed(this.runnable, interval);
+        };
+        handler.postAtTime(runnable, System.currentTimeMillis()+interval);
+        handler.postDelayed(runnable, interval);
     }
 
     private void chatButton() {
@@ -72,36 +136,22 @@ public class HomeFragment extends Fragment {
         ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getContext(), R.dimen.item_offset);
         memoriesRecyclerView.addItemDecoration(itemDecoration);
         chatButton = fragmentHomeView.findViewById(R.id.chatButton);
-        chatButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                chatButton();
-            }
-        });
+        chatButton.setOnClickListener(v -> chatButton());
         return fragmentHomeView;
     }
 
     private void addMemoriesToAdapter(List<Memory> memories) {
         if (memories.size() > 0) {
             Memory memory;
-            Bitmap bitmap = null;
 
             for (int counter = 0; memories.size()<10 ? counter<memories.size() : counter<10; counter++) {
                 memory = memories.get(counter);
 
                 // Image Resolution Below
-                if (memory.getImagePath() != null) {
-                    try {
-                        bitmap = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(),
-                                Uri.parse(memory.getImagePath()));
-                    } catch (Exception e) {
-                        Log.d("UriToImagePathERROR: ", memory.getImagePath());
-                    }
-                }
-                memoriesList.add(new MemoryStorage(memory.getMemory(), bitmap, memory.getSavedOn()));
-                bitmap = null;
+                memoriesList.add(new MemoryStorage(memory.getMemory(), memory.getImagePath(), memory.getSavedOn()));
+
+                memoryAdapter.updateUI();
             }
-            memoryAdapter.updateUI();
         }
     }
 
@@ -110,4 +160,41 @@ public class HomeFragment extends Fragment {
         memoryAdapter.updateUI();
     }
 
+    private void sendMemoriesToServer(List<Memory> memories) {
+        memoriesAsync = memories;
+        for (Memory memory: memories) {
+            // Increase scope
+            memoryAsync = memory;
+
+            // imageToLocal
+            if (!memory.getImagePath().equals("null") && memory.getImageInLocal().equals("0")) {
+                File file = new File(getContext().getExternalFilesDir(null), memory.getId()+".jpeg");
+
+                // Update database
+                try {
+                    memoryViewModel.setImage(String.valueOf(memory.getId()), file.getAbsolutePath());
+                } catch (Exception e) {
+                    Log.i("Name file", e.toString());
+                }
+                memoryViewModel.setImageInLocal(String.valueOf(memory.getId()), "1");
+
+                // Populate variables
+                fileAsync = file;
+                memoryAsync = memory;
+
+                // Load into targetBitmap
+                Picasso.with(getContext()).load(memory.getImagePath()).into(imageToLocalTarget);
+            }
+
+            // memoryToServer
+            if (memory.getSynced().equals("0") && !memory.getImageInLocal().equals("0")) {
+
+                // Populate variables
+                memoryAsync = memory;
+
+                // Get bitmap to targetBitmap
+                Picasso.with(getContext()).load(new File(memory.getImagePath())).into(sendMemoryToServerTarget);
+            }
+        }
+    }
 }

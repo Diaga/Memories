@@ -21,6 +21,10 @@ public class MessageRepository {
 
     public void delete(Message message) { new deleteMessageTask(messageDao).execute(message); }
 
+    public void setMood(String id, String mood) { new moodReplyTask(messageDao).execute(id, mood);}
+
+    public void setReply(String id, String reply) { new replyTask(messageDao).execute(id, reply); }
+
     public LiveData<List<Message>> getMessages(String userId) { return messageDao.getMessages(userId); }
 
     public void getMessage(String savedOn) { new getMessageTask(messageDao).execute(savedOn); }
@@ -54,6 +58,34 @@ class deleteMessageTask extends AsyncTask<Message, Void, Void> {
     @Override
     protected Void doInBackground(Message... messages) {
         messageDaoWeakReference.get().delete(messages[0]);
+        return null;
+    }
+}
+
+class moodReplyTask extends AsyncTask<String, Void, Void> {
+    private WeakReference<MessageDao> messageDaoWeakReference;
+
+    moodReplyTask(MessageDao messageDao) {
+        messageDaoWeakReference = new WeakReference<>(messageDao);
+    }
+
+    @Override
+    protected Void doInBackground(String... strings) {
+        messageDaoWeakReference.get().setMood(Integer.parseInt(strings[0]), strings[1]);
+        return null;
+    }
+}
+
+class replyTask extends AsyncTask<String, Void, Void> {
+    private WeakReference<MessageDao> messageDaoWeakReference;
+
+    replyTask(MessageDao messageDao) {
+        messageDaoWeakReference = new WeakReference<>(messageDao);
+    }
+
+    @Override
+    protected Void doInBackground(String... strings) {
+        messageDaoWeakReference.get().setReply(Integer.parseInt(strings[0]), strings[1]);
         return null;
     }
 }

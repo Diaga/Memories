@@ -17,6 +17,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.widget.Toolbar;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -32,7 +33,6 @@ import androidx.lifecycle.ViewModelProviders;
 
 public class MainActivity extends BaseActivity {
     UserViewModel userViewModel;
-    SettingsViewModel settingsViewModel;
     private final int LOGOUT_REQUEST = 1;
 
     Fragment[] fragments = {new HomeFragment(), new CalendarFragment(), new StatisticsFragment(),new ProfileFragment()};
@@ -47,12 +47,11 @@ public class MainActivity extends BaseActivity {
 
         // Connect with Database
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
-        settingsViewModel = ViewModelProviders.of(this).get(SettingsViewModel.class);
 
         // Check from where MainActivity was invoked and perform corresponding actions
         String fromCode = mainIntent.getExtras().getString("fromCode");
         if (fromCode != null && fromCode.equals("LoginActivity")) {
-            Utils.updateThemeOnSettings(settingsViewModel.getCurrentSettings(userViewModel.getSignedInUser().getId()));
+            Utils.changeTheme(userViewModel.getSignedInUser().getTheme());
         }
 
         BottomNavigationView navigation = findViewById(R.id.navigation);
@@ -63,7 +62,6 @@ public class MainActivity extends BaseActivity {
         hideAllFragments();
 
         fragmentLoader(getSupportFragmentManager().findFragmentByTag(fragmentTags[0]));
-
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
@@ -72,12 +70,21 @@ public class MainActivity extends BaseActivity {
         switch (menuItem.getItemId()) {
             case R.id.home:
                 fragment = getSupportFragmentManager().findFragmentByTag(fragmentTags[0]);
+                if (fragment != null && fragment.isVisible()) {
+                    return false;
+                }
                 break;
             case R.id.calendar:
                 fragment = getSupportFragmentManager().findFragmentByTag(fragmentTags[1]);
+                if (fragment != null && fragment.isVisible()) {
+                    return false;
+                }
                 break;
             case R.id.statistics:
                 fragment = getSupportFragmentManager().findFragmentByTag(fragmentTags[2]);
+                if (fragment != null && fragment.isVisible()) {
+                    return false;
+                }
                 break;
             case R.id.add:
                 Intent intent = new Intent(getApplicationContext(),EditorActivity.class);
@@ -85,6 +92,9 @@ public class MainActivity extends BaseActivity {
                 break;
             case R.id.bottom_profile:
                 fragment = getSupportFragmentManager().findFragmentByTag(fragmentTags[3]);
+                if (fragment != null && fragment.isVisible()) {
+                    return false;
+                }
                 break;
         }
         return fragmentLoader(fragment);
@@ -105,7 +115,6 @@ public class MainActivity extends BaseActivity {
         loginIntent.putExtra("requestCode", LOGOUT_REQUEST);
         startActivityForResult(loginIntent, LOGOUT_REQUEST);
     }
-
 
     private void hideAllFragments() {
         FragmentManager fragmentManager = getSupportFragmentManager();

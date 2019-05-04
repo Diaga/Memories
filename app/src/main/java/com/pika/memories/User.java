@@ -9,13 +9,14 @@ import androidx.room.PrimaryKey;
 @Entity
 public class User {
 
-    @ColumnInfo
-    private String accessKey;
 
     @PrimaryKey
     @ColumnInfo
     @NonNull
     private String id;
+
+    @ColumnInfo
+    private String accessKey;
 
     @ColumnInfo
     @NonNull
@@ -36,6 +37,14 @@ public class User {
     @ColumnInfo
     @NonNull
     private String signedIn;
+
+    @ColumnInfo
+    @NonNull
+    private String theme;
+
+    @ColumnInfo
+    @NonNull
+    private String sync;
 
     @NonNull
     public String getAccessKey() {
@@ -98,5 +107,23 @@ public class User {
 
     public void setSignedIn(@NonNull String signedIn) {
         this.signedIn = signedIn;
+    }
+
+    @NonNull
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(@NonNull String theme) {
+        this.theme = theme;
+    }
+
+    @NonNull
+    public String getSync() {
+        return sync;
+    }
+
+    public void setSync(@NonNull String sync) {
+        this.sync = sync;
     }
 }
