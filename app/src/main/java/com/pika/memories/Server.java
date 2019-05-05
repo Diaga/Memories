@@ -5,18 +5,15 @@ import android.os.AsyncTask;
 import android.util.Log;
 
 import java.io.BufferedReader;
-import java.io.DataOutputStream;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
-import java.util.ArrayList;
-import java.util.Objects;
 
 class Server {
-    private static final String server = "http://memories.pika.cf/";
+    private static final String server = "http://10.7.13.17:5000/";
 
     static String queryBuilder(String[] query, String[] data) {
         if (query.length == data.length) {
@@ -107,7 +104,9 @@ class saveMemoryTask extends AsyncTask<Memory, Void, String[]> {
     saveMemoryTask(MemoryViewModel memoryViewModel, String accessKey, Bitmap bitmap) {
         memoryViewModelWeakReference = new WeakReference<>(memoryViewModel);
         stringWeakReference = new WeakReference<>(accessKey);
-        bitmapWeakReference = new WeakReference<>(bitmap);
+        if (bitmap != null) {
+            bitmapWeakReference = new WeakReference<>(bitmap);
+        }
     }
 
     @Override
@@ -115,7 +114,7 @@ class saveMemoryTask extends AsyncTask<Memory, Void, String[]> {
         String[] args = {"id", "accessKey", "memory", "image", "longitude", "latitude", "score",
                 "timestamp"};
         String[] params = {String.valueOf(memories[0].getId()), stringWeakReference.get(),
-                memories[0].getMemory(), Utils.bitmapToBase64(bitmapWeakReference.get()),
+                memories[0].getMemory(), memories[0].getImagePath(),
                 memories[0].getLongitude(), memories[0].getLatitude(), memories[0].getMood(),
                 memories[0].getSavedOn() };
         String query = Server.queryBuilder(args, params);
@@ -127,11 +126,10 @@ class saveMemoryTask extends AsyncTask<Memory, Void, String[]> {
     @Override
     protected void onPostExecute(String[] s) {
         // Update database
-
         memoryViewModelWeakReference.get().setMood(s[0], s[1]);
 
+        Log.i("Id", s[0]+s[1]);
         memoryViewModelWeakReference.get().setSynced(s[0], "1");
-
     }
 }
 

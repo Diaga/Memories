@@ -46,6 +46,8 @@ public class MemoryRepository {
         new deleteMemoryTask(memoryDao).execute(memory);
     }
 
+    public List<Memory> getMemoriesFromId(String userId) {return memoryDao.getMemoriesFromId(userId); }
+
     public void clearTable() {new clearMemoryTableTask(memoryDao).execute();}
 }
 

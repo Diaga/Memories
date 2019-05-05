@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_pika_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppThemeLight">
-        <activity android:name=".fullMemory"></activity>
+        <activity android:name=".FullMemoryActivity"></activity>
         <activity android:name=".SettingsActivity" />
         <activity
             android:name=".SplashActivity"

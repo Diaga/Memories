@@ -36,11 +36,14 @@ public interface MemoryDao {
     @Query("UPDATE Memory SET latitude = :latitude WHERE id = :id")
     void setLatitude(int id, String latitude);
 
-    @Query("UPDATE Memory SET synced = :synced WHERE id =:id")
+    @Query("UPDATE Memory SET synced = :synced WHERE id = :id")
     void setSynced(int id, String synced);
 
-    @Query("UPDATE memory SET imageInLocal = :imageInLocal WHERE id = :id")
+    @Query("UPDATE Memory SET imageInLocal = :imageInLocal WHERE id = :id")
     void setImageInLocal(int id, String imageInLocal);
+
+    @Query("SELECT * FROM Memory WHERE userId = :userId")
+    List<Memory> getMemoriesFromId(String userId);
 
     @Query("SELECT * FROM Memory WHERE userId = :userId ORDER BY savedOn DESC")
     LiveData<List<Memory>> getMemories(String userId);

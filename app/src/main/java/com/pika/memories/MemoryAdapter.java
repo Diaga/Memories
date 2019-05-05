@@ -2,18 +2,13 @@ package com.pika.memories;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.graphics.Rect;
-import android.net.Uri;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.io.File;
 import java.util.List;
@@ -63,7 +58,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         viewHolder.memory_container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(),fullMemory.class);
+                Intent intent = new Intent(v.getContext(), FullMemoryActivity.class);
                 v.getContext().startActivity(intent);
             }
         });

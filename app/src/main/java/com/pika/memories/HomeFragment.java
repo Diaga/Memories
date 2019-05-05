@@ -66,7 +66,6 @@ public class HomeFragment extends Fragment {
     private Target sendMemoryToServerTarget = new Target() {
         @Override
         public void onBitmapLoaded(Bitmap bitmap, Picasso.LoadedFrom from) {
-            Log.i("IamBeingExecuted", "true");
             new saveMemoryTask(memoryViewModel, userViewModel.getSignedInUser().getAccessKey(),
                     bitmap).execute(memoryAsync);
         }
@@ -187,14 +186,19 @@ public class HomeFragment extends Fragment {
             }
 
             // memoryToServer
-            if (memory.getSynced().equals("0") && !memory.getImageInLocal().equals("0")) {
+            if (memory.getSynced().equals("0")) {
 
                 // Populate variables
                 memoryAsync = memory;
 
                 // Get bitmap to targetBitmap
-                Picasso.with(getContext()).load(new File(memory.getImagePath())).into(sendMemoryToServerTarget);
-            }
+                if (memory.getImagePath().equals("null")) {
+                    new saveMemoryTask(memoryViewModel, userViewModel.getSignedInUser().getAccessKey(),
+                            null).execute(memoryAsync);
+                } else {
+                    Picasso.with(getContext()).load(new File(memory.getImagePath())).into(sendMemoryToServerTarget);
+                }
+                }
         }
     }
 }

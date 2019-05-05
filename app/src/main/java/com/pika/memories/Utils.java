@@ -106,6 +106,37 @@ class Utils {
     static String bitmapToBase64(Bitmap bitmap) {
         return Base64.encodeToString(Utils.imageToByteArray(bitmap), Base64.URL_SAFE);
     }
+
+    static String getMoodFromScore (String scoreString) {
+        double score = Double.parseDouble(scoreString);
+        String mood;
+        if (score >= 0.6 && score <= 1.0) {
+            mood = "excited";
+        } else if (score >= 0.2) {
+            mood = "happy";
+        } else if (score >= -0.2) {
+            mood = "neutral";
+        } else if (score >= -0.6) {
+            mood = "sad";
+        } else if (score >= -1.0) {
+            mood  = "depressed";
+        } else {
+            mood = "invalid";
+        }
+        return mood;
+    }
+
+    static String getDayMonthRelativeToNow(int offset) {
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, offset);
+        return Utils.timestampToDateTime(String.valueOf(cal.getTimeInMillis()), "dd/MM");
+    }
+
+    static String[] getSevenDayMonthRelativeToNow() {
+        return new String[] {getDayMonthRelativeToNow(0), getDayMonthRelativeToNow(-1),
+        getDayMonthRelativeToNow(-2), getDayMonthRelativeToNow(-3), getDayMonthRelativeToNow(-4),
+        getDayMonthRelativeToNow(-5), getDayMonthRelativeToNow(-6), getDayMonthRelativeToNow(-7)};
+    }
 }
 
 class imageToLocalTask extends AsyncTask<Memory, Void, Void> {

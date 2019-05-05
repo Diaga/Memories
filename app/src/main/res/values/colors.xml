@@ -8,4 +8,9 @@
     <color name="colorGreyple">#99AAB5</color>
     <color name="colorChromeBlue">#4285F4</color>
     <color name="colorChromeYellow">#F4B400</color>
+    <color name="colorExcited">#9400D3</color>
+    <color name="colorHappy">#00ff00</color>
+    <color name="colorNeutral">#99AAB5</color>
+    <color name="colorSad">#7289DA</color>
+    <color name="colorDepressed">#FF0000</color>
 </resources>

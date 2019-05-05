@@ -30,7 +30,7 @@ public class SplashActivity extends BaseActivity {
 
         // Clear Tables
         // memoryViewModel.clearTable();
-        messageViewModel.clearTable();
+        // messageViewModel.clearTable();
 
         // SignIn user
         if (!signedIn()) {
