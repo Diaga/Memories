@@ -28,7 +28,7 @@
             android:layout_height="wrap_content"
             android:background="?colorPrimary"
             app:elevation="20dp"
-            app:itemBackground="?colorPrimary"
+            app:itemBackground="?android:windowBackground"
             app:itemIconTint="@color/bottom_nav_selector_change_color"
             app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"

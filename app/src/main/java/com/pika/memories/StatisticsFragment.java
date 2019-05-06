@@ -1,6 +1,5 @@
 package com.pika.memories;
 
-import android.graphics.Color;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,18 +12,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
-import com.github.mikephil.charting.data.Entry;
-import com.github.mikephil.charting.data.LineData;
-import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class StatisticsFragment extends Fragment {
@@ -68,14 +62,14 @@ public class StatisticsFragment extends Fragment {
 
         // Color the dataSet
         pieDataSet.setColors(new int[] {R.color.colorExcited, R.color.colorHappy, R.color.colorNeutral,
-        R.color.colorSad, R.color.colorDepressed}, getContext());
+                R.color.colorDepressed, R.color.colorAngry}, getContext());
 
         pieDataSet.setDrawValues(false);
 
         PieData pieData = new PieData(pieDataSet);
         pieData.setValueFormatter(new PercentFormatter());
 
-        pieChart = view.findViewById(R.id.pie_chart);
+        pieChart = view.findViewById(R.id.memory_chart);
         pieChart.setData(pieData);
         pieChart.setDrawEntryLabels(false);
 
@@ -89,7 +83,10 @@ public class StatisticsFragment extends Fragment {
         handler = new Handler();
         runnable = () -> {
             Log.i("Runnable", "Running Statistics!");
+            pieDataSet.clear();
             computeMemoryDataObjects();
+            pieDataSet.setValues(memoryEntries);
+            pieChart.notifyDataSetChanged();
             pieChart.invalidate();
             handler.postAtTime(this.runnable, System.currentTimeMillis()+interval);
             handler.postDelayed(this.runnable, interval);
@@ -110,7 +107,7 @@ public class StatisticsFragment extends Fragment {
             }
         }
 
-        String[] labels = {"Excited", "Happy", "Neutral", "Sad", "Depressed"};
+        String[] labels = {"Excited", "Happy", "Neutral", "Depressed", "Angry"};
 
         memoryEntries.clear();
         int max = 0;
@@ -134,9 +131,9 @@ public class StatisticsFragment extends Fragment {
             } else if (memoryEntry.getLabel().equals("Neutral")) {
                 pieDataSet.addColor(getResources().getColor(R.color.colorNeutral));
             } else if (memoryEntry.getLabel().equals("Sad")) {
-                pieDataSet.addColor(getResources().getColor(R.color.colorSad));
-            } else if (memoryEntry.getLabel().equals("Depressed")) {
                 pieDataSet.addColor(getResources().getColor(R.color.colorDepressed));
+            } else if (memoryEntry.getLabel().equals("Depressed")) {
+                pieDataSet.addColor(getResources().getColor(R.color.colorAngry));
             }
         }
     }

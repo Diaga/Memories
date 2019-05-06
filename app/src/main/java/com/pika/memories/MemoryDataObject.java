@@ -53,9 +53,9 @@ public class MemoryDataObject {
             moodsCounter[1]++;
         } else if (mood.equals("neutral")) {
             moodsCounter[2]++;
-        } else if (mood.equals("sad")) {
-            moodsCounter[3]++;
         } else if (mood.equals("depressed")) {
+            moodsCounter[3]++;
+        } else if (mood.equals("angry")) {
             moodsCounter[4]++;
         }
     }

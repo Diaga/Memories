@@ -13,7 +13,7 @@ import java.net.URLConnection;
 import java.net.URLEncoder;
 
 class Server {
-    private static final String server = "http://10.7.13.17:5000/";
+    private static final String server = "http://memories.pika.cf/";
 
     static String queryBuilder(String[] query, String[] data) {
         if (query.length == data.length) {

@@ -26,7 +26,7 @@
 
     <!-- Light Theme settings below -->
     <style name="AppThemeLight" parent="Theme.AppCompat.NoActionBar">
-        <item name="colorPrimary">@color/colorWhite</item>
+        <item name="colorPrimary">#EEEEEE</item>
         <item name="colorPrimaryDark">@color/colorAlmostBlack</item>
         <item name="colorAccent">@color/colorChromeBlue</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>

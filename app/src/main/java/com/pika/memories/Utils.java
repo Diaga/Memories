@@ -117,9 +117,9 @@ class Utils {
         } else if (score >= -0.2) {
             mood = "neutral";
         } else if (score >= -0.6) {
-            mood = "sad";
+            mood = "depressed";
         } else if (score >= -1.0) {
-            mood  = "depressed";
+            mood  = "angry";
         } else {
             mood = "invalid";
         }
