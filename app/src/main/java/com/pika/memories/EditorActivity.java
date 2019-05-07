@@ -19,6 +19,8 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.lifecycle.ViewModelProviders;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 
 public class EditorActivity extends BaseActivity {
@@ -53,13 +55,8 @@ public class EditorActivity extends BaseActivity {
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel.class);
 
-        date = (TextView) findViewById(R.id.dateEditorActivity);
-        date.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                dateSelector();
-            }
-        });
+        date = findViewById(R.id.dateEditorActivity);
+        date.setOnClickListener(v -> dateSelector());
 
         // GeoTag
         gpsTracker = new GpsTracker(getApplicationContext());
@@ -83,43 +80,43 @@ public class EditorActivity extends BaseActivity {
 
                 switch (month){
                     case 1:
-                        sMonth="Jan";
+                        sMonth="January";
                         break;
                     case 2:
-                        sMonth="Feb";
+                        sMonth="February";
                         break;
                     case 3:
-                        sMonth="Mar";
+                        sMonth="March";
                         break;
                     case 4:
-                        sMonth="Apr";
+                        sMonth="April";
                         break;
                     case 5:
                         sMonth="May";
                         break;
                     case 6:
-                        sMonth="Jun";
+                        sMonth="June";
                         break;
                     case 7:
-                        sMonth="Jul";
+                        sMonth="July";
                         break;
                     case 8:
-                        sMonth="Aug";
+                        sMonth="August";
                         break;
                     case 9:
-                        sMonth="Sep";
+                        sMonth="September";
                         break;
                     case 10:
-                        sMonth="Oct";
+                        sMonth="October";
                         break;
                     case 11:
-                        sMonth="Nov";
+                        sMonth="November";
                         break;
                     case 12:
-                        sMonth="Dec";
+                        sMonth="December";
                         break;
                 }
-                String dte = dayOfMonth+" "+sMonth+" "+year;
+                String dte = sMonth+" "+dayOfMonth+", "+year;
                 date.setText(dte);
             }
         };
@@ -167,6 +164,10 @@ public class EditorActivity extends BaseActivity {
     public void saveMemory(View view) {
         EditText editorText = findViewById(R.id.editorText);
         String memoryText = editorText.getText().toString();
+        TextView dateTextView = findViewById(R.id.dateEditorActivity);
+        String date = dateTextView.getText().toString();
+
+
         if (memoryText.equals("")) {
             return;
         }
@@ -175,7 +176,7 @@ public class EditorActivity extends BaseActivity {
         Memory memory = new Memory();
         memory.setUserId(userViewModel.getSignedInUser().getId());
         memory.setMemory(memoryText);
-        memory.setSavedOn(String.valueOf(System.currentTimeMillis()));
+        memory.setSavedOn(Utils.customDateToTimestamp(date));
         memory.setSynced("0");
         memory.setImagePath("null");
         memory.setLongitude("null");
@@ -220,7 +221,7 @@ public class EditorActivity extends BaseActivity {
 
     private void setTime(TextView textView) {
         textView.setText(Utils.timestampToDateTime(String.valueOf(System.currentTimeMillis()),
-                "EEEE dd, yyyy"));
+                "MMMM dd, yyyy"));
     }
 
     public void dateSelector(){

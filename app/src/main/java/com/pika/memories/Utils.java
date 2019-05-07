@@ -19,6 +19,7 @@ import java.lang.ref.WeakReference;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 class Utils {
     final static String THEME_BLACK = "black";
@@ -136,6 +137,45 @@ class Utils {
         return new String[] {getDayMonthRelativeToNow(0), getDayMonthRelativeToNow(-1),
         getDayMonthRelativeToNow(-2), getDayMonthRelativeToNow(-3), getDayMonthRelativeToNow(-4),
         getDayMonthRelativeToNow(-5), getDayMonthRelativeToNow(-6), getDayMonthRelativeToNow(-7)};
+    }
+
+    static String customDateToTimestamp(String customDate) {
+        String[] customDateArray = customDate.split(" ");
+        String month = customDateArray[0];
+        String day = customDateArray[1].split(",")[0];
+        String year = customDateArray[2];
+
+        Calendar calendar = new GregorianCalendar(Integer.parseInt(year), monthToInt(month), Integer.parseInt(day));
+        return String.valueOf(calendar.getTimeInMillis());
+    }
+
+    static int monthToInt(String month) {
+        if (month.equals("January")) {
+            return 1;
+        } else if (month.equals("February")) {
+            return 2;
+        } else if (month.equals("March")) {
+            return 3;
+        } else if (month.equals("April")) {
+            return 4;
+        } else if (month.equals("May")) {
+            return 5;
+        } else if (month.equals("June")) {
+            return 6;
+        } else if (month.equals("July")) {
+            return 7;
+        } else if (month.equals("August")) {
+            return 8;
+        } else if (month.equals("September")) {
+            return 9;
+        } else if (month.equals("October")) {
+            return 10;
+        } else if (month.equals("November")) {
+            return 11;
+        } else if (month.equals("December")) {
+            return 12;
+        }
+        return 5;
     }
 }
 
