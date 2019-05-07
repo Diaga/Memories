@@ -145,37 +145,43 @@ class Utils {
         String day = customDateArray[1].split(",")[0];
         String year = customDateArray[2];
 
-        Calendar calendar = new GregorianCalendar(Integer.parseInt(year), monthToInt(month), Integer.parseInt(day));
+        Calendar calendar = new GregorianCalendar();
+        String hour = timestampToDateTime(String.valueOf(System.currentTimeMillis()), "HH");
+        String min = timestampToDateTime(String.valueOf(System.currentTimeMillis()), "mm");
+        String sec = timestampToDateTime(String.valueOf(System.currentTimeMillis()), "ss");
+
+        calendar.set(Integer.parseInt(year), monthToInt(month), Integer.parseInt(day), Integer.parseInt(hour),
+                Integer.parseInt(min), Integer.parseInt(sec));
         return String.valueOf(calendar.getTimeInMillis());
     }
 
     static int monthToInt(String month) {
         if (month.equals("January")) {
-            return 1;
+            return 0;
         } else if (month.equals("February")) {
-            return 2;
+            return 1;
         } else if (month.equals("March")) {
-            return 3;
+            return 2;
         } else if (month.equals("April")) {
-            return 4;
+            return 3;
         } else if (month.equals("May")) {
-            return 5;
+            return 4;
         } else if (month.equals("June")) {
-            return 6;
+            return 5;
         } else if (month.equals("July")) {
-            return 7;
+            return 6;
         } else if (month.equals("August")) {
-            return 8;
+            return 7;
         } else if (month.equals("September")) {
-            return 9;
+            return 8;
         } else if (month.equals("October")) {
-            return 10;
+            return 9;
         } else if (month.equals("November")) {
-            return 11;
+            return 10;
         } else if (month.equals("December")) {
-            return 12;
+            return 11;
         }
-        return 5;
+        return 4;
     }
 }
 
