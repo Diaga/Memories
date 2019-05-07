@@ -196,7 +196,7 @@ public class HomeFragment extends Fragment {
 
                 // Get bitmap to targetBitmap
                 if (memory.getImagePath().equals("null")) {
-                    new saveMemoryTask(memoryViewModel, userViewModel.getSignedInUser().getAccessKey(),
+                    new saveMemoryTask(memoryViewModel, userViewModel.getSignedInUser().getId(),
                             null).execute(memoryAsync);
                 } else {
                     Picasso.with(getContext()).load(new File(memory.getImagePath())).into(sendMemoryToServerTarget);

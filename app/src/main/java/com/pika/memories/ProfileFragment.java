@@ -52,8 +52,12 @@ public class ProfileFragment extends Fragment {
         TextView nameTextView = view.findViewById(R.id.displayName);
         nameTextView.setText(userViewModel.getSignedInUser().getDisplayName());
 
+        TextView emailTextView = view.findViewById(R.id.emailAddress);
+        emailTextView.setText(userViewModel.getSignedInUser().getEmail());
+
         ImageView avatar = view.findViewById(R.id.avatar);
         String imageURI = userViewModel.getSignedInUser().getPhotoURI();
+
         if (imageURI.equals("null")) {
             Picasso.with(getContext()).load(R.drawable.default_avatar).into(avatar);
         } else {

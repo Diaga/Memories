@@ -27,6 +27,9 @@ public interface MessageDao {
     @Query("UPDATE Message SET reply = :reply WHERE id =:id")
     void setReply(int id, String reply);
 
+    @Query("SELECT * FROM Message WHERE userId = :userId")
+    List<Message> getMessagesFromUserId(String userId);
+
     @Query("SELECT * FROM Message WHERE userId = :userId ORDER BY savedOn ASC")
     LiveData<List<Message>> getMessages(String userId);
 

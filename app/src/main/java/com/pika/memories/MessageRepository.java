@@ -25,6 +25,8 @@ public class MessageRepository {
 
     public void setReply(String id, String reply) { new replyTask(messageDao).execute(id, reply); }
 
+    public List<Message> getMessagesFromUserId(String userId) { return messageDao.getMessagesFromUserId(userId);}
+
     public LiveData<List<Message>> getMessages(String userId) { return messageDao.getMessages(userId); }
 
     public void getMessage(String savedOn) { new getMessageTask(messageDao).execute(savedOn); }

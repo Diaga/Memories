@@ -1,21 +1,25 @@
 package com.pika.memories;
 
 import android.Manifest;
+import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Location;
 import android.net.Uri;
-import androidx.annotation.Nullable;
 import android.os.Bundle;
-
-import androidx.core.app.ActivityCompat;
-import androidx.lifecycle.ViewModelProviders;
-
 import android.util.Log;
 import android.view.View;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
+import androidx.lifecycle.ViewModelProviders;
+
+import java.util.Calendar;
 
 public class EditorActivity extends BaseActivity {
 
@@ -29,7 +33,12 @@ public class EditorActivity extends BaseActivity {
     private ImageButton locationButton;
     private ImageButton galleyButton;
     private int counterLocation=0;
-    private int counterImage=0;
+    //private int counterImage=0;
+    private TextView date;
+
+    private DatePickerDialog.OnDateSetListener dateSetListener;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +53,14 @@ public class EditorActivity extends BaseActivity {
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
         memoryViewModel = ViewModelProviders.of(this).get(MemoryViewModel.class);
 
+        date = (TextView) findViewById(R.id.dateEditorActivity);
+        date.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dateSelector();
+            }
+        });
+
         // GeoTag
         gpsTracker = new GpsTracker(getApplicationContext());
         locationButton = findViewById(R.id.geo_tag_location);
@@ -57,6 +74,55 @@ public class EditorActivity extends BaseActivity {
                     Toast.LENGTH_SHORT).show();
         });
         */
+        dateSetListener = new DatePickerDialog.OnDateSetListener(){
+
+            String sMonth;
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month+1;
+
+                switch (month){
+                    case 1:
+                        sMonth="Jan";
+                        break;
+                    case 2:
+                        sMonth="Feb";
+                        break;
+                    case 3:
+                        sMonth="Mar";
+                        break;
+                    case 4:
+                        sMonth="Apr";
+                        break;
+                    case 5:
+                        sMonth="May";
+                        break;
+                    case 6:
+                        sMonth="Jun";
+                        break;
+                    case 7:
+                        sMonth="Jul";
+                        break;
+                    case 8:
+                        sMonth="Aug";
+                        break;
+                    case 9:
+                        sMonth="Sep";
+                        break;
+                    case 10:
+                        sMonth="Oct";
+                        break;
+                    case 11:
+                        sMonth="Nov";
+                        break;
+                    case 12:
+                        sMonth="Dec";
+                        break;
+                }
+                String dte = dayOfMonth+" "+sMonth+" "+year;
+                date.setText(dte);
+            }
+        };
         Intent getIntent = getIntent();
     }
 
@@ -128,7 +194,6 @@ public class EditorActivity extends BaseActivity {
         }
 
         memoryViewModel.insert(memory);
-
         onBackPressed();
     }
 
@@ -158,7 +223,20 @@ public class EditorActivity extends BaseActivity {
                 "EEEE dd, yyyy"));
     }
 
-    public void dateSelector(View view){
-        Toast.makeText(this, "Date Pressed", Toast.LENGTH_SHORT).show();
+    public void dateSelector(){
+        Calendar cal = Calendar.getInstance();
+
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+
+        DatePickerDialog dialog = new DatePickerDialog(
+                this,
+                android.R.style.Theme_DeviceDefault_Dialog_MinWidth,
+                dateSetListener,
+                year, month, day);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
     }
+
 }

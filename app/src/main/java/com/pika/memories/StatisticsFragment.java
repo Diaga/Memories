@@ -1,5 +1,6 @@
 package com.pika.memories;
 
+import android.app.Dialog;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -11,6 +12,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -22,7 +24,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StatisticsFragment extends Fragment {
-
+    private Dialog statistics_dialog;
+    private ImageButton helpButton;
     private UserViewModel userViewModel;
     private MemoryViewModel memoryViewModel;
     private MessageViewModel messageViewModel;
@@ -34,6 +37,13 @@ public class StatisticsFragment extends Fragment {
     private PieDataSet pieDataSet;
     private Description memoryDescription = new Description();
 
+    // Messages Chart
+    private PieChart messagesPieChart;
+    private List<MessageDataObject> messageDataObjects = new ArrayList<>();
+    private List<PieEntry> messageEntries = new ArrayList<>();
+    private PieDataSet messageDataSet;
+    private Description messageDescription = new Description();
+
     // Background
     private final int interval = 5000;
     private Handler handler;
@@ -42,7 +52,12 @@ public class StatisticsFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_statistics, container, false);
+        View view = inflater.inflate(R.layout.fragment_statistics, container, false);
+        statistics_dialog = new Dialog(getContext());
+        helpButton = view.findViewById(R.id.helpButton);
+        helpButton.setOnClickListener(v -> showpop());
+        return view;
+
     }
 
     @Override
@@ -56,18 +71,26 @@ public class StatisticsFragment extends Fragment {
 
         // Compute dataObjects and populate Entries
         computeMemoryDataObjects();
+        computeMessageDataObjects();
 
         // Chart below
         pieDataSet = new PieDataSet(memoryEntries, "");
+        messageDataSet = new PieDataSet(messageEntries, "");
 
         // Color the dataSet
         pieDataSet.setColors(new int[] {R.color.colorExcited, R.color.colorHappy, R.color.colorNeutral,
                 R.color.colorDepressed, R.color.colorAngry}, getContext());
+        messageDataSet.setColors(new int[] {R.color.colorExcited, R.color.colorHappy, R.color.colorNeutral,
+        R.color.colorDepressed, R.color.colorAngry}, getContext());
 
         pieDataSet.setDrawValues(false);
+        messageDataSet.setDrawValues(false);
 
         PieData pieData = new PieData(pieDataSet);
         pieData.setValueFormatter(new PercentFormatter());
+
+        PieData messageData = new PieData(messageDataSet);
+        messageData.setValueFormatter(new PercentFormatter());
 
         pieChart = view.findViewById(R.id.memory_chart);
         pieChart.setData(pieData);
@@ -77,6 +100,13 @@ public class StatisticsFragment extends Fragment {
         pieChart.animateXY(500, 500);
         pieChart.invalidate();
 
+        messagesPieChart = view.findViewById(R.id.messages_chart);
+        messagesPieChart.setData(messageData);
+        messagesPieChart.setDrawEntryLabels(false);
+
+        messagesPieChart.setDescription(messageDescription);
+        messagesPieChart.animateXY(500, 500);
+        messagesPieChart.invalidate();
 
 
         // Run background tasks
@@ -88,12 +118,24 @@ public class StatisticsFragment extends Fragment {
             pieDataSet.setValues(memoryEntries);
             pieChart.notifyDataSetChanged();
             pieChart.invalidate();
+
+            messageDataSet.clear();
+            computeMessageDataObjects();
+            messageDataSet.setValues(messageEntries);
+            messagesPieChart.notifyDataSetChanged();
+            messagesPieChart.invalidate();
+
             handler.postAtTime(this.runnable, System.currentTimeMillis()+interval);
             handler.postDelayed(this.runnable, interval);
         };
 
         handler.postAtTime(runnable, System.currentTimeMillis()+interval);
         handler.postDelayed(runnable, interval);
+    }
+
+    public void showpop(){
+        statistics_dialog.setContentView(R.layout.statistics_popup);
+        statistics_dialog.show();
     }
 
     private void computeMemoryDataObjects() {
@@ -103,7 +145,7 @@ public class StatisticsFragment extends Fragment {
         if (allMemories != null) {
             for (Memory memory : allMemories) {
                 memoryDataObjects.add(new MemoryDataObject(memory.getSavedOn(), memory.getMood()));
-                Log.i("ami", memory.getMood());
+                Log.i("MemoryAnalysis", memory.getMood());
             }
         }
 
@@ -120,6 +162,32 @@ public class StatisticsFragment extends Fragment {
         }
 
         maxToDesc(max);
+    }
+
+    private void computeMessageDataObjects() {
+        // Get all messages
+        List<Message> allMessages = messageViewModel.getMessagesFromUserId(userViewModel.getSignedInUser().getId());
+
+        if (allMessages != null) {
+            for (Message message : allMessages) {
+                messageDataObjects.add(new MessageDataObject(message.getMood()));
+                Log.i("MessageAnalysis", message.getMood());
+            }
+        }
+
+        String[] labels = {"Excited", "Happy", "Neutral", "Depressed", "Angry"};
+
+        messageEntries.clear();
+        int max = 0;
+        for (int counter = 0; counter < 5; counter++){
+            messageEntries.add(new PieEntry(MessageDataObject.getMoodsCounter()[counter],
+                    labels[counter]));
+            if (MessageDataObject.getMoodsCounter()[counter] > MessageDataObject.getMoodsCounter()[max]) {
+                max = counter;
+            }
+        }
+
+        maxToDescMessage(max);
     }
 
     private void colorDataSet() {
@@ -140,17 +208,32 @@ public class StatisticsFragment extends Fragment {
 
     private void maxToDesc(int max) {
         if (max == 0) {
-            memoryDescription.setText("emo feels excitement in the air! :D");
+            memoryDescription.setText(":D");
         } else if (max == 1) {
-            memoryDescription.setText("emo feels happiness in the air! :)");
+            memoryDescription.setText(":)");
         } else if (max == 2) {
-            memoryDescription.setText("emo feels nothing in the air! :|");
+            memoryDescription.setText(":|");
         } else if (max == 3) {
-            memoryDescription.setText("emo feels sadness in the air! :(");
+            memoryDescription.setText(":(");
         } else if (max == 4) {
-            memoryDescription.setText("emo feels depression in the air! :'(");
+            memoryDescription.setText(":'(");
         }
         memoryDescription.setTextSize(8);
+    }
+
+    private void maxToDescMessage(int max) {
+        if (max == 0) {
+            messageDescription.setText(":D");
+        } else if (max == 1) {
+            messageDescription.setText(":)");
+        } else if (max == 2) {
+            messageDescription.setText(":|");
+        } else if (max == 3) {
+            messageDescription.setText(":(");
+        } else if (max == 4) {
+            messageDescription.setText(":'(");
+        }
+        messageDescription.setTextSize(8);
     }
 
 }

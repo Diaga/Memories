@@ -112,7 +112,7 @@ public class ChatActivity extends AppCompatActivity {
 
                 String[] args = {"id", "accessKey", "message", "timestamp"};
                 String[] params = {String.valueOf(message.getId()),
-                        userViewModel.getSignedInUser().getAccessKey(), message.getMessage(),
+                        userViewModel.getSignedInUser().getId(), message.getMessage(),
                 message.getSavedOn()};
                 String query = Server.queryBuilder(args, params);
                 String urlString = Server.urlBuilder("reply", query);

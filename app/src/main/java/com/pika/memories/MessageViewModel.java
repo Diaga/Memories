@@ -21,6 +21,8 @@ public class MessageViewModel extends AndroidViewModel {
 
     public void getMessage(String savedOn) { messageRepository.getMessage(savedOn); }
 
+    public List<Message> getMessagesFromUserId(String userId) { return messageRepository.getMessagesFromUserId(userId);}
+
     public LiveData<List<Message>> getMessages(String userId) { return messageRepository.getMessages(userId); }
 
     public void clearTable() { messageRepository.clearTable(); }
