@@ -7,10 +7,10 @@
     tools:context=".FullMemoryActivity">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
+        android:id="@+id/cardView4"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
         android:backgroundTint="?android:windowBackground"
+        android:layout_height="56dp"
         app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,22 +21,42 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/homeText"
+                android:id="@+id/memoryHeading"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Memory"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.078"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.555" />
+                app:layout_constraintVertical_bias="0.567" />
+
+            <ImageButton
+                android:id="@+id/memoryeditButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/ic_mode_edit_black_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+
+            <ImageButton
+                android:id="@+id/memorydeleteButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="80dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/ic_delete_black_24dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
-
-
     <TextView
         android:id="@+id/fullMemory"
         android:layout_width="match_parent"

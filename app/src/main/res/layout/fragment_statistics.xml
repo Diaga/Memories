@@ -66,7 +66,8 @@
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/memory_chart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
 
         </com.github.mikephil.charting.charts.PieChart>
 
@@ -92,7 +93,8 @@
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/pie_chart2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="10dp">
 
         </com.github.mikephil.charting.charts.PieChart>
 

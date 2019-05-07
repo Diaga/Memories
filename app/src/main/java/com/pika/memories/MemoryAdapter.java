@@ -84,26 +84,6 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     }
 }
 
-class ItemOffsetDecoration extends RecyclerView.ItemDecoration {
-
-    private int mItemOffset;
-
-    ItemOffsetDecoration(int itemOffset) {
-        mItemOffset = itemOffset;
-    }
-
-    ItemOffsetDecoration(@NonNull Context context, @DimenRes int itemOffsetId) {
-        this(context.getResources().getDimensionPixelSize(itemOffsetId));
-    }
-
-    @Override
-    public void getItemOffsets(Rect outRect, View view, RecyclerView parent,
-                               RecyclerView.State state) {
-        super.getItemOffsets(outRect, view, parent, state);
-        outRect.set(mItemOffset, mItemOffset, mItemOffset, mItemOffset);
-    }
-}
-
 
 class MemoryStorage {
 

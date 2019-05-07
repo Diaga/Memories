@@ -150,6 +150,7 @@ public class StatisticsFragment extends Fragment {
         } else if (max == 4) {
             memoryDescription.setText("emo feels depression in the air! :'(");
         }
+        memoryDescription.setTextSize(8);
     }
 
 }

@@ -35,8 +35,8 @@ public class MainActivity extends BaseActivity {
     UserViewModel userViewModel;
     private final int LOGOUT_REQUEST = 1;
 
-    Fragment[] fragments = {new HomeFragment(), new CalendarFragment(), new StatisticsFragment(),new ProfileFragment()};
-    String[] fragmentTags = {"Home", "Calendar", "Statistics","Profile"};
+    Fragment[] fragments = {new HomeFragment(), new CalendarFragment(), new StatisticsFragment(), new ProfileFragment()};
+    String[] fragmentTags = {"Home", "Calendar", "Statistics", "Profile"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,7 +89,7 @@ public class MainActivity extends BaseActivity {
                 }
                 break;
             case R.id.add:
-                Intent intent = new Intent(getApplicationContext(),EditorActivity.class);
+                Intent intent = new Intent(getApplicationContext(), EditorActivity.class);
                 startActivity(intent);
                 break;
             case R.id.bottom_profile:
@@ -104,9 +104,10 @@ public class MainActivity extends BaseActivity {
 
 
     public boolean fragmentLoader(Fragment fragment) {
+        FragmentTransaction fragmentTransaction = getFragmentTransaction(getSupportFragmentManager());
         if (fragment != null) {
             hideAllFragments();
-            getSupportFragmentManager().beginTransaction().show(fragment).commit();
+            fragmentTransaction.show(fragment).commit();
             return true;
         }
         return false;
@@ -114,8 +115,8 @@ public class MainActivity extends BaseActivity {
 
 
     private void hideAllFragments() {
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        FragmentManager fragmentManager = getFragmentManagerCustom();
+        FragmentTransaction fragmentTransaction = getFragmentTransaction(fragmentManager);
         for (int counter = 0; counter < 4; counter++) {
             fragmentTransaction.hide(fragmentManager.findFragmentByTag(fragmentTags[counter]));
         }
@@ -127,7 +128,7 @@ public class MainActivity extends BaseActivity {
     private void loadAllFragments() {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        for (int counter = 0; counter <4; counter++) {
+        for (int counter = 0; counter < 4; counter++) {
             fragmentTransaction.add(R.id.fg_container, fragments[counter], fragmentTags[counter]);
         }
         fragmentTransaction.commit();
@@ -141,4 +142,16 @@ public class MainActivity extends BaseActivity {
         startActivityForResult(loginIntent, LOGOUT_REQUEST);
         finish();
     }
+
+    private FragmentManager getFragmentManagerCustom() {
+        return getSupportFragmentManager();
+    }
+
+    private FragmentTransaction getFragmentTransaction(FragmentManager fragmentManager) {
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.setCustomAnimations(android.R.anim.slide_in_left,
+                android.R.anim.slide_out_right);
+        return fragmentTransaction;
+    }
+
 }

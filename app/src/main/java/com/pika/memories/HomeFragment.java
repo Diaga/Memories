@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -34,6 +35,7 @@ public class HomeFragment extends Fragment {
     private MemoryAdapter memoryAdapter;
     private UserViewModel userViewModel;
     private ImageButton chatButton;
+    private DividerItemDecoration decoration;
 
     // Background
     private final int interval = 5000;
@@ -132,8 +134,9 @@ public class HomeFragment extends Fragment {
         memoryAdapter = new MemoryAdapter(getContext(), memoriesList);
         memoriesRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         memoriesRecyclerView.setAdapter(memoryAdapter);
-        ItemOffsetDecoration itemDecoration = new ItemOffsetDecoration(getContext(), R.dimen.item_offset);
-        memoriesRecyclerView.addItemDecoration(itemDecoration);
+        decoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        decoration.setDrawable(getResources().getDrawable(R.drawable.line_divider));
+        memoriesRecyclerView.addItemDecoration(decoration);
         chatButton = fragmentHomeView.findViewById(R.id.chatButton);
         chatButton.setOnClickListener(v -> chatButton());
         return fragmentHomeView;
