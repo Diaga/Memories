@@ -45,6 +45,9 @@ public interface MemoryDao {
     @Query("SELECT * FROM Memory WHERE userId = :userId")
     List<Memory> getMemoriesFromId(String userId);
 
+    @Query("SELECT * FROM Memory WHERE id = :id LIMIT 1")
+    Memory getMemoryFromId(int id);
+
     @Query("SELECT * FROM Memory WHERE userId = :userId ORDER BY savedOn DESC")
     LiveData<List<Memory>> getMemories(String userId);
 

@@ -32,6 +32,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
+        private TextView id;
         private TextView savedOn;
         private TextView savedOnTime;
         private TextView memory;
@@ -42,6 +43,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         ViewHolder(View itemView) {
             super(itemView);
             memory_container=itemView.findViewById(R.id.memory_container);
+            id = itemView.findViewById(R.id.idMemory);
             memory = itemView.findViewById(R.id.memoryText);
             savedOn = itemView.findViewById(R.id.savedOnMemory);
             savedOnTime = itemView.findViewById(R.id.savedOnMemoryTime);
@@ -55,12 +57,10 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
         View view = LayoutInflater.from(context).inflate(R.layout.memory_card, parent,false);
         ViewHolder viewHolder = new ViewHolder(view);
-        viewHolder.memory_container.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), FullMemoryActivity.class);
-                v.getContext().startActivity(intent);
-            }
+        viewHolder.memory_container.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(), FullMemoryActivity.class);
+            intent.putExtra("id", viewHolder.id.getText().toString());
+            v.getContext().startActivity(intent);
         });
         return new ViewHolder(view);
     }
@@ -71,6 +71,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         holder.memory.setText(memories.get(position).getMemory());
         holder.savedOn.setText(memories.get(position).getSavedOn());
         holder.savedOnTime.setText(memories.get(position).getSavedOnTime());
+        holder.id.setText(memories.get(position).getId());
         Picasso.with(context).load(new File(memories.get(position).getImagePath())).into(holder.imageView);
     }
 
@@ -91,13 +92,22 @@ class MemoryStorage {
     private String imagePath;
     private String savedOn;
     private String savedOnTime;
+    private String id;
 
-
-    MemoryStorage(String memory, String imagePath, String savedOn) {
+    MemoryStorage(String memory, String imagePath, String savedOn, int id) {
         this.memory = memory;
         this.imagePath = imagePath;
         this.savedOn = savedOn;
         this.savedOnTime = savedOn;
+        this.id = String.valueOf(id);
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     String getMemory() {

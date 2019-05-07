@@ -48,6 +48,8 @@ public class MemoryRepository {
 
     public List<Memory> getMemoriesFromId(String userId) {return memoryDao.getMemoriesFromId(userId); }
 
+    public Memory getMemoryFromId (String id) {return memoryDao.getMemoryFromId(Integer.parseInt(id));}
+
     public void clearTable() {new clearMemoryTableTask(memoryDao).execute();}
 }
 

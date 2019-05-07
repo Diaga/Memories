@@ -150,7 +150,8 @@ public class HomeFragment extends Fragment {
                 memory = memories.get(counter);
 
                 // Image Resolution Below
-                memoriesList.add(new MemoryStorage(memory.getMemory(), memory.getImagePath(), memory.getSavedOn()));
+                memoriesList.add(new MemoryStorage(memory.getMemory(), memory.getImagePath(),
+                        memory.getSavedOn(), memory.getId()));
 
                 memoryAdapter.updateUI();
             }

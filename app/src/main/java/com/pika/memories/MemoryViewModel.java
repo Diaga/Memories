@@ -43,6 +43,8 @@ public class MemoryViewModel extends AndroidViewModel {
 
     public List<Memory> getMemoriesFromId(String userId) {return memoryRepository.getMemoriesFromId(userId);}
 
+    public Memory getMemoryFromId(String id) {return memoryRepository.getMemoryFromId(id);}
+
     public void clearTable() {
         memoryRepository.clearTable();
     }
