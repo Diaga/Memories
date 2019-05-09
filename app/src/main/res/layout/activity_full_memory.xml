@@ -38,6 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginBottom="16dp"
+                android:onClick="delete_memory"
                 android:background="@drawable/ic_delete_black_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent" />
@@ -68,8 +69,10 @@
         android:src="@mipmap/ic_launcher_round"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fullMemory" />
+        app:layout_constraintTop_toBottomOf="@+id/fullMemory"
+        app:layout_constraintVertical_bias="0.257" />
 
 
     <androidx.cardview.widget.CardView
@@ -91,8 +94,8 @@
 
             <ImageButton
                 android:id="@+id/moodImageInFull"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
                 android:layout_marginStart="94dp"
                 android:background="@drawable/ic_mood_white_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -104,10 +107,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="94dp"
-                android:onClick="toastLocation"
                 android:background="@drawable/ic_location_on_white_24dp"
+                android:onClick="toastLocation"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
