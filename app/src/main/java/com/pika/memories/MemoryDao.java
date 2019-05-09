@@ -19,7 +19,7 @@ public interface MemoryDao {
     void delete(Memory memory);
 
     @Query("SELECT * FROM Memory WHERE id = :id LIMIT 1")
-    Memory getMemory(String id);
+    Memory getMemory(int id);
 
     @Query("UPDATE Memory SET memory = :memory WHERE id = :id")
     void setMemory(int id, String memory);
@@ -38,6 +38,9 @@ public interface MemoryDao {
 
     @Query("UPDATE Memory SET synced = :synced WHERE id = :id")
     void setSynced(int id, String synced);
+
+    @Query("UPDATE Memory SET place = :place WHERE id = :id")
+    void setPlace(int id, String place);
 
     @Query("UPDATE Memory SET imageInLocal = :imageInLocal WHERE id = :id")
     void setImageInLocal(int id, String imageInLocal);

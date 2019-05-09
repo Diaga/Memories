@@ -33,12 +33,14 @@ public class MemoryViewModel extends AndroidViewModel {
 
     public void setLatitude(String id, String latitude) { memoryRepository.setLatitude(id, latitude); }
 
+    public void setPlace(String id, String place) {memoryRepository.setPlace(id, place);}
+
     public void setSynced(String id, String synced) { memoryRepository.setSynced(id, synced); }
 
     public void setImageInLocal(String id, String imageInLocal) { memoryRepository.setImageInLocal(id, imageInLocal); }
 
-    public void getMemoryAndDelete(String savedOn) {
-        memoryRepository.getMemoryAndDelete(savedOn);
+    public void getMemoryAndDelete(String id) {
+        memoryRepository.getMemoryAndDelete(id);
     }
 
     public List<Memory> getMemoriesFromId(String userId) {return memoryRepository.getMemoriesFromId(userId);}

@@ -128,6 +128,7 @@ public class LoginActivity extends BaseActivity {
         user.setId(gsAccount.getId());
         user.setEmail(gsAccount.getEmail());
         user.setPhotoURI("null");
+        user.setRegisteredOn(String.valueOf(System.currentTimeMillis()));
         if (gsAccount.getPhotoUrl() != null) {
             user.setPhotoURI(gsAccount.getPhotoUrl().toString());
         }

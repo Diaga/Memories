@@ -183,6 +183,7 @@ public class EditorActivity extends BaseActivity {
         memory.setLatitude("null");
         memory.setImageInLocal("1");
         memory.setMood("201");
+        memory.setPlace("null");
 
         if (imageURI != null) {
             memory.setImagePath(imageURI.toString());

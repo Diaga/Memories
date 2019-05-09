@@ -49,6 +49,10 @@ public class Memory {
     @NonNull
     private String imageInLocal;
 
+    @ColumnInfo
+    @NonNull
+    private String place;
+
     @NonNull
     public String getSavedOn() {
         return savedOn;
@@ -135,5 +139,14 @@ public class Memory {
 
     public void setImageInLocal(@NonNull String imageInLocal) {
         this.imageInLocal = imageInLocal;
+    }
+
+    @NonNull
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(@NonNull String place) {
+        this.place = place;
     }
 }

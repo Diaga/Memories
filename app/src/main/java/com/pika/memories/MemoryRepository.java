@@ -36,6 +36,8 @@ public class MemoryRepository {
 
     public void setSynced(String id, String synced) {new syncedMemoryTask(memoryDao).execute(id, synced); }
 
+    public void setPlace(String id, String place) {new setPlaceTask(memoryDao).execute(id, place); }
+
     public void setImageInLocal(String id, String imageInLocal) {new imageInLocalTask(memoryDao).execute(id, imageInLocal); }
 
     public void getMemoryAndDelete(String id) {
@@ -48,7 +50,7 @@ public class MemoryRepository {
 
     public List<Memory> getMemoriesFromId(String userId) {return memoryDao.getMemoriesFromId(userId); }
 
-    public Memory getMemoryFromId (String id) {return memoryDao.getMemoryFromId(Integer.parseInt(id));}
+    public Memory getMemoryFromId(String id) {return memoryDao.getMemoryFromId(Integer.parseInt(id));}
 
     public void clearTable() {new clearMemoryTableTask(memoryDao).execute();}
 }
@@ -160,7 +162,7 @@ class getMemoryAndDeleteTask extends AsyncTask<String, Void, Memory> {
 
     @Override
     protected Memory doInBackground(String... strings) {
-        return memoryDaoWeakReference.get().getMemory(strings[0]);
+        return memoryDaoWeakReference.get().getMemory(Integer.parseInt(strings[0]));
     }
 
     @Override
@@ -207,6 +209,20 @@ class imageInLocalTask extends AsyncTask<String, Void, Void> {
     @Override
     protected Void doInBackground(String... strings) {
         memoryDaoWeakReference.get().setImageInLocal(Integer.parseInt(strings[0]), strings[1]);
+        return null;
+    }
+}
+
+class setPlaceTask extends AsyncTask<String, Void, Void> {
+    private WeakReference<MemoryDao> memoryDaoWeakReference;
+
+    setPlaceTask(MemoryDao memoryDao) {
+        memoryDaoWeakReference = new WeakReference<>(memoryDao);
+    }
+
+    @Override
+    protected Void doInBackground(String... strings) {
+        memoryDaoWeakReference.get().setPlace(Integer.parseInt(strings[0]), strings[1]);
         return null;
     }
 }

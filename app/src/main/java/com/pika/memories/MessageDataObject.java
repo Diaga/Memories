@@ -51,4 +51,10 @@ public class MessageDataObject {
     public static void setMoodsCounter(int[] moodsCounter) {
         MessageDataObject.moodsCounter = moodsCounter;
     }
+
+    public static void moodsCounterClear() {
+        for (int counter = 0; counter < moodsCounter.length; counter++) {
+            moodsCounter[counter] = 0;
+        }
+    }
 }

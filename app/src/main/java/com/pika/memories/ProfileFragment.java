@@ -55,6 +55,10 @@ public class ProfileFragment extends Fragment {
         TextView emailTextView = view.findViewById(R.id.emailAddress);
         emailTextView.setText(userViewModel.getSignedInUser().getEmail());
 
+        TextView registeredOnView = view.findViewById(R.id.date);
+        registeredOnView.setText(Utils.timestampToDateTime(userViewModel.getSignedInUser().
+                getRegisteredOn(), " hh:mm:ss a on dd/MM/yy"));
+
         ImageView avatar = view.findViewById(R.id.avatar);
         String imageURI = userViewModel.getSignedInUser().getPhotoURI();
 

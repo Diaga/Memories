@@ -5,6 +5,6 @@
     <item>
         <bitmap
             android:gravity="center"
-            android:src="@drawable/emo_icon"/>
+            android:src="@drawable/emo_splash"/>
     </item>
 </layer-list>

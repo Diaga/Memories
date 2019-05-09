@@ -18,6 +18,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
 import com.squareup.picasso.Target;
@@ -37,8 +39,12 @@ public class HomeFragment extends Fragment {
     private ImageButton chatButton;
     private DividerItemDecoration decoration;
 
+    // Buffer Views
+    private ImageView grayE;
+    private TextView noMemories;
+
     // Background
-    private final int interval = 5000;
+    private final int interval = 2000;
     private Handler handler;
     private Runnable runnable;
 
@@ -139,6 +145,11 @@ public class HomeFragment extends Fragment {
         memoriesRecyclerView.addItemDecoration(decoration);
         chatButton = fragmentHomeView.findViewById(R.id.chatButton);
         chatButton.setOnClickListener(v -> chatButton());
+
+        // Buffer Views
+        grayE = fragmentHomeView.findViewById(R.id.gray_e);
+        noMemories = fragmentHomeView.findViewById(R.id.noMemoriesText);
+
         return fragmentHomeView;
     }
 
@@ -146,15 +157,23 @@ public class HomeFragment extends Fragment {
         if (memories.size() > 0) {
             Memory memory;
 
+            grayE.setVisibility(View.INVISIBLE);
+            noMemories.setVisibility(View.INVISIBLE);
+
             for (int counter = 0; memories.size()<10 ? counter<memories.size() : counter<10; counter++) {
                 memory = memories.get(counter);
 
-                // Image Resolution Below
-                memoriesList.add(new MemoryStorage(memory.getMemory(), memory.getImagePath(),
-                        memory.getSavedOn(), memory.getId()));
+                if (memory.getMood() != null) {
+                    // Image Resolution Below
+                    memoriesList.add(new MemoryStorage(memory.getMemory(), memory.getImagePath(),
+                            memory.getSavedOn(), memory.getId(), memory.getMood()));
+                }
 
                 memoryAdapter.updateUI();
             }
+        } else {
+            grayE.setVisibility(View.VISIBLE);
+            noMemories.setVisibility(View.VISIBLE);
         }
     }
 

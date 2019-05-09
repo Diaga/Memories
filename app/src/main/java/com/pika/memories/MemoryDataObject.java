@@ -24,9 +24,10 @@ public class MemoryDataObject {
         this.score = score;
 
         dateTime = Utils.timestampToDateTime(timestamp, "dd/MM");
-        mood = Utils.getMoodFromScore(score);
-
-        counterManage(mood);
+        if (score != null) {
+            mood = Utils.getMoodFromScore(score);
+            counterManage(mood);
+        }
     }
 
     public static void assignXValues(List<MemoryDataObject> memoryDataObjects,
@@ -114,6 +115,12 @@ public class MemoryDataObject {
 
     public static void setMoodsCounter(int[] moodsCounter) {
         MemoryDataObject.moodsCounter = moodsCounter;
+    }
+
+    public static void moodsCounterClear() {
+        for (int counter = 0; counter < moodsCounter.length; counter++) {
+            moodsCounter[counter] = 0;
+        }
     }
 }
 

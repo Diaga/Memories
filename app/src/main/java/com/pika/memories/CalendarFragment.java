@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.DayViewDecorator;
@@ -40,11 +41,13 @@ public class CalendarFragment extends Fragment {
     private boolean hasInflated = false;
     private View viewLoad;
     private View viewCalendar;
-    private MaterialCalendarView materialCalendarView;
     private RecyclerView recyclerView;
     private List<CalendarMemoryStorage> calendarMemoryStorages;
     private CalendarAdapter calendarAdapter;
     private DividerItemDecoration decoration;
+
+    // Buffer
+    private TextView noMemories;
 
     private UserViewModel userViewModel;
     private MemoryViewModel memoryViewModel;
@@ -77,6 +80,7 @@ public class CalendarFragment extends Fragment {
                 recyclerView.addItemDecoration(decoration);
                 recyclerView.setAdapter(calendarAdapter);
             };
+
             AsyncLayoutInflater asyncLayoutInflater = new AsyncLayoutInflater(getContext());
             asyncLayoutInflater.inflate(R.layout.fragment_calendar, container, callback);
 
@@ -106,6 +110,9 @@ public class CalendarFragment extends Fragment {
     }
 
     void onCreateViewAfterViewStubInflated(View view) {
+        // Buffer views
+        noMemories = view.findViewById(R.id.noMemoriesCalendarText);
+
         MaterialCalendarView materialCalendarView = view.findViewById(R.id.calendarView);
         materialCalendarView.addDecorator(new CurrentDateDecorator(getContext()));
         materialCalendarView.setOnDateChangedListener((widget, date, selected) -> {
@@ -113,17 +120,22 @@ public class CalendarFragment extends Fragment {
                 String dateString = getDateString(date.getDay(), date.getMonth(), date.getYear());
                 List<Memory> memories = memoryViewModel.getMemoriesFromId(userViewModel.
                         getSignedInUser().getId());
-                calendarMemoryStorages.clear();
-                calendarAdapter.notifyDataSetChanged();
-                Log.i("DateCal", dateString);
-                for (Memory memory : memories) {
-                    Log.i("DateMem", Utils.timestampToDateTime(memory.getSavedOn(), "dd/MM/yyyy"));
-                    if (Utils.timestampToDateTime(memory.getSavedOn(), "dd/MM/yyyy").equals(dateString)) {
-                        calendarMemoryStorages.add(new CalendarMemoryStorage(memory.getMemory()));
-                        calendarAdapter.notifyDataSetChanged();
+                if (memories.size() > 0) {
+                    noMemories.setVisibility(View.INVISIBLE);
+
+                    calendarMemoryStorages.clear();
+                    calendarAdapter.notifyDataSetChanged();
+                    Log.i("DateCal", dateString);
+                    for (Memory memory : memories) {
+                        Log.i("DateMem", Utils.timestampToDateTime(memory.getSavedOn(), "dd/MM/yyyy"));
+                        if (Utils.timestampToDateTime(memory.getSavedOn(), "dd/MM/yyyy").equals(dateString)) {
+                            calendarMemoryStorages.add(new CalendarMemoryStorage(memory.getMemory()));
+                            calendarAdapter.notifyDataSetChanged();
+                        }
                     }
                 }
-
+            } else {
+                noMemories.setVisibility(View.VISIBLE);
             }
         });
     }

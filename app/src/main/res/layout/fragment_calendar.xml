@@ -3,14 +3,15 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:scrollbars="vertical"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:scrollbars="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView8"
         android:layout_width="match_parent"
         android:layout_height="56dp"
-        app:cardElevation="5dp"
         android:backgroundTint="?android:windowBackground"
+        app:cardElevation="5dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -35,6 +36,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
+                android:onClick="addMemory"
                 android:backgroundTint="?android:windowBackground"
                 android:src="@drawable/ic_add_circle_outline_black_24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -60,13 +62,12 @@
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            app:mcv_dateTextAppearance="?android:textColor"
+            app:mcv_headerTextAppearance="@style/calendarViewHeader"
             app:mcv_leftArrow="@drawable/ic_keyboard_arrow_left_24dp"
             app:mcv_rightArrow="@drawable/ic_keyboard_arrow_right_24dp"
             app:mcv_selectionColor="?colorAccent"
-            app:mcv_headerTextAppearance="@style/calendarViewHeader"
-            app:mcv_weekDayTextAppearance="?android:textColor"
-            app:mcv_dateTextAppearance="?android:textColor"
-            />
+            app:mcv_weekDayTextAppearance="?android:textColor" />
 
     </androidx.cardview.widget.CardView>
 
@@ -84,4 +85,17 @@
 
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/noMemoriesCalendarText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="88dp"
+        android:text="No Memories to display"
+        android:textSize="20sp"
+        android:textColor="#DDAAAAAA"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,7 +29,7 @@
             android:background="?colorPrimary"
             app:elevation="20dp"
             app:itemBackground="?android:windowBackground"
-            app:itemIconTint="@color/bottom_nav_selector_change_color"
+            app:itemIconTint="@color/selector"
             app:labelVisibilityMode="unlabeled"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"

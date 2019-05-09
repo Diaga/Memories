@@ -3,6 +3,7 @@ package com.pika.memories;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -37,6 +38,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         private TextView savedOnTime;
         private TextView memory;
         private ImageView imageView;
+        private ImageView moodImageView;
         private ConstraintLayout memory_container;
 
 
@@ -48,6 +50,7 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
             savedOn = itemView.findViewById(R.id.savedOnMemory);
             savedOnTime = itemView.findViewById(R.id.savedOnMemoryTime);
             imageView = itemView.findViewById(R.id.imageMemoryView);
+            moodImageView = itemView.findViewById(R.id.moodImage);
         }
     }
 
@@ -73,6 +76,20 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
         holder.savedOnTime.setText(memories.get(position).getSavedOnTime());
         holder.id.setText(memories.get(position).getId());
         Picasso.with(context).load(new File(memories.get(position).getImagePath())).into(holder.imageView);
+
+        if (memories.get(position).getMood() != null) {
+            if (memories.get(position).getMood().equals("excited")) {
+                Picasso.with(context).load(R.drawable.emo_excited).into(holder.moodImageView);
+            } else if (memories.get(position).getMood().equals("happy")) {
+                Picasso.with(context).load(R.drawable.emo_happy).into(holder.moodImageView);
+            } else if (memories.get(position).getMood().equals("neutral")) {
+                Picasso.with(context).load(R.drawable.emo_neutral).into(holder.moodImageView);
+            } else if (memories.get(position).getMood().equals("depressed")) {
+                Picasso.with(context).load(R.drawable.emo_depressed).into(holder.moodImageView);
+            } else if (memories.get(position).getMood().equals("angry")) {
+                Picasso.with(context).load(R.drawable.emo_angry).into(holder.moodImageView);
+            }
+        }
     }
 
     @Override
@@ -88,18 +105,22 @@ public class MemoryAdapter extends RecyclerView.Adapter<MemoryAdapter.ViewHolder
 
 class MemoryStorage {
 
+    private String mood;
     private String memory;
     private String imagePath;
     private String savedOn;
     private String savedOnTime;
     private String id;
 
-    MemoryStorage(String memory, String imagePath, String savedOn, int id) {
+    MemoryStorage(String memory, String imagePath, String savedOn, int id, String score) {
         this.memory = memory;
         this.imagePath = imagePath;
         this.savedOn = savedOn;
         this.savedOnTime = savedOn;
         this.id = String.valueOf(id);
+        Log.i("Score", score);
+        this.mood = Utils.getMoodFromScore(score);
+        Log.i("Score", mood+score);
     }
 
     public String getId() {
@@ -140,5 +161,13 @@ class MemoryStorage {
 
     public void setSavedOnTime(String savedOnTime) {
         this.savedOnTime = savedOnTime;
+    }
+
+    public String getMood() {
+        return mood;
+    }
+
+    public void setMood(String mood) {
+        this.mood = mood;
     }
 }

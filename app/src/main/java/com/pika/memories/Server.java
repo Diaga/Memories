@@ -4,6 +4,8 @@ import android.graphics.Bitmap;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.lang.ref.WeakReference;
@@ -12,8 +14,11 @@ import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
 
+import javax.net.ssl.HttpsURLConnection;
+
 class Server {
     private static final String server = "http://memories.pika.cf/";
+    private static final String tokenLocationAPI = "pk.97a52e39e9fae1356449c16d55eb687a";
 
     static String queryBuilder(String[] query, String[] data) {
         if (query.length == data.length) {
@@ -37,10 +42,49 @@ class Server {
         return server+action+query;
     }
     
+    static String buildLocationURL(String latitude, String longitude) {
+        return String.format("https://eu1.locationiq.com/v1/reverse.php?key=%s&lat=%s&lon=%s&format" +
+                "=json", tokenLocationAPI, latitude, longitude);
+    }
+
     static String getServer() {
         return server;
     }
-    
+
+    static String getResponseHttps(String urlString) {
+        HttpsURLConnection connection;
+        try {
+            URL url = new URL(urlString);
+            URLConnection urlConnection = url.openConnection();
+            if (urlConnection instanceof HttpsURLConnection) {
+                connection = (HttpsURLConnection) urlConnection;
+                return bufferReadHttps(connection);
+            }
+        } catch (Exception e) {
+            Log.d("getResponseHttps_ERROR", e.toString());
+        }
+        return "";
+    }
+
+    private static String bufferReadHttps(HttpsURLConnection conn) {
+        try {
+            BufferedReader in =
+                    new BufferedReader(new InputStreamReader(conn.getInputStream()));
+            String inputLine;
+            StringBuilder response = new StringBuilder();
+
+            while ((inputLine = in.readLine()) != null) {
+                response.append(inputLine);
+            }
+            in.close();
+            conn.disconnect();
+            return response.toString();
+        } catch (Exception e) {
+            Log.d("bufferReadHttps", e.toString());
+        }
+        return null;
+    }
+
     static String getResponse(String urlString) {
         HttpURLConnection connection;
         try {
@@ -70,7 +114,7 @@ class Server {
             conn.disconnect();
             return response.toString();
         } catch (Exception e) {
-            e.printStackTrace();
+            Log.d("bufferRead", e.toString());
         }
         return null;
     }
@@ -159,5 +203,32 @@ class sendMessageTask extends AsyncTask<String, Void, String> {
         messageWeakReference.get().setMood(data[1]);
         messageWeakReference.get().setSynced("1");
         messageViewModelWeakReference.get().insert(messageWeakReference.get());
+    }
+}
+
+class getLocationTask extends AsyncTask<String, Void, String> {
+    private WeakReference<MemoryViewModel> memoryViewModelWeakReference;
+    private WeakReference<String> memoryIdWeakReference;
+
+    getLocationTask(MemoryViewModel memoryViewModel, String memoryId) {
+        this.memoryViewModelWeakReference = new WeakReference<>(memoryViewModel);
+        this.memoryIdWeakReference = new WeakReference<>(memoryId);
+    }
+
+    @Override
+    protected String doInBackground(String... strings) {
+        return Server.getResponseHttps(strings[0]);
+    }
+
+    @Override
+    protected void onPostExecute(String s) {
+        JSONObject jsonObject = null;
+        try {
+            jsonObject = new JSONObject(s);
+            memoryViewModelWeakReference.get().setPlace(memoryIdWeakReference.get(),
+                    jsonObject.getString("display_name"));
+        } catch (Exception e) {
+            Log.e("getLocationTask JSON", e.toString());
+        }
     }
 }

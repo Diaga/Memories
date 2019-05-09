@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.CompoundButton;
 import android.widget.Switch;
+import android.widget.Toast;
 
 public class SettingsActivity extends AppCompatActivity {
     private Switch themeSwitch;
@@ -43,7 +44,7 @@ public class SettingsActivity extends AppCompatActivity {
                 theme = Utils.THEME_WHITE;
                 Utils.changeTheme(theme);
             }
-            userViewModel.getSignedInUser().setTheme("theme");
+            userViewModel.setTheme(theme);
             restartApp();
         });
     }
@@ -54,5 +55,9 @@ public class SettingsActivity extends AppCompatActivity {
         changeThemeIntent.putExtra("fromCode", "SettingsActivity");
         changeThemeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         startActivity(changeThemeIntent);
+    }
+
+    public void delete(View view){
+        Toast.makeText(this, "Feature under Testing", Toast.LENGTH_SHORT).show();
     }
 }

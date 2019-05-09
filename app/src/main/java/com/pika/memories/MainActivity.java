@@ -154,4 +154,8 @@ public class MainActivity extends BaseActivity {
         return fragmentTransaction;
     }
 
+    public void addMemory(View view) {
+        Intent intent = new Intent(getApplicationContext(), EditorActivity.class);
+        startActivity(intent);
+    }
 }

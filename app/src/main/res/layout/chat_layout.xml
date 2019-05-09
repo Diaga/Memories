@@ -27,7 +27,7 @@
         android:layout_marginBottom="8dp"
         android:elevation="5dp"
         android:background="@drawable/bg_edit_text"
-        android:hint="Ask Chatty"
+        android:hint="Ask Pika"
         android:imeActionId="4"
         android:imeOptions="actionSend"
         android:inputType="text"

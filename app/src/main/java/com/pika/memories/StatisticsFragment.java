@@ -1,11 +1,13 @@
 package com.pika.memories;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.room.Update;
 
 import android.os.Handler;
 import android.util.Log;
@@ -13,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
@@ -30,7 +33,34 @@ public class StatisticsFragment extends Fragment {
     private MemoryViewModel memoryViewModel;
     private MessageViewModel messageViewModel;
 
-    // Chart
+    // Buffer Views
+    TextView noMemoryGraph;
+    TextView noChatGraph;
+
+    // Info
+    private int totalAnalysis;
+    private int excitedAnalysis;
+    private int happyAnalysis;
+    private int neutralAnalysis;
+    private int depressedAnalysis;
+    private int angryAnalysis;
+
+    private int totalMemoryAnalysis;
+    private int excitedMemoryAnalysis;
+    private int happyMemoryAnalysis;
+    private int neutralMemoryAnalysis;
+    private int depressedMemoryAnalysis;
+    private int angryMemoryAnalysis;
+
+    private int totalMessageAnalysis;
+    private int excitedMessageAnalysis;
+    private int happyMessageAnalysis;
+    private int neutralMessageAnalysis;
+    private int depressedMessageAnalysis;
+    private int angryMessageAnalysis;
+
+
+    // Memories Chart
     private PieChart pieChart;
     private List<MemoryDataObject> memoryDataObjects = new ArrayList<>();
     private List<PieEntry> memoryEntries = new ArrayList<>();
@@ -63,6 +93,10 @@ public class StatisticsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        // Buffers
+        noMemoryGraph = view.findViewById(R.id.memorygraph);
+        noChatGraph = view.findViewById(R.id.chatgraph);
 
         // Connect with database
         userViewModel = ViewModelProviders.of(this).get(UserViewModel.class);
@@ -125,6 +159,8 @@ public class StatisticsFragment extends Fragment {
             messagesPieChart.notifyDataSetChanged();
             messagesPieChart.invalidate();
 
+            computeAnalysis();
+
             handler.postAtTime(this.runnable, System.currentTimeMillis()+interval);
             handler.postDelayed(this.runnable, interval);
         };
@@ -133,8 +169,25 @@ public class StatisticsFragment extends Fragment {
         handler.postDelayed(runnable, interval);
     }
 
+    @SuppressLint("DefaultLocale")
     public void showpop(){
         statistics_dialog.setContentView(R.layout.statistics_popup);
+        TextView totalNumbers = statistics_dialog.findViewById(R.id.entryNumbers);
+        TextView excitedNumbers = statistics_dialog.findViewById(R.id.excitedNumbers);
+        TextView happyNumbers = statistics_dialog.findViewById(R.id.happyNumbers);
+        TextView neutralNumbers = statistics_dialog.findViewById(R.id.neutralNumbers);
+        TextView depressedNumbers = statistics_dialog.findViewById(R.id.depressedNumbers);
+        TextView angryNumbers = statistics_dialog.findViewById(R.id.angryNumbers);
+
+        if (totalAnalysis != 0) {
+            totalNumbers.setText(String.valueOf(totalAnalysis));
+            excitedNumbers.setText(String.format("%.1f %s", ((double) excitedAnalysis / totalAnalysis) * 100, "%"));
+            happyNumbers.setText(String.format("%.1f %s", ((double) happyAnalysis / totalAnalysis) * 100, "%"));
+            neutralNumbers.setText(String.format("%.1f %s", ((double) neutralAnalysis / totalAnalysis) * 100, "%"));
+            depressedNumbers.setText(String.format("%.1f %s", ((double) depressedAnalysis / totalAnalysis) * 100, "%"));
+            angryNumbers.setText(String.format("%.1f %s", ((double) angryAnalysis / totalAnalysis) * 100, "%"));
+        }
+
         statistics_dialog.show();
     }
 
@@ -142,10 +195,22 @@ public class StatisticsFragment extends Fragment {
         // Get all memories
         List<Memory> allMemories = memoryViewModel.getMemoriesFromId(userViewModel.getSignedInUser().getId());
 
+        if (allMemories.size() == 0 && pieChart != null) {
+            noMemoryGraph.setVisibility(View.VISIBLE);
+            pieChart.setVisibility(View.INVISIBLE);
+        } else if (pieChart != null) {
+            noMemoryGraph.setVisibility(View.INVISIBLE);
+            pieChart.setVisibility(View.VISIBLE);
+        }
+
+        memoryDataObjects.clear();
+        MemoryDataObject.moodsCounterClear();
         if (allMemories != null) {
             for (Memory memory : allMemories) {
-                memoryDataObjects.add(new MemoryDataObject(memory.getSavedOn(), memory.getMood()));
-                Log.i("MemoryAnalysis", memory.getMood());
+                if (memory.getMood() != null) {
+                    Log.i("MemoryAnalysis", memory.getMood());
+                    memoryDataObjects.add(new MemoryDataObject(memory.getSavedOn(), memory.getMood()));
+                }
             }
         }
 
@@ -161,6 +226,15 @@ public class StatisticsFragment extends Fragment {
             }
         }
 
+        // Update Info
+        totalMemoryAnalysis = allMemories.size();
+        excitedMemoryAnalysis = MemoryDataObject.getMoodsCounter()[0];
+        happyMemoryAnalysis = MemoryDataObject.getMoodsCounter()[1];
+        neutralMemoryAnalysis = MemoryDataObject.getMoodsCounter()[2];
+        depressedMemoryAnalysis = MemoryDataObject.getMoodsCounter()[3];
+        angryMemoryAnalysis = MemoryDataObject.getMoodsCounter()[4];
+
+
         maxToDesc(max);
     }
 
@@ -168,6 +242,16 @@ public class StatisticsFragment extends Fragment {
         // Get all messages
         List<Message> allMessages = messageViewModel.getMessagesFromUserId(userViewModel.getSignedInUser().getId());
 
+        if (allMessages.size() == 0 && messagesPieChart != null) {
+            noChatGraph.setVisibility(View.VISIBLE);
+            messagesPieChart.setVisibility(View.INVISIBLE);
+        } else if (messagesPieChart != null) {
+            noChatGraph.setVisibility(View.INVISIBLE);
+            messagesPieChart.setVisibility(View.VISIBLE);
+        }
+
+        messageDataObjects.clear();
+        MessageDataObject.moodsCounterClear();
         if (allMessages != null) {
             for (Message message : allMessages) {
                 messageDataObjects.add(new MessageDataObject(message.getMood()));
@@ -186,6 +270,14 @@ public class StatisticsFragment extends Fragment {
                 max = counter;
             }
         }
+
+        // Update Info
+        totalMessageAnalysis = allMessages.size();
+        excitedMessageAnalysis = MessageDataObject.getMoodsCounter()[0];
+        happyMessageAnalysis = MessageDataObject.getMoodsCounter()[1];
+        neutralMessageAnalysis = MessageDataObject.getMoodsCounter()[2];
+        depressedMessageAnalysis = MessageDataObject.getMoodsCounter()[3];
+        angryMessageAnalysis = MessageDataObject.getMoodsCounter()[4];
 
         maxToDescMessage(max);
     }
@@ -236,4 +328,13 @@ public class StatisticsFragment extends Fragment {
         messageDescription.setTextSize(8);
     }
 
+    private void computeAnalysis() {
+        Log.i("Data", neutralAnalysis+" "+neutralMemoryAnalysis+" "+neutralMessageAnalysis);
+        totalAnalysis = totalMemoryAnalysis + totalMessageAnalysis;
+        excitedAnalysis = excitedMemoryAnalysis + excitedMessageAnalysis;
+        happyAnalysis = happyMemoryAnalysis + happyMessageAnalysis;
+        neutralAnalysis = neutralMemoryAnalysis + neutralMessageAnalysis;
+        depressedAnalysis = depressedMemoryAnalysis + depressedMessageAnalysis;
+        angryAnalysis = angryMemoryAnalysis + angryMessageAnalysis;
+    }
 }
