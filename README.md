@@ -1,5 +1,5 @@
 # Memories
-Learn more about yourselves through the power of AI and NLP
+Learn more about yourselves through the power of AI and NLP.
 Our attempt at realizing the limits of creating Jarvis - an artifical intelligent companion
 
 ## Archived
